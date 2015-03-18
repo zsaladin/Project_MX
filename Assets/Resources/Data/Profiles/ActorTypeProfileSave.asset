@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631b68930400daf49bfba4f3f16d1259, type: 3}
+  m_Name: ActorTypeProfileSave
+  m_EditorClassIdentifier: 
+  ActorTypeProfiles:
+  - ID: 1
+    Name: Unit
+    States:
+    - ID: 1
+      Name: Movement
+      ConditionStateSet:
+      - ConditionType: 2
+        ConditionProfileID: 1
+        StateProfileID: 2
+      Actions: 030000000200000004000000
+    - ID: 2
+      Name: Attack
+      ConditionStateSet:
+      - ConditionType: 2
+        ConditionProfileID: 2
+        StateProfileID: 1
+      Actions: 010000000200000004000000
+  - ID: 2
+    Name: Hero
+    States: []

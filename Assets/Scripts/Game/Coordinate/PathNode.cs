@@ -4,12 +4,15 @@ using System.Linq;
 
 public class PathNode 
 {
+    public static readonly int STRAIGHT_LINE_COST = 10;
+    public static readonly int DIAGONAL_LINE_COST = 14;
+
     public GraphNode GraphNode { get; private set; }
     public PathNode ParentPathNode { get; set; }
 
-    public float F { get; set; }
-    public float G { get; set; }
-    public float H { get; set; }
+    public int F { get; set; }
+    public int G { get; set; }
+    public int H { get; set; }
 
     public PathNode(GraphNode node)
     {

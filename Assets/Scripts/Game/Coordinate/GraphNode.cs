@@ -6,7 +6,7 @@ public struct GraphNode : System.IEquatable<GraphNode>
 {
     public int X { get; private set; }
     public int Z { get; private set; }
-    public int Height { get; private set; }
+    public float Height { get; private set; }
 
     private float _graphSqrMagnitude;
     public float GraphSqrMagnitude
@@ -52,7 +52,7 @@ public struct GraphNode : System.IEquatable<GraphNode>
         }
     }
 
-    public GraphNode(int x, int z, int height)
+    public GraphNode(int x, int z, float height)
         : this()
     {
         X = x;
@@ -81,6 +81,10 @@ public struct GraphNode : System.IEquatable<GraphNode>
         return base.GetHashCode();
     }
 
+    public override string ToString()
+    {
+        return string.Format("X : {0}, Z : {1}, Height {2}", X, Z, Height);
+    }
     public static bool operator == (GraphNode first, GraphNode second)
     {
         return first.Equals(second);

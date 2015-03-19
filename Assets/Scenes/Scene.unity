@@ -6917,19 +6917,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4663dab9862d7814184172a2c1dac88a, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -.270599097
+      value: -.270599067
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4663dab9862d7814184172a2c1dac88a, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -.653281033
+      value: -.653280973
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4663dab9862d7814184172a2c1dac88a, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -.653281152
+      value: -.653281093
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4663dab9862d7814184172a2c1dac88a, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .270599157
+      value: .270599127
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 4663dab9862d7814184172a2c1dac88a, type: 2}
       propertyPath: m_LightmapIndex
@@ -14234,19 +14234,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 95bb716919bfaa940995cdaede7b7ec6, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -.0417166315
+      value: -.0417166278
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 95bb716919bfaa940995cdaede7b7ec6, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .705875158
+      value: .705875099
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 95bb716919bfaa940995cdaede7b7ec6, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .705875218
+      value: .705875158
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 95bb716919bfaa940995cdaede7b7ec6, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .0417167991
+      value: .0417167954
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 95bb716919bfaa940995cdaede7b7ec6, type: 2}
       propertyPath: m_LightmapIndex
@@ -17763,19 +17763,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee310940381d5f3409a44456d948e8e3, type: 2}
       propertyPath: m_LocalRotation.x
-      value: .183011249
+      value: .183011234
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee310940381d5f3409a44456d948e8e3, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -.683013082
+      value: -.683013022
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee310940381d5f3409a44456d948e8e3, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -.683013141
+      value: -.683013082
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee310940381d5f3409a44456d948e8e3, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -.183011532
+      value: -.183011517
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: ee310940381d5f3409a44456d948e8e3, type: 2}
       propertyPath: m_ScaleInLightmap
@@ -27184,11 +27184,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showGraph: 0
-  _xMin: -40
-  _xMax: 40
-  _zMin: -40
-  _zMax: 40
-  _interval: .200000003
+  _graph:
+    _xMin: -30
+    _xMax: 30
+    _zMin: -40
+    _zMax: 40
 --- !u!1001 &1132509676
 Prefab:
   m_ObjectHideFlags: 0

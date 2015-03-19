@@ -37,6 +37,9 @@ public class Manager : MonoBehaviour
         Constant = GameObject.FindObjectOfType<ConstantManager>();
         Constant.Init();
 
+        Coordinate = GameObject.FindObjectOfType<CoordinateManager>();
+        Coordinate.Init();
+
         Entity = GameObject.FindObjectOfType<EntityManager>();
         Entity.Init();
 
@@ -45,8 +48,5 @@ public class Manager : MonoBehaviour
 
         Event = GameObject.FindObjectOfType<EventManager>();
         Event.Init();
-
-        Coordinate = GameObject.FindObjectOfType<CoordinateManager>();
-        Coordinate.Init();
     }
 }

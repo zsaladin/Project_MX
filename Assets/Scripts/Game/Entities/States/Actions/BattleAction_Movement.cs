@@ -4,6 +4,7 @@ using System.Linq;
 
 public class BattleAction_Movement : BattleAction
 {
+    private List<Vector3> _pathPositions;
     public override ActionType Type
     {
         get
@@ -14,18 +15,34 @@ public class BattleAction_Movement : BattleAction
 
     public override void OnBegin()
     {
-        
+        Animation animation = Actor.GetComponent<Animation>();
+        if (animation.GetClip("Walk"))
+            animation.Play("Walk");
+        else
+            animation.Play("walk");
     }
 
     public override void OnTick()
     {
         //Debug.Log(string.Format("{0} : {1}", Actor.name, GetType().Name));
+        _pathPositions = Manager.Coordinate.GetPath(Actor);
     }
 
     public override void OnEnd()
     {
         
     }
+
+    public override void Update()
+    {
+        if (_pathPositions == null) return;
+        if (_pathPositions.Count == 0) return;
+
+        Vector3 destination = _pathPositions[_pathPositions.Count -1];
+        Actor.transform.position = Vector3.MoveTowards(Actor.transform.position, destination, 2 * Time.deltaTime);
+        Actor.transform.LookAt(destination);
+    }
+    
 }
 
 

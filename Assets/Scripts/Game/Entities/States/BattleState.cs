@@ -9,13 +9,24 @@ public class BattleState : ITickable
     private List<BattleAction> _actions = new List<BattleAction>();
     private Dictionary<BattleCondition, BattleState> _conditions = new Dictionary<BattleCondition,BattleState>();
 
+    private BattleAction_SearchForTarget _searchingTargetAction;
+
     public BattleActor Target 
     {
         get 
         {
-            BattleAction_SearchForTarget searchingAction = _actions.Find(item => item is BattleAction_SearchForTarget) as BattleAction_SearchForTarget;
-            if (searchingAction == null) return null;
-            return searchingAction.Target;
+            if (_searchingTargetAction == null) return null;
+            return _searchingTargetAction.Target;
+        }
+    }
+
+    public Vector3 Destination
+    {
+        get
+        {
+            if (_searchingTargetAction == null) return _actor.transform.position;
+            if ( _searchingTargetAction.Target == null) return _actor.transform.position;
+            return _searchingTargetAction.Target.transform.position;
         }
     }
 
@@ -29,6 +40,8 @@ public class BattleState : ITickable
             BattleAction action = BattleAction.Create(profile.Actions[i]);
             action.Actor = _actor;
             _actions.Add(action);
+
+            if (action is BattleAction_SearchForTarget) _searchingTargetAction = action as BattleAction_SearchForTarget;
         }
     }
 
@@ -46,8 +59,7 @@ public class BattleState : ITickable
 
     public void OnBegin()
     {
-        int count = _actions.Count;
-        for (int i = 0; i < count; ++i)
+        for (int i = 0; i < _actions.Count; ++i)
         {
             _actions[i].OnBegin();
         }
@@ -55,8 +67,7 @@ public class BattleState : ITickable
 
     public void OnTick()
     {
-        int count = _actions.Count;
-        for(int i = 0; i < count; ++i)
+        for (int i = 0; i < _actions.Count; ++i)
         {
             _actions[i].OnTick();
         }
@@ -64,10 +75,17 @@ public class BattleState : ITickable
 
     public void OnEnd()
     {
-        int count = _actions.Count;
-        for (int i = 0; i < count; ++i)
+        for (int i = 0; i < _actions.Count; ++i)
         {
             _actions[i].OnEnd();
+        }
+    }
+
+    public void Update()
+    {
+        for (int i = 0; i < _actions.Count; ++i)
+        {
+            _actions[i].Update();
         }
     }
     

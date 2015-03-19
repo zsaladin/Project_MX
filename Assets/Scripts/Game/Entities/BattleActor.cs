@@ -33,6 +33,7 @@ public class BattleActor : MonoBehaviour, ITickable
     public Ownership OpponentOwnerShip { get { return (Ownership)((int)OwnerShip ^ 0x1); } }
 
     public BattleActor Target { get { return _currentState.Target; } }
+    public Vector3 Destination { get { return _currentState.Destination; } }
 
     public void Init(ActorRecord record, Ownership ownerShip, Vector3? position)
     {
@@ -54,8 +55,6 @@ public class BattleActor : MonoBehaviour, ITickable
 
     void InitStats()
     {
-        
-
         Size = _profile.Size;
         HitPointMax = HitPointMax = _profile.HitPointMax;
         OffenseType = _profile.OffenseType;
@@ -85,6 +84,7 @@ public class BattleActor : MonoBehaviour, ITickable
             States[i].PostInit();
         }
         _currentState = States[0];
+        _currentState.OnBegin();
     }
 
 	public void OnTick()
@@ -97,6 +97,11 @@ public class BattleActor : MonoBehaviour, ITickable
             _currentState = nextState;
             _currentState.OnBegin();
         }
+    }
+
+    void Update()
+    {
+        _currentState.Update();
     }
 
     public void OnChangeState()

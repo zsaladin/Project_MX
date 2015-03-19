@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
         {
             _currentTickCounter -= Manager.Constant.GAME_TICK;
 
+            Manager.Coordinate.OnTick();
+
             Manager.Event.OnTick();
             Manager.Entity.OnTick();
 

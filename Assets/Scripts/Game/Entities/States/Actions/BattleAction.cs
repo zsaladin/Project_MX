@@ -14,6 +14,7 @@ public abstract class BattleAction : ITickable
     public virtual void OnBegin() { }
     public virtual void OnTick() { }
     public virtual void OnEnd() { }
+    public virtual void Update() { }
 
     public static BattleAction Create(ActionType type)
     {

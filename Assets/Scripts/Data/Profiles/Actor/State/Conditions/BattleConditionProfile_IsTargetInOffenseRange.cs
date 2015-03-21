@@ -15,6 +15,7 @@ public class BattleConditionProfile_IsTargetInOffenseRange : BattleConditionProf
     public BattleConditionProfile_IsTargetInOffenseRange()
     {
         Name = "IsTargetInOffenseRange";
+        Type = ConditionType.IsTargetInOffenseRange;
     }
 
 #if UNITY_EDITOR

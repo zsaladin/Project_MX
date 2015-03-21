@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
             Manager.Event.OnEventTick();
             Manager.Event.ReleaseEvents();
+
+            Manager.Entity.OnPostTick();
             _tickCount++;
         }
     }

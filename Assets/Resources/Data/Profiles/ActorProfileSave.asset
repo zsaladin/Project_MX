@@ -16,25 +16,25 @@ MonoBehaviour:
     Name: Warrior
     Prefab: {fileID: 100070, guid: a0179be775d865349b2c4bbbd6f83177, type: 2}
     ActorType: 1
-    Size: 0
+    Size: 1
     HitPointMax: 1000
     OffenseType: 1
     OffensePower: 100
-    OffenseTime: 1
-    OffenseDealTime: .5
-    OffenseRange: 3
+    OffenseTime: .769999981
+    OffenseDealTime: .300000012
+    OffenseRange: .699999988
     DefenseType: 2
-    MovingSpeed: 5
+    MovingSpeed: 10
   - ID: 2
     Name: Troll
     Prefab: {fileID: 100000, guid: ba76689f220e59a48845d4df03dcbffa, type: 2}
     ActorType: 1
-    Size: 0
+    Size: .800000012
     HitPointMax: 500
     OffenseType: 1
     OffensePower: 50
-    OffenseTime: 1.39999998
-    OffenseDealTime: .699999988
-    OffenseRange: 2
+    OffenseTime: 1.52999997
+    OffenseDealTime: 1
+    OffenseRange: 1
     DefenseType: 1
     MovingSpeed: 3

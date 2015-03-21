@@ -20,19 +20,19 @@ MonoBehaviour:
       ProfileID: 1
       Level: 0
       Exp: 0
-      Position: {x: 1, y: 1, z: 1}
+      Position: {x: -10, y: 0, z: -7}
     - ID: 2
-      Name: Troll
-      ProfileID: 2
+      Name: Warrior
+      ProfileID: 1
       Level: 0
       Exp: 0
-      Position: {x: -1, y: -1, z: -1}
+      Position: {x: -7, y: 0, z: 2}
   - ID: 2
     Name: Enemy1
     ActorRecords:
     - ID: 1
-      Name: Warrior
-      ProfileID: 1
+      Name: Troll
+      ProfileID: 2
       Level: 0
       Exp: 0
       Position: {x: 10, y: 0, z: 7}
@@ -43,8 +43,8 @@ MonoBehaviour:
       Exp: 0
       Position: {x: 10, y: 0, z: 9}
     - ID: 3
-      Name: Warrior
-      ProfileID: 1
+      Name: Troll
+      ProfileID: 2
       Level: 0
       Exp: 0
       Position: {x: 12, y: 0, z: 7.5}
@@ -55,8 +55,8 @@ MonoBehaviour:
       Exp: 0
       Position: {x: 2, y: 0, z: 3.0999999}
     - ID: 5
-      Name: Warrior
-      ProfileID: 1
+      Name: Troll
+      ProfileID: 2
       Level: 0
       Exp: 0
       Position: {x: 3, y: 0, z: 5}
@@ -67,8 +67,8 @@ MonoBehaviour:
       Exp: 0
       Position: {x: 3, y: 0, z: 2}
     - ID: 7
-      Name: Warrior
-      ProfileID: 1
+      Name: Troll
+      ProfileID: 2
       Level: 0
       Exp: 0
       Position: {x: 5, y: 0, z: 3}

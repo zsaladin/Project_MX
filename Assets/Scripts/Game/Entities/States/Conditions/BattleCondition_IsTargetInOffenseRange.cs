@@ -6,10 +6,15 @@ public class BattleCondition_IsTargetInRange : BattleCondition<BattleConditionPr
 {
     public override bool IsInCondition()
     {
-        if (_state.Target == null) return false;
+        if (_state.Target == null)
+            return Profile.IsTrue == false;
 
         // It must be chagned from 'maginitude' to  'sqrMaginitude'
         Vector3 diff = _state.Target.transform.position - _actor.transform.position;
-        return diff.magnitude <= _actor.OffenseRange - (_actor.Size * 0.5f) - (_state.Target.Size * 0.5f);
+        bool isInRange = diff.magnitude <= _actor.OffenseRange + (_actor.Size * 0.5f) + (_state.Target.Size * 0.5f);
+        if (Profile.IsTrue)
+            return isInRange;
+        else
+            return !isInRange;
     }
 }

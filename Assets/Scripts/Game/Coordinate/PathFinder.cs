@@ -11,9 +11,13 @@ public class PathFinder : ITickable
     private PathNode _currentNode;
     private PathNode _destinationNode;
     private PathNode _calculatedDestNode;
-    
-    private List<PathNode> _openedNodes = new List<PathNode>();
-    private List<PathNode> _closedNodes = new List<PathNode>();
+    private PathNodeComparer _comparer;
+
+    private HashSet<PathNode> _openedHash = new HashSet<PathNode>();
+    //private List<PathNode> _openedNodes = new List<PathNode>();
+
+    private HashSet<PathNode> _closedHash = new HashSet<PathNode>();
+    //private List<PathNode> _closedNodes = new List<PathNode>();
 
     private List<Vector3> _pathPositions = new List<Vector3>();
 
@@ -22,6 +26,7 @@ public class PathFinder : ITickable
     public PathFinder(BattleActor actor)
     {
         _actor = actor;
+        _comparer = new PathNodeComparer();
         _directions = System.Enum.GetValues(typeof(Direction)) as Direction[];
 
         var tempDirectinos = _directions.ToList();
@@ -42,6 +47,144 @@ public class PathFinder : ITickable
                 _nodes[x * Graph.ZCount + z] = new PathNode(Manager.Coordinate.Graph.GetNode(x, z).Value);
             }
         }
+    }
+
+    void InitNode(PathNode thisNode)
+    {
+        thisNode.ParentPathNode = null;
+        thisNode.F = 0;
+        thisNode.G = 0;
+        thisNode.H = 0;
+    }
+
+    public void OnTick()
+    {
+        //_openedNodes.Clear();
+        //_closedNodes.Clear();
+        _openedHash.Clear();
+        _closedHash.Clear();
+
+        _currentNode = GetNodeFromVector(_actor.transform.position);
+        _destinationNode = GetNodeFromVector(_actor.Destination);
+        _calculatedDestNode = null;
+        //_destinationNode = GetNodeFromVector(Vector3.zero);
+
+        InitNode(_currentNode);
+        PathNode thisNode = _currentNode;
+
+        for (int i = 0; i < _directions.Length; ++i)
+        {
+            Direction dir = _directions[i];
+            PathNode nearNode = GetNearNode(_currentNode, dir);
+            if (nearNode == null) continue;
+
+            nearNode.ParentPathNode = thisNode;
+            CalculateCosts(nearNode);
+            //_openedNodes.Add(nearNode);
+            _openedHash.Add(nearNode);
+
+            if (nearNode == _destinationNode)
+            {
+                _calculatedDestNode = _destinationNode;
+                break;
+            }
+        }
+
+        if (_calculatedDestNode != null) return;
+
+        int repeat = 0;
+        const int maxRepeat = 3000;
+        while (repeat < maxRepeat)
+        {
+            ++repeat;
+            if (_openedHash.Count == 0) break;
+            if (_openedHash.Contains(_destinationNode))
+            {
+                _calculatedDestNode = _destinationNode;
+                break;
+            }
+
+            //if (_calculatedDestNode != null) break;
+
+            //_openedNodes.Sort(_comparer);
+            //thisNode = _openedNodes[0];
+            thisNode = GetTheLeastCostNode(_openedHash);
+            //_openedNodes.RemoveAt(0);
+            _openedHash.Remove(thisNode);
+
+            //_closedNodes.Add(thisNode);
+            _closedHash.Add(thisNode);
+
+            for (int i = 0; i < _directions.Length; ++i)
+            {
+                Direction dir = _directions[i];
+                PathNode nearNode = GetNearNode(thisNode, dir);
+                if (nearNode == null) continue;
+
+                if (_closedHash.Contains(nearNode)) continue;
+                if (_openedHash.Contains(_destinationNode))
+                {
+                    // recalculate
+                }
+                else
+                {
+                    CalculateCosts(nearNode);
+
+                    float diffHeight = Mathf.Abs(nearNode.GraphNode.Height - thisNode.GraphNode.Height);
+                    if (diffHeight < 0.3f)
+                    {
+                        //_openedNodes.Add(nearNode);
+                        _openedHash.Add(nearNode);
+                        nearNode.ParentPathNode = thisNode;
+                        //if (nearNode == _destinationNode)
+                        //{
+                        //    _calculatedDestNode = _destinationNode;
+                        //}
+                    }
+                    else
+                    {
+                        //_closedNodes.Add(nearNode);
+                        _closedHash.Add(nearNode);
+                    }
+                }
+            }
+        }
+        if (repeat == maxRepeat)
+        {
+            _calculatedDestNode = thisNode;
+        }
+    }
+
+    PathNode GetTheLeastCostNode(ICollection<PathNode> collection)
+    {
+        int minFCost = int.MaxValue;
+        PathNode node = null;
+        foreach(PathNode item in collection)
+        {
+            if (minFCost > item.F)
+            {
+                minFCost = item.F;
+                node = item;
+            }
+        }
+        return node;
+    }
+
+    public List<Vector3> GetPath()
+    {
+        _pathPositions.Clear();
+        PathNode thisNode = _calculatedDestNode;
+        while(true)
+        {
+            if (thisNode == null) break;
+            if (thisNode == _currentNode) break;
+            if (_pathPositions.Contains(GetVectorFromNode(thisNode))) break;
+
+            _pathPositions.Add(GetVectorFromNode(thisNode));
+            thisNode = thisNode.ParentPathNode;
+        }
+
+        return _pathPositions;
     }
 
     public PathNode GetNode(int x, int z)
@@ -79,7 +222,7 @@ public class PathFinder : ITickable
         return GetNode(Graph.GetNearCoordinateX(x, direction), Graph.GetNearCoordinateZ(z, direction));
     }
 
-    
+
 
     void CalculateCosts(PathNode thisNode)
     {
@@ -93,8 +236,7 @@ public class PathFinder : ITickable
         PathNode parentNode = thisNode.ParentPathNode;
         if (parentNode == null) return 0;
 
-
-        return parentNode.G + CalculateCostBetweenNodes(thisNode, parentNode);
+        return parentNode.G + CalculateCostBetweenNodeAndParent(thisNode, parentNode);
     }
     int CalculateCostH(PathNode thisNode)
     {
@@ -115,83 +257,18 @@ public class PathFinder : ITickable
         return diagonal * PathNode.DIAGONAL_LINE_COST + straight * PathNode.STRAIGHT_LINE_COST;
     }
 
-    void InitNode(PathNode thisNode)
+    int CalculateCostBetweenNodeAndParent(PathNode thisNode, PathNode parentNode)
     {
-        thisNode.ParentPathNode = null;
-        thisNode.F = 0;
-        thisNode.G = 0;
-        thisNode.H = 0;
+        if (thisNode.GraphNode.X == parentNode.GraphNode.X) return PathNode.STRAIGHT_LINE_COST;
+        if (thisNode.GraphNode.Z == parentNode.GraphNode.Z) return PathNode.STRAIGHT_LINE_COST;
+        return PathNode.DIAGONAL_LINE_COST;
     }
 
-    public void OnTick()
+    class PathNodeComparer : IComparer<PathNode>
     {
-        _openedNodes.Clear();
-        _closedNodes.Clear();
-
-        _currentNode = GetNodeFromVector(_actor.transform.position);
-        //_destinationNode = GetNodeFromVector(_actor.Destination);
-        _destinationNode = GetNodeFromVector(Vector3.zero);
-
-        InitNode(_currentNode);
-        PathNode thisNode = _currentNode;
-
-        for (int i = 0; i < _directions.Length; ++i)
+        public int Compare(PathNode x, PathNode y)
         {
-            Direction dir = _directions[i];
-            PathNode nearNode = GetNearNode(_currentNode, dir);
-            if (nearNode == null) continue;
-
-            nearNode.ParentPathNode = thisNode;
-            CalculateCosts(nearNode);
-            _openedNodes.Add(nearNode);
-        }
-
-        while (true)
-        {
-            if (_openedNodes.Count == 0) break;
-            if (_openedNodes.Contains(_destinationNode))
-            {
-                _calculatedDestNode = _destinationNode;
-                break;
-            }
-
-            _openedNodes.Sort((first, second) => first.F -second.F);
-            thisNode = _openedNodes[0];
-            _openedNodes.RemoveAt(0);
-            _closedNodes.Add(thisNode);
-
-            for (int i = 0; i < _directions.Length; ++i)
-            {
-                Direction dir = _directions[i];
-                PathNode nearNode = GetNearNode(thisNode, dir);
-                if (nearNode == null) continue;
-
-                if (_closedNodes.Contains(nearNode)) continue;
-                if (_openedNodes.Contains(nearNode))
-                {
-                    // recalculate
-                }
-                else
-                {
-                    _openedNodes.Add(nearNode);
-                    nearNode.ParentPathNode = thisNode;
-                    CalculateCosts(nearNode);
-                }
-            }
+            return x.F - y.F;
         }
     }
-
-    public List<Vector3> GetPath()
-    {
-        _pathPositions.Clear();
-        PathNode thisNode = _calculatedDestNode;
-        while(thisNode != _currentNode)
-        {
-            _pathPositions.Add(GetVectorFromNode(thisNode));
-            thisNode = thisNode.ParentPathNode;
-        }
-
-        return _pathPositions;
-    }
-
 }

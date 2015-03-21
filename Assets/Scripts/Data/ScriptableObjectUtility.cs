@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public static class ScriptableObjectUtility
 {
@@ -12,15 +15,21 @@ public static class ScriptableObjectUtility
         _savePath.Add(DataType.Record, "Data/Records");
     }
 
+
     public static T GetAsset<T>(DataType dataType) where T : ScriptableObject
     {
         string assetPath = string.Format("{0}/{1}", _savePath[dataType], typeof(T).Name);
         T asset = Resources.Load<T>(assetPath);
         if (asset != null) return asset;
 
+#if UNITY_EDITOR
         return CreateAsset<T>(dataType);
+#else
+        return null;
+#endif
     }
 
+#if UNITY_EDITOR
     public static T CreateAsset<T>(DataType dataType) where T : ScriptableObject
     {
         T asset = ScriptableObject.CreateInstance<T>();
@@ -40,6 +49,7 @@ public static class ScriptableObjectUtility
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+#endif
 }
 
 public enum DataType

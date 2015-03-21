@@ -58,7 +58,7 @@ public class Graph
                 RaycastHit[] hits = Physics.RaycastAll(ray, 500, layers);
                 if (hits.Length > 0)
                 {
-                    RaycastHit hit = hits[0];
+                    RaycastHit hit = hits.Aggregate((first, second) => first.point.y > second.point.y ? first : second);
                     height = hit.point.y;
                 }
 
@@ -90,9 +90,9 @@ public class Graph
 
     public static int GetNearCoordinateX(int x, Direction direction)
     {
-        if (direction.Has(Direction.Top))
+        if (EnumHas(direction, Direction.Top))
             --x;
-        else if (direction.Has(Direction.Bottom))
+        else if (EnumHas(direction, Direction.Bottom))
             ++x;
 
         return x;
@@ -100,12 +100,21 @@ public class Graph
 
     public static int GetNearCoordinateZ(int z, Direction direction)
     {
-        if (direction.Has(Direction.Left))
+        if (EnumHas(direction, Direction.Left))
             --z;
-        else if (direction.Has(Direction.Right))
+        else if (EnumHas(direction, Direction.Right))
             ++z;
 
         return z;
+    }
+
+    // Extension Method 'Has' have performance issue;
+    static bool EnumHas(Direction enumFirst, Direction enumSecond)
+    {
+        int first = System.Convert.ToInt32(enumFirst);
+        int second = System.Convert.ToInt32(enumSecond);
+
+        return (first & second) == second;
     }
 
     public GraphNode? GetNode(int x, int z)

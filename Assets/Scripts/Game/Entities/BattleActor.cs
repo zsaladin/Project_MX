@@ -7,10 +7,9 @@ public class BattleActor : MonoBehaviour, ITickable
     private ActorRecord _record;
     private ActorProfile _profile;
     private ActorTypeProfile _actorTypeProfile;
-    private BattleState _currentState;
-    
-    
 
+    private List<UIMonoBehaviour> _uiControllers = new List<UIMonoBehaviour>();
+    
     #region Battle Stat Property
     public float Size { get; protected set; }
     public float HitPointMax { get; protected set; }
@@ -28,12 +27,13 @@ public class BattleActor : MonoBehaviour, ITickable
     #endregion
 
     public BattleState[] States { get; protected set; }
+    public BattleState CurrentState { get; private set; }
 
     public Ownership OwnerShip  { get; protected set; }
     public Ownership OpponentOwnerShip { get { return (Ownership)((int)OwnerShip ^ 0x1); } }
 
-    public BattleActor Target { get { return _currentState.Target; } }
-    public Vector3 Destination { get { return _currentState.Destination; } }
+    public BattleActor Target { get { return CurrentState.Target; } }
+    public Vector3 Destination { get { return CurrentState.Destination; } }
 
     public void Init(ActorRecord record, Ownership ownerShip, Vector3? position)
     {
@@ -56,7 +56,7 @@ public class BattleActor : MonoBehaviour, ITickable
     void InitStats()
     {
         Size = _profile.Size;
-        HitPointMax = HitPointMax = _profile.HitPointMax;
+        HitPoint = HitPointMax = _profile.HitPointMax;
         OffenseType = _profile.OffenseType;
         OffensePower = _profile.OffensePower;
         OffenseTime = _profile.OffenseTime;
@@ -83,25 +83,46 @@ public class BattleActor : MonoBehaviour, ITickable
         {
             States[i].PostInit();
         }
-        _currentState = States[0];
-        _currentState.OnBegin();
+        CurrentState = States[0];
+        CurrentState.OnBegin();
+    }
+
+    public void AddUIController(UIMonoBehaviour ui)
+    {
+        _uiControllers.Add(ui);
+    }
+
+    public void RedrawUIs()
+    {
+        for(int i = 0; i < _uiControllers.Count; ++i)
+        {
+            _uiControllers[i].Redraw();
+        }
+    }
+
+    public void EnableUIs(bool enable)
+    {
+        for (int i = 0; i < _uiControllers.Count; ++i)
+        {
+            _uiControllers[i].EnableUI(enable);
+        }
     }
 
 	public void OnTick()
     {
-        _currentState.OnTick();
-        BattleState nextState = _currentState.OnConditionConfirm();
+        CurrentState.OnTick();
+        BattleState nextState = CurrentState.OnConditionConfirm();
         if (nextState != null)
         {
-            _currentState.OnEnd();
-            _currentState = nextState;
-            _currentState.OnBegin();
+            CurrentState.OnEnd();
+            CurrentState = nextState;
+            CurrentState.OnBegin();
         }
     }
 
     void Update()
     {
-        _currentState.Update();
+        CurrentState.Update();
     }
 
     public void OnChangeState()

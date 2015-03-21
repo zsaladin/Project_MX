@@ -20,6 +20,11 @@ public class CoordinateManager : MonoBehaviour, ITickable
         _actorPathFinders.Add(actor, new PathFinder(actor));
     }
 
+    public void UnregisterForPathFinder(BattleActor actor)
+    {
+        _actorPathFinders.Remove(actor);
+    }
+
     public List<Vector3> GetPath(BattleActor actor)
     {
         return _actorPathFinders[actor].GetPath();

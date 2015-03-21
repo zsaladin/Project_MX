@@ -8,9 +8,20 @@ public class BattleAction_SearchForTarget : BattleAction
 {
     public BattleActor Target { get; protected set; }
 
+    public override void OnBegin()
+    {
+        base.OnBegin();
+
+        SearchForTarget();
+    }
+
     public override void OnTick()
     {
-        //Debug.Log(string.Format("{0} : {1}", Actor.name, GetType().Name));
+        SearchForTarget();
+    }
+
+    void SearchForTarget()
+    {
         List<BattleActor> opponents = Manager.Entity.GetActors(Actor.OpponentOwnerShip, false);
 
         BattleActor nearestOpponent = null;
@@ -18,7 +29,7 @@ public class BattleAction_SearchForTarget : BattleAction
 
         Vector3 actorPosition = Actor.transform.position;
         int count = opponents.Count;
-        for(int i = 0; i < count; ++i)
+        for (int i = 0; i < count; ++i)
         {
             Vector3 diff = actorPosition - opponents[i].transform.position;
             float sqrMag = diff.sqrMagnitude;
@@ -31,4 +42,6 @@ public class BattleAction_SearchForTarget : BattleAction
 
         Target = nearestOpponent;
     }
+
+
 }

@@ -6,10 +6,10 @@ public class BattleState : ITickable
 {
     private BattleStateProfile _profile;
     private BattleActor _actor;
-    private List<BattleAction> _actions = new List<BattleAction>();
     private Dictionary<BattleCondition, BattleState> _conditions = new Dictionary<BattleCondition,BattleState>();
-
     private BattleAction_SearchForTarget _searchingTargetAction;
+
+    public List<BattleAction> Actions { get; private set; }
 
     public BattleActor Target 
     {
@@ -35,11 +35,13 @@ public class BattleState : ITickable
         _actor = actor;
         _profile = profile;
 
+        Actions = new List<BattleAction>();
+
         for(int i = 0; i < profile.Actions.Count; ++i)
         {
             BattleAction action = BattleAction.Create(profile.Actions[i]);
             action.Actor = _actor;
-            _actions.Add(action);
+            Actions.Add(action);
 
             if (action is BattleAction_SearchForTarget) _searchingTargetAction = action as BattleAction_SearchForTarget;
         }
@@ -59,33 +61,33 @@ public class BattleState : ITickable
 
     public void OnBegin()
     {
-        for (int i = 0; i < _actions.Count; ++i)
+        for (int i = 0; i < Actions.Count; ++i)
         {
-            _actions[i].OnBegin();
+            Actions[i].OnBegin();
         }
     }
 
     public void OnTick()
     {
-        for (int i = 0; i < _actions.Count; ++i)
+        for (int i = 0; i < Actions.Count; ++i)
         {
-            _actions[i].OnTick();
+            Actions[i].OnTick();
         }
     }
 
     public void OnEnd()
     {
-        for (int i = 0; i < _actions.Count; ++i)
+        for (int i = 0; i < Actions.Count; ++i)
         {
-            _actions[i].OnEnd();
+            Actions[i].OnEnd();
         }
     }
 
     public void Update()
     {
-        for (int i = 0; i < _actions.Count; ++i)
+        for (int i = 0; i < Actions.Count; ++i)
         {
-            _actions[i].Update();
+            Actions[i].Update();
         }
     }
     

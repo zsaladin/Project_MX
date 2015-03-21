@@ -4,7 +4,7 @@ using System.Linq;
 
 public class BattleAction_Offense : BattleAction
 {
-    protected BattleAction_Defense _target;
+    protected BattleActor _target;
 
     protected float _currentDuratiion;
     protected bool _isDealed;
@@ -19,8 +19,21 @@ public class BattleAction_Offense : BattleAction
 
     public override void OnBegin()
     {
+        base.OnBegin();
+
         _currentDuratiion = 0;
         _isDealed = false;
+
+        Animation animation = Actor.GetComponent<Animation>();
+        animation.Stop();
+        if (animation.GetClip("Attack_01"))
+            animation.Play("Attack_01");
+        else
+            animation.Play("attack");
+
+        _target = Actor.Target;
+        if (_target != null)
+            Actor.transform.LookAt(_target.transform);
     }
     
     public override void OnTick()
@@ -35,7 +48,7 @@ public class BattleAction_Offense : BattleAction
 
         if (_currentDuratiion >= Actor.OffenseDealTime)
         {
-            if (_isDealed)
+            if (_isDealed == false)
             {
                 _isDealed = true;
                 Offense();
@@ -48,9 +61,18 @@ public class BattleAction_Offense : BattleAction
         
     }
 
+    public override void Update()
+    {
+        
+    }
+
     void Offense()
     {
-        _target.Defense(this);
+        if (_target == null) return;
+
+        var defenseAction = _target.CurrentState.Actions.Find(item => item is BattleAction_Defense) as BattleAction_Defense;
+        if (defenseAction != null)
+            defenseAction.Defense(this);
     }
 }
 

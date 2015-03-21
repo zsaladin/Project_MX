@@ -12,9 +12,12 @@ public class EventManager : MonoBehaviour
     private bool _isMouseDown;
     private bool _isMouseUp;
 
+    private Vector3 _mouseDownPosition;
+
 	public void Init()
     {
         _eventLisener.Add(EventType.MouseDown, OnMouseDown);
+        _eventLisener.Add(EventType.MouseUp, OnMouseUp);
     }
 	
 	void Update () 
@@ -50,7 +53,8 @@ public class EventManager : MonoBehaviour
 
         if (_isMouseUp)
         {
-
+            BattleEvent_MouseUp mouseUpEvent = BattleEvent.Create(EventType.MouseUp) as BattleEvent_MouseUp;
+            mouseUpEvent._mousePosition = Input.mousePosition;
         }
 
         _isMouseDown = false;
@@ -80,6 +84,15 @@ public class EventManager : MonoBehaviour
     void OnMouseDown(BattleEvent e)
     {
         BattleEvent_MouseDown mouseEvent = e as BattleEvent_MouseDown;
+        _mouseDownPosition = mouseEvent._mousePosition;
+        
+    }
+
+    void OnMouseUp(BattleEvent e)
+    {
+        BattleEvent_MouseUp mouseEvent = e as BattleEvent_MouseUp;
+        if ((mouseEvent._mousePosition - _mouseDownPosition).sqrMagnitude > 2) return;
+
         Ray ray = Camera.main.ScreenPointToRay(mouseEvent._mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("Ground")))

@@ -26,6 +26,10 @@ public abstract class BattleCondition
                 return new BattleCondition_HitPoint();
             case ConditionType.IsTargetInOffenseRange:
                 return new BattleCondition_IsTargetInRange();
+            case ConditionType.IsOffenseEnded:
+                return new BattleCondition_IsOffenseEnded();
+            case ConditionType.ExistsTarget:
+                return new BattleCondition_ExistsTarget();
         }
 
         return null;
@@ -51,9 +55,9 @@ public enum Condition_RatioValueType
 
 public enum Condition_ComparisonType
 {
-    Equal   = 0x01,
-    More    = 0x02,
-    Less    = 0x04,
+    Equal       = 0x01,
+    More        = 0x02,
+    Less        = 0x04,
 }
 
 public enum ConditionType
@@ -61,4 +65,6 @@ public enum ConditionType
     Invalid,
     HitPoint,
     IsTargetInOffenseRange,
+    IsOffenseEnded,
+    ExistsTarget,
 }

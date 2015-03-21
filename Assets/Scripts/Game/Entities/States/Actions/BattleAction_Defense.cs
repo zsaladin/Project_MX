@@ -14,7 +14,7 @@ public class BattleAction_Defense : BattleAction
 
     public override void OnBegin()
     {
-        
+        base.OnBegin();
     }
 
     public override void OnTick()
@@ -30,6 +30,7 @@ public class BattleAction_Defense : BattleAction
     public void Defense(BattleAction_Offense attackAction)
     {
         Actor.HitPoint -= attackAction.Actor.OffensePower;
+        Actor.RedrawUIs();
     }
 }
 

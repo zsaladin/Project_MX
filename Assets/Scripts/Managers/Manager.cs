@@ -24,6 +24,7 @@ public class Manager : MonoBehaviour
     public static GameManager Game { get; private set; }
     public static EventManager Event { get; private set; }
     public static CoordinateManager Coordinate { get; private set; }
+    public static UIManager UI { get; private set; }
 
 	void Awake () 
 	{
@@ -37,6 +38,9 @@ public class Manager : MonoBehaviour
         Constant = GameObject.FindObjectOfType<ConstantManager>();
         Constant.Init();
 
+        UI = GameObject.FindObjectOfType<UIManager>();
+        UI.Init();
+
         Coordinate = GameObject.FindObjectOfType<CoordinateManager>();
         Coordinate.Init();
 
@@ -48,5 +52,7 @@ public class Manager : MonoBehaviour
 
         Event = GameObject.FindObjectOfType<EventManager>();
         Event.Init();
+
+        
     }
 }

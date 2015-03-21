@@ -11,13 +11,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19037b8f9dadfc48990ad419d79408f, type: 3}
   m_Name: ConditionProfileSave
   m_EditorClassIdentifier: 
-  Conditions_HitPoint: []
+  Conditions_HitPoint:
+  - ID: 1
+    Name: IsDead
+    Type: 1
+    StandardHitPoint: 0
+    RatioValueType: 1
+    ComparisonType: 5
   Conditions_IsTargetInOffenseRange:
   - ID: 1
     Name: InRange True
-    Type: 0
+    Type: 2
     IsTrue: 1
   - ID: 2
     Name: InRange False
-    Type: 0
+    Type: 2
+    IsTrue: 0
+  Conditions_IsOffenseEnded:
+  - ID: 1
+    Name: Default
+    Type: 3
+  Conditions_ExistsTarget:
+  - ID: 1
+    Name: Exists Target True
+    Type: 4
+    IsTrue: 1
+  - ID: 2
+    Name: Exists Target False
+    Type: 4
     IsTrue: 0

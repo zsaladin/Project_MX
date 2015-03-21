@@ -11,7 +11,12 @@ public abstract class BattleAction : ITickable
 
     public virtual ActionType Type { get { return ActionType.Invalid; }}
 
-    public virtual void OnBegin() { }
+    public virtual void OnBegin() 
+    { 
+        IsEnd = false;
+        ForceEnd = false;
+    }
+
     public virtual void OnTick() { }
     public virtual void OnEnd() { }
     public virtual void Update() { }
@@ -28,6 +33,10 @@ public abstract class BattleAction : ITickable
                 return new BattleAction_Movement();
             case ActionType.SearchForTarget:
                 return new BattleAction_SearchForTarget();
+            case ActionType.Death:
+                return new BattleAction_Death();
+            case ActionType.Wait:
+                return new BattleAction_Wait();
         }
 
         return null;
@@ -42,4 +51,6 @@ public enum ActionType
     Defense,
     Movement,
     SearchForTarget,
+    Death,
+    Wait,
 }

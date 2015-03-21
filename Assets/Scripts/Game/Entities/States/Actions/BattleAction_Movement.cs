@@ -15,11 +15,14 @@ public class BattleAction_Movement : BattleAction
 
     public override void OnBegin()
     {
+        base.OnBegin();
+
         Animation animation = Actor.GetComponent<Animation>();
+        animation.Stop();
         if (animation.GetClip("Walk"))
             animation.Play("Walk");
         else
-            animation.Play("walk");
+            animation.Play("run");
     }
 
     public override void OnTick()
@@ -39,7 +42,7 @@ public class BattleAction_Movement : BattleAction
         if (_pathPositions.Count == 0) return;
 
         Vector3 destination = _pathPositions[_pathPositions.Count -1];
-        Actor.transform.position = Vector3.MoveTowards(Actor.transform.position, destination, 2 * Time.deltaTime);
+        Actor.transform.position = Vector3.MoveTowards(Actor.transform.position, destination, 1 * Time.deltaTime);
         Actor.transform.LookAt(destination);
     }
     

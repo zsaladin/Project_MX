@@ -21,6 +21,12 @@ MonoBehaviour:
       - ConditionType: 2
         ConditionProfileID: 1
         StateProfileID: 2
+      - ConditionType: 1
+        ConditionProfileID: 1
+        StateProfileID: 3
+      - ConditionType: 4
+        ConditionProfileID: 2
+        StateProfileID: 4
       Actions: 030000000200000004000000
     - ID: 2
       Name: Attack
@@ -28,7 +34,33 @@ MonoBehaviour:
       - ConditionType: 2
         ConditionProfileID: 2
         StateProfileID: 1
-      Actions: 010000000200000004000000
+      - ConditionType: 3
+        ConditionProfileID: 1
+        StateProfileID: 2
+      - ConditionType: 1
+        ConditionProfileID: 1
+        StateProfileID: 3
+      - ConditionType: 4
+        ConditionProfileID: 2
+        StateProfileID: 4
+      Actions: 020000000400000001000000
+    - ID: 3
+      Name: Death
+      ConditionStateSet: []
+      Actions: 05000000
+    - ID: 4
+      Name: Wait
+      ConditionStateSet:
+      - ConditionType: 4
+        ConditionProfileID: 1
+        StateProfileID: 1
+      - ConditionType: 1
+        ConditionProfileID: 1
+        StateProfileID: 3
+      - ConditionType: 2
+        ConditionProfileID: 1
+        StateProfileID: 2
+      Actions: 0400000006000000
   - ID: 2
     Name: Hero
     States: []

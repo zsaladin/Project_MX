@@ -29,8 +29,10 @@ public abstract class BattleEvent
             switch (type)
             {
                 case EventType.MouseDown:
-                    newEvent = new BattleEvent_MouseDown();
-                    break;
+                    newEvent = new BattleEvent_MouseDown(); break;
+
+                case EventType.MouseUp:
+                    newEvent = new BattleEvent_MouseUp(); break;
             }
         }
 
@@ -49,4 +51,5 @@ public abstract class BattleEvent
 public enum EventType
 {
     MouseDown,
+    MouseUp
 }

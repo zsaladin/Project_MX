@@ -12,6 +12,8 @@ public class EntityManager : MonoBehaviour, ITickable
     public List<BattleActor> BattleActors { get; private set; }
     private List<BattleActor>[] _battleActorsByOwnership;
 
+    private List<BattleActor> _removeActors;
+
     public void Init()
     {
         BattleActors = new List<BattleActor>();
@@ -19,16 +21,15 @@ public class EntityManager : MonoBehaviour, ITickable
         _battleActorsByOwnership = new List<BattleActor>[System.Enum.GetNames(typeof(Ownership)).Length];
         _battleActorsByOwnership[(int)Ownership.OurForce] = new List<BattleActor>();
         _battleActorsByOwnership[(int)Ownership.EnemyForce] = new List<BattleActor>();
+
+        _removeActors = new List<BattleActor>();
     }
 
-    public List<BattleActor> GetActors(Ownership ownership, bool isClone)
+    public void CreateUser(Ownership ownership, UserRecord userRecord)
     {
-        if (isClone == false)
-            return _battleActorsByOwnership[(int)ownership];
-
-        return new List<BattleActor>(_battleActorsByOwnership[(int)ownership]);
+        for (int i = 0; i < userRecord.ActorRecords.Count; ++i)
+            CreateActors(ownership, userRecord.ActorRecords[i]);
     }
-
 
     public BattleActor CreateActors(Ownership ownership, ActorRecord actorRecord, Vector3? position = null)
     {
@@ -42,6 +43,7 @@ public class EntityManager : MonoBehaviour, ITickable
         else
             battleActor.transform.parent = _rootOfEnemyUnits.transform;
 
+        Manager.UI.InitActorSlider(battleActor);
         Manager.Coordinate.RegisterForPathFinder(battleActor);
         _battleActorsByOwnership[(int)ownership].Add(battleActor);
         BattleActors.Add(battleActor);
@@ -49,19 +51,40 @@ public class EntityManager : MonoBehaviour, ITickable
         return battleActor;
     }
 
-    public void CreateUser(Ownership ownership, UserRecord userRecord)
-    {
-        for (int i = 0; i < userRecord.ActorRecords.Count; ++i)
-            CreateActors(ownership, userRecord.ActorRecords[i]);
-    }
-
     public void OnTick()
     {
-        int length = BattleActors.Count;
-        for(int i = 0; i < length; ++i)
+        for(int i = 0; i < BattleActors.Count; ++i)
         {
             BattleActors[i].OnTick();
         }
+    }
+
+    public void OnPostTick()
+    {
+        for (int i = 0; i < _removeActors.Count; ++i )
+        {
+            BattleActor actor = _removeActors[i];
+            BattleActors.Remove(actor);
+            _battleActorsByOwnership[(int)actor.OwnerShip].Remove(actor);
+
+            actor.EnableUIs(false);
+
+            Manager.Coordinate.UnregisterForPathFinder(actor);
+        }
+            
+    }
+
+    public List<BattleActor> GetActors(Ownership ownership, bool isClone)
+    {
+        if (isClone == false)
+            return _battleActorsByOwnership[(int)ownership];
+
+        return new List<BattleActor>(_battleActorsByOwnership[(int)ownership]);
+    }
+
+    public void RemoveActor(BattleActor actor)
+    {
+        _removeActors.Add(actor);
     }
 }
 

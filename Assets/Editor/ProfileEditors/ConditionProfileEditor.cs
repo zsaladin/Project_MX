@@ -9,6 +9,8 @@ public class ConditionProfileEditor : EditorWindow
 
     BattleConditionProfile_HitPoint _currentHitPointProfile;
     BattleConditionProfile_IsTargetInOffenseRange _currentRangeProfile;
+    BattleConditionProfile_IsOffenseEnded _currentOffenseEndedProfile;
+    BattleConditionProfile_ExistsTarget _currentExistsTargetProfile;
 
     [MenuItem("Custom/Profile/Condition")]
     static public void CreateConditionProfileWindow()
@@ -56,29 +58,34 @@ public class ConditionProfileEditor : EditorWindow
             DrawDetail(_currentRangeProfile);
         } GUILayout.EndHorizontal();
 
+        GUILayout.BeginHorizontal();
+        {
+            GUILayout.BeginVertical(GUILayout.Width(200));
+            {
+                GUILayout.Label("Is OffenseEnded");
+                CommonEditorUnitity.DrawData(_save.Conditions_IsOffenseEnded, ref _currentOffenseEndedProfile);
+                CommonEditorUnitity.DrawAddData(_save.Conditions_IsOffenseEnded, ref _currentOffenseEndedProfile);
+                CommonEditorUnitity.DrawRemoveData(_save.Conditions_IsOffenseEnded, ref _currentOffenseEndedProfile);
+            } GUILayout.EndVertical();
+
+            DrawDetail(_currentOffenseEndedProfile);
+        } GUILayout.EndHorizontal();
+
+
+        GUILayout.BeginHorizontal();
+        {
+            GUILayout.BeginVertical(GUILayout.Width(200));
+            {
+                GUILayout.Label("Exists Target");
+                CommonEditorUnitity.DrawData(_save.Conditions_ExistsTarget, ref _currentExistsTargetProfile);
+                CommonEditorUnitity.DrawAddData(_save.Conditions_ExistsTarget, ref _currentExistsTargetProfile);
+                CommonEditorUnitity.DrawRemoveData(_save.Conditions_ExistsTarget, ref _currentExistsTargetProfile);
+            } GUILayout.EndVertical();
+
+            DrawDetail(_currentExistsTargetProfile);
+        } GUILayout.EndHorizontal();
+
         CommonEditorUnitity.DrawSaveData(_save);
-
-            //GUILayout.BeginVertical();
-            //{
-            //    GUILayout.BeginHorizontal();
-            //    {
-            //        GUILayout.Label("Name", GUILayout.Width(150));
-            //        EditorGUILayout.TextField(_currentProfile.Name, GUILayout.Width(150));
-            //    } GUILayout.EndHorizontal();
-
-            //    GUILayout.BeginHorizontal();
-            //    {
-            //        BattleConditionProfile newCondition = null;
-            //        DrawSelectedConditionDetail(ref newCondition);
-            //        if (newCondition != null)
-            //        {
-            //            int index = _save.Conditions.IndexOf(_currentProfile);
-            //            _save.Conditions[index] = newCondition;
-            //            _currentProfile = newCondition;
-            //        }
-            //    } GUILayout.EndHorizontal();
-            //} GUILayout.EndVertical();
-        
     }
 
     void DrawDetail(BattleConditionProfile profile)

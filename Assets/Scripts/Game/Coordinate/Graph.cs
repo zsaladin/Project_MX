@@ -90,9 +90,15 @@ public class Graph
 
     public static int GetNearCoordinateX(int x, Direction direction)
     {
-        if (EnumHas(direction, Direction.Top))
+        // Extension Method -> Performance issue
+        //if (direction.Has(Direction.Top)
+        //    --x;
+        //else if (direction.Has(Direction.Bottom)
+        //    ++x;
+
+        if (direction == Direction.Top || direction == Direction.TopLeft || direction == Direction.TopRight)
             --x;
-        else if (EnumHas(direction, Direction.Bottom))
+        else if (direction == Direction.Bottom || direction == Direction.BottomLeft || direction == Direction.BottomRight)
             ++x;
 
         return x;
@@ -100,22 +106,21 @@ public class Graph
 
     public static int GetNearCoordinateZ(int z, Direction direction)
     {
-        if (EnumHas(direction, Direction.Left))
+        // Extension Method -> Performance issue
+        //if (direction.Has(Direction.Left)
+        //    --z;
+        //else if (direction.Has(Direction.Right)
+        //    ++z;
+
+        if (direction == Direction.Left || direction == Direction.BottomLeft || direction == Direction.TopLeft)
             --z;
-        else if (EnumHas(direction, Direction.Right))
+        else if (direction == Direction.Right || direction == Direction.BottomRight || direction == Direction.TopRight)
             ++z;
 
         return z;
     }
 
-    // Extension Method 'Has' have performance issue;
-    static bool EnumHas(Direction enumFirst, Direction enumSecond)
-    {
-        int first = System.Convert.ToInt32(enumFirst);
-        int second = System.Convert.ToInt32(enumSecond);
-
-        return (first & second) == second;
-    }
+    
 
     public GraphNode? GetNode(int x, int z)
     {

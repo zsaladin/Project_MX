@@ -11,6 +11,7 @@ public class PathFinder : ITickable
     private PathNode _currentNode;
     private PathNode _destinationNode;
     private PathNode _calculatedDestNode;
+    private PathNode _leastCostNode;
     private PathNodeComparer _comparer;
 
     private HashSet<PathNode> _openedHash = new HashSet<PathNode>();
@@ -59,15 +60,13 @@ public class PathFinder : ITickable
 
     public void OnTick()
     {
-        //_openedNodes.Clear();
-        //_closedNodes.Clear();
         _openedHash.Clear();
         _closedHash.Clear();
 
         _currentNode = GetNodeFromVector(_actor.transform.position);
         _destinationNode = GetNodeFromVector(_actor.Destination);
         _calculatedDestNode = null;
-        //_destinationNode = GetNodeFromVector(Vector3.zero);
+        _leastCostNode = null;
 
         InitNode(_currentNode);
         PathNode thisNode = _currentNode;
@@ -79,9 +78,8 @@ public class PathFinder : ITickable
             if (nearNode == null) continue;
 
             nearNode.ParentPathNode = thisNode;
+            AddToOpened(nearNode);
             CalculateCosts(nearNode);
-            //_openedNodes.Add(nearNode);
-            _openedHash.Add(nearNode);
 
             if (nearNode == _destinationNode)
             {
@@ -93,7 +91,7 @@ public class PathFinder : ITickable
         if (_calculatedDestNode != null) return;
 
         int repeat = 0;
-        const int maxRepeat = 3000;
+        const int maxRepeat = 6000;
         while (repeat < maxRepeat)
         {
             ++repeat;
@@ -104,15 +102,13 @@ public class PathFinder : ITickable
                 break;
             }
 
-            //if (_calculatedDestNode != null) break;
+            if (_leastCostNode == null)
+            {
+                _leastCostNode = GetTheLeastCostNode();
+            }
+            thisNode = _leastCostNode;
+            RemoveFromOpened(thisNode);
 
-            //_openedNodes.Sort(_comparer);
-            //thisNode = _openedNodes[0];
-            thisNode = GetTheLeastCostNode(_openedHash);
-            //_openedNodes.RemoveAt(0);
-            _openedHash.Remove(thisNode);
-
-            //_closedNodes.Add(thisNode);
             _closedHash.Add(thisNode);
 
             for (int i = 0; i < _directions.Length; ++i)
@@ -133,17 +129,11 @@ public class PathFinder : ITickable
                     float diffHeight = Mathf.Abs(nearNode.GraphNode.Height - thisNode.GraphNode.Height);
                     if (diffHeight < 0.3f)
                     {
-                        //_openedNodes.Add(nearNode);
-                        _openedHash.Add(nearNode);
+                        AddToOpened(nearNode);
                         nearNode.ParentPathNode = thisNode;
-                        //if (nearNode == _destinationNode)
-                        //{
-                        //    _calculatedDestNode = _destinationNode;
-                        //}
                     }
                     else
                     {
-                        //_closedNodes.Add(nearNode);
                         _closedHash.Add(nearNode);
                     }
                 }
@@ -155,11 +145,30 @@ public class PathFinder : ITickable
         }
     }
 
-    PathNode GetTheLeastCostNode(ICollection<PathNode> collection)
+    void AddToOpened(PathNode thisNode)
+    {
+        _openedHash.Add(thisNode);
+        if (_leastCostNode == null)
+        {
+            if (_openedHash.Count == 0)
+                _leastCostNode = thisNode;
+        }
+        else if (_leastCostNode.F > thisNode.F)
+            _leastCostNode = thisNode;
+    }
+
+    void RemoveFromOpened(PathNode thisNode)
+    {
+        _openedHash.Remove(thisNode);
+        if (_leastCostNode == thisNode)
+            _leastCostNode = null;
+    }
+
+    PathNode GetTheLeastCostNode()
     {
         int minFCost = int.MaxValue;
         PathNode node = null;
-        foreach(PathNode item in collection)
+        foreach (PathNode item in _openedHash)
         {
             if (minFCost > item.F)
             {

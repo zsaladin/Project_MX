@@ -11,11 +11,7 @@ public class BattleAction_Death : BattleAction
         Manager.Entity.RemoveActor(Actor);
 
         _animation = Actor.GetComponent<Animation>();
-        if (_animation.GetClip("Die") != null)
-        {
-            _animation.wrapMode = WrapMode.Once;
-            _animation.Play("Die");
-        }
+        _animation.Play("Die");
     }
 
     public override void Update()

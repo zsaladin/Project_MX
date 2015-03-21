@@ -19,10 +19,7 @@ public class BattleAction_Movement : BattleAction
 
         Animation animation = Actor.GetComponent<Animation>();
         animation.Stop();
-        if (animation.GetClip("Walk"))
-            animation.Play("Walk");
-        else
-            animation.Play("run");
+        animation.Play("Walk");
     }
 
     public override void OnTick()

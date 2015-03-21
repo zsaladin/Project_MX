@@ -26,10 +26,7 @@ public class BattleAction_Offense : BattleAction
 
         Animation animation = Actor.GetComponent<Animation>();
         animation.Stop();
-        if (animation.GetClip("Attack_01"))
-            animation.Play("Attack_01");
-        else
-            animation.Play("attack");
+        animation.Play("Attack");
 
         _target = Actor.Target;
         if (_target != null)

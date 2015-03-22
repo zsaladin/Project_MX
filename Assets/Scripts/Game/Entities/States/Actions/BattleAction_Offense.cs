@@ -24,7 +24,9 @@ public class BattleAction_Offense : BattleAction
         _currentDuratiion = 0;
         _isDealed = false;
 
-        Actor.AnimationController.Play(AnimationType.Attack);
+        Animation animation = Actor.GetComponent<Animation>();
+        animation.Stop();
+        animation.Play("Attack");
 
         _target = Actor.Target;
         if (_target != null)

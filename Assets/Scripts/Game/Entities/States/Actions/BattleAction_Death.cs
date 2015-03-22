@@ -4,19 +4,21 @@ using System.Linq;
 
 public class BattleAction_Death : BattleAction 
 {
+    private Animation _animation;
     public override void OnBegin()
     {
         base.OnBegin();
         Manager.Entity.RemoveActor(Actor);
 
-        Actor.AnimationController.Play(AnimationType.Die);
+        _animation = Actor.GetComponent<Animation>();
+        _animation.Play("Die");
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (Actor.AnimationController.IsPlaying(AnimationType.Die) == false)
+        if (_animation.isPlaying == false)
         {
             GameObject.Destroy(Actor.gameObject);
         }

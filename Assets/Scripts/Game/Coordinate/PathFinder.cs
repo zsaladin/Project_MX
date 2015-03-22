@@ -23,7 +23,6 @@ public class PathFinder : ITickable
     private List<Vector3> _pathPositions = new List<Vector3>();
 
     private Direction[] _directions;
-    private bool _isSuccess;
 
     public PathFinder(BattleActor actor)
     {
@@ -64,7 +63,7 @@ public class PathFinder : ITickable
         _openedHash.Clear();
         _closedHash.Clear();
 
-        _currentNode = GetNodeFromVector(_actor.Position);
+        _currentNode = GetNodeFromVector(_actor.transform.position);
         _destinationNode = GetNodeFromVector(_actor.Destination);
         _calculatedDestNode = null;
         _leastCostNode = null;
@@ -85,7 +84,6 @@ public class PathFinder : ITickable
             if (nearNode == _destinationNode)
             {
                 _calculatedDestNode = _destinationNode;
-                _isSuccess = true;
                 break;
             }
         }
@@ -93,7 +91,7 @@ public class PathFinder : ITickable
         if (_calculatedDestNode != null) return;
 
         int repeat = 0;
-        const int maxRepeat = 3000;
+        const int maxRepeat = 6000;
         while (repeat < maxRepeat)
         {
             ++repeat;
@@ -101,7 +99,6 @@ public class PathFinder : ITickable
             if (_openedHash.Contains(_destinationNode))
             {
                 _calculatedDestNode = _destinationNode;
-                _isSuccess = true;
                 break;
             }
 
@@ -144,8 +141,7 @@ public class PathFinder : ITickable
         }
         if (repeat == maxRepeat)
         {
-            //_calculatedDestNode = thisNode;
-            _isSuccess = false;
+            _calculatedDestNode = thisNode;
         }
     }
 
@@ -181,6 +177,23 @@ public class PathFinder : ITickable
             }
         }
         return node;
+    }
+
+    public List<Vector3> GetPath()
+    {
+        _pathPositions.Clear();
+        PathNode thisNode = _calculatedDestNode;
+        while(true)
+        {
+            if (thisNode == null) break;
+            if (thisNode == _currentNode) break;
+            if (_pathPositions.Contains(GetVectorFromNode(thisNode))) break;
+
+            _pathPositions.Add(GetVectorFromNode(thisNode));
+            thisNode = thisNode.ParentPathNode;
+        }
+
+        return _pathPositions;
     }
 
     public PathNode GetNode(int x, int z)
@@ -234,7 +247,6 @@ public class PathFinder : ITickable
 
         return parentNode.G + CalculateCostBetweenNodeAndParent(thisNode, parentNode);
     }
-
     int CalculateCostH(PathNode thisNode)
     {
         return CalculateCostBetweenNodes(thisNode, _destinationNode);
@@ -259,25 +271,6 @@ public class PathFinder : ITickable
         if (thisNode.GraphNode.X == parentNode.GraphNode.X) return PathNode.STRAIGHT_LINE_COST;
         if (thisNode.GraphNode.Z == parentNode.GraphNode.Z) return PathNode.STRAIGHT_LINE_COST;
         return PathNode.DIAGONAL_LINE_COST;
-    }
-
-    public List<Vector3> GetPath()
-    {
-        if (_isSuccess == false) return _pathPositions;
-
-        _pathPositions.Clear();
-        PathNode thisNode = _calculatedDestNode;
-        while (true)
-        {
-            if (thisNode == null) break;
-            if (thisNode == _currentNode) break;
-            if (_pathPositions.Contains(GetVectorFromNode(thisNode))) break;
-
-            _pathPositions.Add(GetVectorFromNode(thisNode));
-            thisNode = thisNode.ParentPathNode;
-        }
-
-        return _pathPositions;
     }
 
     class PathNodeComparer : IComparer<PathNode>

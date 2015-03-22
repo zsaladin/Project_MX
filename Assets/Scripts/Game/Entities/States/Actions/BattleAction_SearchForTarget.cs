@@ -27,11 +27,11 @@ public class BattleAction_SearchForTarget : BattleAction
         BattleActor nearestOpponent = null;
         float minDiff = float.MaxValue;
 
-        Vector3 actorPosition = Actor.transform.position;
+        Vector3 actorPosition = Actor.Position;
         int count = opponents.Count;
         for (int i = 0; i < count; ++i)
         {
-            Vector3 diff = actorPosition - opponents[i].transform.position;
+            Vector3 diff = actorPosition - opponents[i].Position;
             float sqrMag = diff.sqrMagnitude;
             if (minDiff > sqrMag)
             {

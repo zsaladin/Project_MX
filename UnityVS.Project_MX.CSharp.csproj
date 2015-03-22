@@ -77,11 +77,15 @@
     <Compile Include="Assets\Scripts\Extensions\CollectionExtension.cs" />
     <Compile Include="Assets\Scripts\Extensions\EnumExtension.cs" />
     <Compile Include="Assets\Scripts\Extensions\TransformExtension.cs" />
+    <Compile Include="Assets\Scripts\Game\Animators\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\Game\Animators\LegacyAnimationController.cs" />
+    <Compile Include="Assets\Scripts\Game\Animators\MecanimAnimationController.cs" />
     <Compile Include="Assets\Scripts\Game\Coordinate\Graph.cs" />
     <Compile Include="Assets\Scripts\Game\Coordinate\GraphNode.cs" />
     <Compile Include="Assets\Scripts\Game\Coordinate\PathFinder.cs" />
     <Compile Include="Assets\Scripts\Game\Coordinate\PathNode.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\BattleActor.cs" />
+    <Compile Include="Assets\Scripts\Game\Entities\BattleProjectile.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\BattleUser.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\States\Actions\BattleAction.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\States\Actions\BattleAction_Death.cs" />
@@ -113,6 +117,7 @@
   <ItemGroup>
     <None Include="Assets\Raw\Models\Earthborn Troll\Shader\Alpha_Texture.shader" />
     <None Include="Assets\Raw\Models\Earthborn Troll\Shader\DoubleSided-Light-Spec.shader" />
+    <None Include="Assets\Raw\Models\SkeletonData\animations.txt" />
     <None Include="Assets\Raw\Models\Warrior 2 Swords\Readme.TXT" />
     <None Include="Assets\Raw\Models\Warrior 2 Swords\sources\Toon Shading\Toony Gooch RimOutline Hard.shader" />
     <None Include="Assets\Raw\Models\Warrior 2 Swords\sources\Toon Shading\Toony-Basic.shader" />

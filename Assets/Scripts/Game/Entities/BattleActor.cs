@@ -32,8 +32,12 @@ public class BattleActor : MonoBehaviour, ITickable
     public Ownership OwnerShip  { get; protected set; }
     public Ownership OpponentOwnerShip { get { return (Ownership)((int)OwnerShip ^ 0x1); } }
 
+    public Vector3 Position { get; set; }
+
     public BattleActor Target { get { return CurrentState.Target; } }
     public Vector3 Destination { get { return CurrentState.Destination; } }
+
+    public AnimationController AnimationController { get; private set; }
 
     public void Init(ActorRecord record, Ownership ownerShip, Vector3? position)
     {
@@ -44,10 +48,15 @@ public class BattleActor : MonoBehaviour, ITickable
         _actorTypeProfile = Manager.Data.ActorTypeProfileSave.Get(_profile.ActorType);
 
         if (position != null)
-            transform.position = position.Value;
+            Position = position.Value;
         else
-            transform.position = _record.Position;
+            Position = _record.Position;
+
+        transform.position = Position;
         transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0));
+
+        AnimationController = GetComponent<AnimationController>();
+        AnimationController.Init();
 
         InitStats();
         InitStates();

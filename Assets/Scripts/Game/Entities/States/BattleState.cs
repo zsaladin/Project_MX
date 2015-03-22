@@ -24,9 +24,9 @@ public class BattleState : ITickable
     {
         get
         {
-            if (_searchingTargetAction == null) return _actor.transform.position;
-            if ( _searchingTargetAction.Target == null) return _actor.transform.position;
-            return _searchingTargetAction.Target.transform.position;
+            if (_searchingTargetAction == null) return _actor.Position;
+            if ( _searchingTargetAction.Target == null) return _actor.Position;
+            return _searchingTargetAction.Target.Position;
         }
     }
 

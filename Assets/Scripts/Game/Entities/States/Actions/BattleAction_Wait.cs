@@ -8,7 +8,6 @@ public class BattleAction_Wait : BattleAction
     {
         base.OnBegin();
 
-        Animation animaition = Actor.GetComponent<Animation>();
-        animaition.Play("Idle");
+        Actor.AnimationController.Play(AnimationType.Idle);
     }
 }

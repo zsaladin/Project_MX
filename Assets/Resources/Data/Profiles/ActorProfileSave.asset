@@ -16,25 +16,77 @@ MonoBehaviour:
     Name: Warrior
     Prefab: {fileID: 100070, guid: a0179be775d865349b2c4bbbd6f83177, type: 2}
     ActorType: 1
-    Size: 1
+    Size: 1.5
     HitPointMax: 1000
     OffenseType: 1
     OffensePower: 100
     OffenseTime: .769999981
     OffenseDealTime: .300000012
-    OffenseRange: .699999988
+    OffenseRange: .5
     DefenseType: 2
-    MovingSpeed: 10
+    MovingSpeed: 3
   - ID: 2
     Name: Troll
     Prefab: {fileID: 100000, guid: ba76689f220e59a48845d4df03dcbffa, type: 2}
     ActorType: 1
-    Size: .800000012
+    Size: 1.5
     HitPointMax: 500
     OffenseType: 1
     OffensePower: 50
     OffenseTime: 1.52999997
     OffenseDealTime: 1
-    OffenseRange: 1
+    OffenseRange: .699999988
     DefenseType: 1
     MovingSpeed: 3
+  - ID: 3
+    Name: SkeletonDark
+    Prefab: {fileID: 100016, guid: a2cb09cf998faef4fb7887e15c3608c1, type: 2}
+    ActorType: 1
+    Size: 1.5
+    HitPointMax: 300
+    OffenseType: 1
+    OffensePower: 30
+    OffenseTime: 1.10000002
+    OffenseDealTime: .5
+    OffenseRange: .300000012
+    DefenseType: 1
+    MovingSpeed: 2
+  - ID: 4
+    Name: SkeletonFresh
+    Prefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
+    ActorType: 1
+    Size: 1.5
+    HitPointMax: 300
+    OffenseType: 1
+    OffensePower: 30
+    OffenseTime: 1.14999998
+    OffenseDealTime: .5
+    OffenseRange: .300000012
+    DefenseType: 1
+    MovingSpeed: 2
+  - ID: 5
+    Name: SkeletonMage
+    Prefab: {fileID: 100024, guid: 1bc803c4bf46dcc48b0d9035951ec07a, type: 2}
+    ActorType: 1
+    Size: 1.5
+    HitPointMax: 300
+    OffenseType: 4
+    OffensePower: 300
+    OffenseTime: 30
+    OffenseDealTime: 1.12
+    OffenseRange: .300000012
+    DefenseType: 1
+    MovingSpeed: 2
+  - ID: 6
+    Name: SkeletonNormal
+    Prefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
+    ActorType: 1
+    Size: 1.5
+    HitPointMax: 300
+    OffenseType: 1
+    OffensePower: 30
+    OffenseTime: 1.12
+    OffenseDealTime: .5
+    OffenseRange: .300000012
+    DefenseType: 1
+    MovingSpeed: 2

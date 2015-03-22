@@ -111,6 +111,7 @@
   <ItemGroup>
     <None Include="Assets\Raw\Models\Earthborn Troll\Shader\Alpha_Texture.shader" />
     <None Include="Assets\Raw\Models\Earthborn Troll\Shader\DoubleSided-Light-Spec.shader" />
+    <None Include="Assets\Raw\Models\SkeletonData\animations.txt" />
     <None Include="Assets\Raw\Models\Warrior 2 Swords\Readme.TXT" />
     <None Include="Assets\Raw\Models\Warrior 2 Swords\sources\Toon Shading\Toony Gooch RimOutline Hard.shader" />
     <None Include="Assets\Raw\Models\Warrior 2 Swords\sources\Toon Shading\Toony-Basic.shader" />

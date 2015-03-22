@@ -61,14 +61,50 @@ MonoBehaviour:
       Exp: 0
       Position: {x: 3, y: 0, z: 5}
     - ID: 6
-      Name: Troll
-      ProfileID: 2
+      Name: SkeletonDark
+      ProfileID: 3
       Level: 0
       Exp: 0
       Position: {x: 3, y: 0, z: 2}
     - ID: 7
-      Name: Troll
-      ProfileID: 2
+      Name: SkeletonDark
+      ProfileID: 3
       Level: 0
       Exp: 0
       Position: {x: 5, y: 0, z: 3}
+    - ID: 8
+      Name: SkeletonFresh
+      ProfileID: 4
+      Level: 0
+      Exp: 0
+      Position: {x: -7, y: 0, z: -8}
+    - ID: 9
+      Name: SkeletonFresh
+      ProfileID: 4
+      Level: 0
+      Exp: 0
+      Position: {x: -8, y: 0, z: -7}
+    - ID: 10
+      Name: SkeletonMage
+      ProfileID: 5
+      Level: 0
+      Exp: 0
+      Position: {x: -7, y: 0, z: 8}
+    - ID: 11
+      Name: SkeletonMage
+      ProfileID: 5
+      Level: 0
+      Exp: 0
+      Position: {x: -8, y: 0, z: 6}
+    - ID: 12
+      Name: SkeletonNormal
+      ProfileID: 6
+      Level: 0
+      Exp: 0
+      Position: {x: 8, y: 0, z: -6}
+    - ID: 13
+      Name: SkeletonNormal
+      ProfileID: 6
+      Level: 0
+      Exp: 0
+      Position: {x: 7, y: 0, z: -7}

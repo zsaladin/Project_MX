@@ -10,7 +10,7 @@ public class BattleCondition_IsOffenseEnded : BattleCondition<BattleConditionPro
     {
         if (_isInit == false)
         {
-            _offenseAction = _actor.CurrentState.Actions.Find(item => item is BattleAction_Offense) as BattleAction_Offense;
+            _offenseAction = _actor.CurrentState.FindAction<BattleAction_Offense>();
             _isInit = true;
         }
 

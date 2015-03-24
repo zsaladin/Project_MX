@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class BattleAction_Offense : BattleAction
+public class BattleAction_Offense : BattleAction, IProjectileReached
 {
     protected BattleActor _target;
 
@@ -65,9 +65,31 @@ public class BattleAction_Offense : BattleAction
     {
         if (_target == null) return;
 
-        var defenseAction = _target.CurrentState.Actions.Find(item => item is BattleAction_Defense) as BattleAction_Defense;
+        if (Actor.OffenseType == OffenseType.Melee)
+        {
+            DealDamage();
+        }
+        else if (Actor.OffenseType == OffenseType.Range || Actor.OffenseType == OffenseType.Magic)
+        {
+            ProjectileProfile projectileProfile = Manager.Data.ProjectileProfileSave.Get(Actor.OffenseProjectileType);
+            BattleProjectile projectile = Manager.Entity.CreateProjectile(projectileProfile, Actor.Position);
+            projectile.SetTarget(_target);
+            projectile.ReachedHandler = this;
+        }
+    }
+
+    void DealDamage()
+    {
+        var defenseAction = _target.CurrentState.FindAction<BattleAction_Defense>();
         if (defenseAction != null)
+        {
             defenseAction.Defense(this);
+        }
+    }
+
+    public void OnProjectileReached()
+    {
+        DealDamage();
     }
 }
 

@@ -44,6 +44,10 @@ public class ActorProfileEditor : EditorWindow
                 GUILayout.Label("Size");
                 GUILayout.Label("HitPoint");
                 GUILayout.Label("OffenseType");
+                if (_currentProfile.OffenseType == OffenseType.Range || _currentProfile.OffenseType == OffenseType.Magic)
+                {
+                    GUILayout.Label("Offense Projectile Type");
+                }
                 GUILayout.Label("OffensePower");
                 GUILayout.Label("OffenseTime");
                 GUILayout.Label("OffenseDealTime");
@@ -65,6 +69,14 @@ public class ActorProfileEditor : EditorWindow
                 _currentProfile.Size = EditorGUILayout.FloatField(_currentProfile.Size);
                 _currentProfile.HitPointMax = EditorGUILayout.FloatField(_currentProfile.HitPointMax);
                 _currentProfile.OffenseType = (OffenseType) EditorGUILayout.EnumPopup(_currentProfile.OffenseType);
+                if (_currentProfile.OffenseType == OffenseType.Range || _currentProfile.OffenseType == OffenseType.Magic)
+                {
+                    var list = Manager.Data.ProjectileProfileSave.ProjectileProfiles.ToList();
+                    int currentIndex = list.Select(item => item.ID).ToList().IndexOf(_currentProfile.OffenseProjectileType);
+                    currentIndex = EditorGUILayout.Popup(currentIndex, list.Select(item => item.Name).ToArray());
+                    if (currentIndex >= 0)
+                        _currentProfile.OffenseProjectileType = list[currentIndex].ID;
+                }
                 _currentProfile.OffensePower = EditorGUILayout.FloatField(_currentProfile.OffensePower);
                 _currentProfile.OffenseTime = EditorGUILayout.FloatField(_currentProfile.OffenseTime);
                 _currentProfile.OffenseDealTime = EditorGUILayout.FloatField(_currentProfile.OffenseDealTime);

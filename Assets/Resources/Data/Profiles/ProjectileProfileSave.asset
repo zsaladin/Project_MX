@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 599ae3b5d4d83e14b94cb93f1afbb5b9, type: 3}
+  m_Name: ProjectileProfileSave
+  m_EditorClassIdentifier: 
+  ProjectileProfiles:
+  - ID: 1
+    Name: Straight Buttet
+    Prefab: {fileID: 102270, guid: bafda99fe9582b24d8a38215f6b94ce8, type: 2}
+    ProjectileMotionType: 1
+    Speed: 8
+    MaxHeight: 0
+  - ID: 2
+    Name: Arc Arrow
+    Prefab: {fileID: 102270, guid: bafda99fe9582b24d8a38215f6b94ce8, type: 2}
+    ProjectileMotionType: 2
+    Speed: 12
+    MaxHeight: 6

@@ -12,6 +12,8 @@ public class ActorProfile : Profile
     public float HitPointMax;
 
     public OffenseType OffenseType;
+    public int OffenseProjectileType;
+
     public float OffensePower;
     public float OffenseTime;
     public float OffenseDealTime;

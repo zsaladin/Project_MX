@@ -9,20 +9,26 @@ public class EntityManager : MonoBehaviour, ITickable
     public GameObject _rootOfEnemyUnits;
     public GameObject _rootOfEnemyBuildings;
 
-    public List<BattleActor> BattleActors { get; private set; }
+    private List<BattleActor> _battleActors;
     private List<BattleActor>[] _battleActorsByOwnership;
 
     private List<BattleActor> _removeActors;
 
+    private List<BattleProjectile> _battleProjectiles;
+    private List<BattleProjectile> _removeProjectiles;
+
     public void Init()
     {
-        BattleActors = new List<BattleActor>();
+        _battleActors = new List<BattleActor>();
 
         _battleActorsByOwnership = new List<BattleActor>[System.Enum.GetNames(typeof(Ownership)).Length];
         _battleActorsByOwnership[(int)Ownership.OurForce] = new List<BattleActor>();
         _battleActorsByOwnership[(int)Ownership.EnemyForce] = new List<BattleActor>();
 
         _removeActors = new List<BattleActor>();
+
+        _battleProjectiles = new List<BattleProjectile>();
+        _removeProjectiles = new List<BattleProjectile>();
     }
 
     public void CreateUser(Ownership ownership, UserRecord userRecord)
@@ -46,16 +52,31 @@ public class EntityManager : MonoBehaviour, ITickable
         Manager.UI.InitActorSlider(battleActor);
         Manager.Coordinate.RegisterForPathFinder(battleActor);
         _battleActorsByOwnership[(int)ownership].Add(battleActor);
-        BattleActors.Add(battleActor);
+        _battleActors.Add(battleActor);
         
         return battleActor;
     }
 
+    public BattleProjectile CreateProjectile(ProjectileProfile projectileProfile, Vector3 position)
+    {
+        GameObject obj = GameObject.Instantiate<GameObject>(projectileProfile.Prefab);
+        BattleProjectile projectile = obj.AddComponent<BattleProjectile>();
+        projectile.Init(projectileProfile, position);
+
+        _battleProjectiles.Add(projectile);
+        return projectile;
+    }
+
     public void OnTick()
     {
-        for(int i = 0; i < BattleActors.Count; ++i)
+        for(int i = 0; i < _battleActors.Count; ++i)
         {
-            BattleActors[i].OnTick();
+            _battleActors[i].OnTick();
+        }
+
+        for(int i = 0; i < _battleProjectiles.Count; ++i)
+        {
+            _battleProjectiles[i].OnTick();
         }
     }
 
@@ -64,12 +85,18 @@ public class EntityManager : MonoBehaviour, ITickable
         for (int i = 0; i < _removeActors.Count; ++i )
         {
             BattleActor actor = _removeActors[i];
-            BattleActors.Remove(actor);
+            _battleActors.Remove(actor);
             _battleActorsByOwnership[(int)actor.OwnerShip].Remove(actor);
 
             actor.EnableUIs(false);
 
             Manager.Coordinate.UnregisterForPathFinder(actor);
+        }
+
+        for (int i = 0; i < _removeProjectiles.Count; ++i)
+        {
+            BattleProjectile projectile = _removeProjectiles[i];
+            _battleProjectiles.Remove(projectile);
         }
             
     }
@@ -85,6 +112,11 @@ public class EntityManager : MonoBehaviour, ITickable
     public void RemoveActor(BattleActor actor)
     {
         _removeActors.Add(actor);
+    }
+
+    public void RemoveProjectile(BattleProjectile projectile)
+    {
+        _removeProjectiles.Add(projectile);
     }
 }
 

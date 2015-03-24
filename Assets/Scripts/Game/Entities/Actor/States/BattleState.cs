@@ -9,7 +9,7 @@ public class BattleState : ITickable
     private Dictionary<BattleCondition, BattleState> _conditions = new Dictionary<BattleCondition,BattleState>();
     private BattleAction_SearchForTarget _searchingTargetAction;
 
-    public List<BattleAction> Actions { get; private set; }
+    private List<BattleAction> _actions;
 
     public BattleActor Target 
     {
@@ -35,13 +35,13 @@ public class BattleState : ITickable
         _actor = actor;
         _profile = profile;
 
-        Actions = new List<BattleAction>();
+        _actions = new List<BattleAction>();
 
         for(int i = 0; i < profile.Actions.Count; ++i)
         {
             BattleAction action = BattleAction.Create(profile.Actions[i]);
             action.Actor = _actor;
-            Actions.Add(action);
+            _actions.Add(action);
 
             if (action is BattleAction_SearchForTarget) _searchingTargetAction = action as BattleAction_SearchForTarget;
         }
@@ -61,33 +61,33 @@ public class BattleState : ITickable
 
     public void OnBegin()
     {
-        for (int i = 0; i < Actions.Count; ++i)
+        for (int i = 0; i < _actions.Count; ++i)
         {
-            Actions[i].OnBegin();
+            _actions[i].OnBegin();
         }
     }
 
     public void OnTick()
     {
-        for (int i = 0; i < Actions.Count; ++i)
+        for (int i = 0; i < _actions.Count; ++i)
         {
-            Actions[i].OnTick();
+            _actions[i].OnTick();
         }
     }
 
     public void OnEnd()
     {
-        for (int i = 0; i < Actions.Count; ++i)
+        for (int i = 0; i < _actions.Count; ++i)
         {
-            Actions[i].OnEnd();
+            _actions[i].OnEnd();
         }
     }
 
     public void Update()
     {
-        for (int i = 0; i < Actions.Count; ++i)
+        for (int i = 0; i < _actions.Count; ++i)
         {
-            Actions[i].Update();
+            _actions[i].Update();
         }
     }
     
@@ -102,5 +102,10 @@ public class BattleState : ITickable
             }
         }
         return null;
+    }
+
+    public TAction FindAction<TAction>() where TAction: BattleAction
+    {
+        return _actions.Find(item => item is TAction) as TAction;
     }
 }

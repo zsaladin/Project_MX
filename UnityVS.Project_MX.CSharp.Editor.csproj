@@ -105,6 +105,7 @@
     <Compile Include="Assets\Editor\ProfileEditors\ActorProfileEditor.cs" />
     <Compile Include="Assets\Editor\ProfileEditors\ActorTypeProfileEditor.cs" />
     <Compile Include="Assets\Editor\ProfileEditors\ConditionProfileEditor.cs" />
+    <Compile Include="Assets\Editor\ProfileEditors\ProjectileProfileEditor.cs" />
     <Compile Include="Assets\Editor\RecordEditors\UserRecordEditor.cs" />
     <Compile Include="Assets\Editor\Utitlities\CommonEditorUnitity.cs" />
   </ItemGroup>

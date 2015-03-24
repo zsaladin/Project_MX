@@ -16,6 +16,7 @@ public class BattleActor : MonoBehaviour, ITickable
     public float HitPoint { get; set; }
 
     public OffenseType OffenseType { get; protected set; }
+    public int OffenseProjectileType { get; protected set; }
     public float OffensePower { get; protected set; }
     public float OffenseTime { get; protected set; }
     public float OffenseDealTime { get; protected set; }
@@ -67,6 +68,7 @@ public class BattleActor : MonoBehaviour, ITickable
         Size = _profile.Size;
         HitPoint = HitPointMax = _profile.HitPointMax;
         OffenseType = _profile.OffenseType;
+        OffenseProjectileType = _profile.OffenseProjectileType;
         OffensePower = _profile.OffensePower;
         OffenseTime = _profile.OffenseTime;
         OffenseDealTime = _profile.OffenseDealTime;

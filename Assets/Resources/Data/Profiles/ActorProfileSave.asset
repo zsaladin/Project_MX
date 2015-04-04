@@ -82,7 +82,7 @@ MonoBehaviour:
           BuffActionTypeParams: []
       Buffs:
       - ID: 1
-        Name: Stun
+        Name: Knockback
         Conditions:
         - ID: 1
           Name: New
@@ -93,7 +93,7 @@ MonoBehaviour:
             IntParams: []
             FloatParams:
             - Key: Duration
-              Value: 1
+              Value: .25
             BoolParams: []
             StringParams: []
             ComparisonParams: []
@@ -103,14 +103,18 @@ MonoBehaviour:
         Actions:
         - ID: 1
           Name: New
-          Type: 2
+          Type: 3
           Params:
             ID: 0
             Name: 
             IntParams: []
             FloatParams:
             - Key: Duration
-              Value: 1
+              Value: .25
+            - Key: Distance
+              Value: 4.19999981
+            - Key: FarFrom
+              Value: 0
             BoolParams: []
             StringParams: []
             ComparisonParams: []

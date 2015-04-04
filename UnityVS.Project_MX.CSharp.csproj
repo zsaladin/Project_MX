@@ -110,6 +110,7 @@
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_Airborn.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_Interruption.cs" />
+    <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_Knockback.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffConditions\BattleBuffCondition.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffConditions\BattleBuffCondition_Duration.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Skill\BattleSkill.cs" />

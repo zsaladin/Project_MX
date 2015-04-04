@@ -11,8 +11,8 @@ namespace MX
             get { return BuffActionType.Interruption; }
         }
 
-        public BattleBuffAction_Interruption(BattleBuffActionProfile profile, BattleActor actor)
-            : base(profile, actor)
+        public BattleBuffAction_Interruption(BattleBuffActionProfile profile, BattleActor actor, BattleActor attacker)
+            : base(profile, actor, attacker)
         {
 
         }

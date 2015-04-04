@@ -48,7 +48,7 @@ namespace MX
                     defenseAction.Defense(_damage);
 
                 for (int j = 0; j < Profile.Buffs.Count; ++j)
-                    _targetActors[i].BuffMachine.AddBuff(Profile.Buffs[j]);
+                    _targetActors[i].BuffMachine.AddBuff(Profile.Buffs[j], Actor);
             }
             _targetActors.Clear();
         }

@@ -20,8 +20,8 @@ namespace MX
             get { return BuffActionType.Airborn; }
         }
 
-        public BattleBuffAction_Airborn(BattleBuffActionProfile profile, BattleActor actor)
-            : base(profile, actor)
+        public BattleBuffAction_Airborn(BattleBuffActionProfile profile, BattleActor actor, BattleActor attacker)
+            : base(profile, actor, attacker)
         {
             _duration = profile.Params.GetFloat("Duration").Value;
         }

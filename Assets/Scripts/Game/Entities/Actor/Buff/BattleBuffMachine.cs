@@ -60,9 +60,9 @@ namespace MX
             _addedBuffs.Add(buff);
         }
 
-        public void AddBuff(BattleBuffProfile buffProfile)
+        public void AddBuff(BattleBuffProfile buffProfile, BattleActor attacker)
         {
-            AddBuff(new BattleBuff(buffProfile, _actor));
+            AddBuff(new BattleBuff(buffProfile, _actor, attacker));
         }
 
         public bool ContainsBuff(BuffActionType type)

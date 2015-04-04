@@ -11,6 +11,8 @@ namespace MX
         private Vector3 _baseLauncherPoint;
         private Vector3 _baseProjectileHitPoint;
 
+        public Vector3 Direction { get; private set; }
+
         public BattleActorBaseAction(BattleActor actor)
         {
             _actor = actor;
@@ -31,10 +33,12 @@ namespace MX
             Vector3 direction = subjectPosition - _actor.Position;
             direction.y = 0;
 
-            float angle = Mathf.Atan(direction.z / direction.x);
+            Direction = direction.normalized;
+
+            float angle = Mathf.Atan(Direction.z / Direction.x);
             angle -= 90 * Mathf.Deg2Rad;
 
-            if (direction.magnitude / direction.x < 0)
+            if (Direction.magnitude / Direction.x < 0)
                 angle += 180 * Mathf.Deg2Rad;
 
 
@@ -53,8 +57,6 @@ namespace MX
             x = (cos * tx) + (sin * tz);
             z = (cos * tz) - (sin * tx);
             _actor.ProjectileHitPoint = new Vector3(x, _baseProjectileHitPoint.y, z) + _actor.Position;
-
-
         }
 
         public void Update()

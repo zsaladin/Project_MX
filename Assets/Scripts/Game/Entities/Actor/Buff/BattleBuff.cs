@@ -7,19 +7,23 @@ namespace MX
     public class BattleBuff 
     {
         private BattleActor _actor;
+        private BattleActor _attacker;
         public BattleBuffProfile Profile { get; private set; }
 
         private List<BattleBuffAction> _buffActions = new List<BattleBuffAction>();
         private List<BattleBuffCondition> _buffConditions = new List<BattleBuffCondition>();
 
-        public BattleBuff(BattleBuffProfile profile, BattleActor actor)
+        public BattleBuff(BattleBuffProfile profile, BattleActor actor, BattleActor attacker)
         {
             _actor = actor;
+            _attacker = attacker;
             Profile = profile;
 
             for(int i = 0; i < Profile.Actions.Count; ++i)
             {
-                var buffAction = BattleBuffAction.Create(Profile.Actions[i], _actor);
+                if (_actor.BuffMachine.ContainsBuff(Profile.Actions[i].Type))
+                    continue;
+                var buffAction = BattleBuffAction.Create(Profile.Actions[i], _actor, attacker);
                 _buffActions.Add(buffAction);
             }
 

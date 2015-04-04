@@ -109,6 +109,12 @@ namespace MX
                     case BuffActionType.Airborn:
                         CommonEditorUtility.DrawParam(actionProfile.Params, "Duration", typeof(float));
                         break;
+                    case BuffActionType.Knockback:
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "Duration", typeof(float));
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "Distance", typeof(float));
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "FarFrom", typeof(float));
+                        break;
+
                 }
             } EditorGUILayout.EndVertical();
 

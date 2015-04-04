@@ -7,13 +7,15 @@ namespace MX
     public abstract class BattleBuffAction
     {
         protected BattleActor _actor;
+        protected BattleActor _attacker;
         protected BattleBuffActionProfile _profile;
 
         public abstract BuffActionType Type { get; }
 
-        public BattleBuffAction(BattleBuffActionProfile profile, BattleActor actor)
+        public BattleBuffAction(BattleBuffActionProfile profile, BattleActor actor, BattleActor attacker)
         {
             _actor = actor;
+            _attacker = attacker;
             _profile = profile;
         }
 
@@ -22,14 +24,16 @@ namespace MX
         public virtual void OnEnd() { }
         public virtual void Update() { }
 
-        public static BattleBuffAction Create(BattleBuffActionProfile profile, BattleActor actor)
+        public static BattleBuffAction Create(BattleBuffActionProfile profile, BattleActor actor, BattleActor attacker)
         {
             switch(profile.Type)
             {
                 case BuffActionType.Interruption:
-                    return new BattleBuffAction_Interruption(profile, actor);
+                    return new BattleBuffAction_Interruption(profile, actor, attacker);
                 case BuffActionType.Airborn:
-                    return new BattleBuffAction_Airborn(profile, actor);
+                    return new BattleBuffAction_Airborn(profile, actor, attacker);
+                case BuffActionType.Knockback:
+                    return new BattleBuffAction_Knockback(profile, actor, attacker);
             }
 
             return null;
@@ -41,5 +45,6 @@ namespace MX
         Invalid,
         Interruption,
         Airborn,
+        Knockback,
     }
 }

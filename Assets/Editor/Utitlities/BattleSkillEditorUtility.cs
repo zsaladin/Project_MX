@@ -106,6 +106,9 @@ namespace MX
                 {
                     case BuffActionType.Interruption:
                         break;
+                    case BuffActionType.Airborn:
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "Duration", typeof(float));
+                        break;
                 }
             } EditorGUILayout.EndVertical();
 

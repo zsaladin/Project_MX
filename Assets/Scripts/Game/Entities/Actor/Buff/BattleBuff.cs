@@ -69,6 +69,14 @@ namespace MX
             }
         }
 
+        public void Update()
+        {
+            for(int i = 0; i <_buffActions.Count; ++i)
+            {
+                _buffActions[i].Update();
+            }
+        }
+
         public bool IsEnded
         {
             get

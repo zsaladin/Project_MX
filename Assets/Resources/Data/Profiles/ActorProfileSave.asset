@@ -57,7 +57,7 @@ MonoBehaviour:
           IntParams: []
           FloatParams:
           - Key: CoolTime
-            Value: 2
+            Value: 6
           BoolParams: []
           StringParams: []
           ComparisonParams: []
@@ -102,6 +102,22 @@ MonoBehaviour:
             BuffActionTypeParams: []
         Actions:
         - ID: 1
+          Name: New
+          Type: 2
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Duration
+              Value: 1
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        - ID: 2
           Name: New
           Type: 1
           Params:

@@ -20,6 +20,7 @@ namespace MX
         public virtual void OnBegin() { }
         public virtual void OnTick() { }
         public virtual void OnEnd() { }
+        public virtual void Update() { }
 
         public static BattleBuffAction Create(BattleBuffActionProfile profile, BattleActor actor)
         {
@@ -27,6 +28,8 @@ namespace MX
             {
                 case BuffActionType.Interruption:
                     return new BattleBuffAction_Interruption(profile, actor);
+                case BuffActionType.Airborn:
+                    return new BattleBuffAction_Airborn(profile, actor);
             }
 
             return null;
@@ -37,5 +40,6 @@ namespace MX
     {
         Invalid,
         Interruption,
+        Airborn,
     }
 }

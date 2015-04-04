@@ -48,6 +48,8 @@ namespace MX
         public BattleActorBaseAction BaseAction { get; private set; }
         public AnimationController AnimationController { get; private set; }
 
+        public bool debug = false;
+
         public void Init(ActorRecord record, Ownership ownerShip, Vector3? position)
         {
             OwnerShip = ownerShip;
@@ -102,6 +104,7 @@ namespace MX
 
         void Update()
         {
+            BuffMachine.Update();
             StateMachine.CurrentState.Update();
             BaseAction.Update();
         }

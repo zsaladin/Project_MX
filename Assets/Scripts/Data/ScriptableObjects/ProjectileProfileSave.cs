@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ProjectileProfileSave : ScriptableObject 
+namespace MX
 {
-    public List<ProjectileProfile> ProjectileProfiles = new List<ProjectileProfile>();
-
-    public ProjectileProfile Get(int id)
+    public class ProjectileProfileSave : ScriptableObject
     {
-        return ProjectileProfiles.Find(item => item.ID == id);
+        public List<ProjectileProfile> ProjectileProfiles = new List<ProjectileProfile>();
+
+        public ProjectileProfile Get(int id)
+        {
+            return ProjectileProfiles.Find(item => item.ID == id);
+        }
     }
 }

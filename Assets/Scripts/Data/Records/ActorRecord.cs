@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-[System.Serializable]
-public class ActorRecord : Record 
+namespace MX
 {
-    public int ProfileID;
-    public int Level;
-    public int Exp;
-    public Vector3 Position;
+    [System.Serializable]
+    public class ActorRecord : Record
+    {
+        public int ProfileID;
+        public int Level;
+        public int Exp;
+        public Vector3 Position;
+    }
 }

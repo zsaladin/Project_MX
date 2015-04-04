@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class BattleUser  
+namespace MX
 {
-    public void OnEventTick()
+    public class BattleUser
     {
+        public void OnEventTick()
+        {
 
+        }
     }
 }

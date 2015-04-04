@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class ActorTypeProfile : Profile
+namespace MX
 {
-    /// <summary>
-    /// State Profile ID
-    /// </summary>
-    public List<BattleStateProfile> States = new List<BattleStateProfile>();
-
-    public BattleStateProfile GetStateProfile(int id)
+    [System.Serializable]
+    public class ActorTypeProfile : Profile
     {
-        return States.Find(item => item.ID == id);
+        /// <summary>
+        /// State Profile ID
+        /// </summary>
+        public List<BattleStateProfile> States = new List<BattleStateProfile>();
+
+        public BattleStateProfile GetStateProfile(int id)
+        {
+            return States.Find(item => item.ID == id);
+        }
     }
 }

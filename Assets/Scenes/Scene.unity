@@ -27133,6 +27133,7 @@ GameObject:
   - 114: {fileID: 1129951181}
   - 114: {fileID: 1129951183}
   - 114: {fileID: 1129951184}
+  - 114: {fileID: 1129951185}
   m_Layer: 0
   m_Name: LocalManagers
   m_TagString: Untagged
@@ -27202,7 +27203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ourForceID: 1
   _enemyForceID: 2
-  _autoStart: 0
+  _autoStart: 1
 --- !u!114 &1129951183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27234,6 +27235,17 @@ MonoBehaviour:
   _rootOfBattleInfo: {fileID: 2145958327}
   _actorHPSliderPrefab: {fileID: 11430172, guid: 62b7289c05414254c8639527614eaae0,
     type: 2}
+--- !u!114 &1129951185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1129951177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d777c3bc98fccfd48a6808b8ea66c403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1132509676
 Prefab:
   m_ObjectHideFlags: 0

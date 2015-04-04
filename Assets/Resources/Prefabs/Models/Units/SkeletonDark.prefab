@@ -866,6 +866,36 @@ GameObject:
 --- !u!1002 &100093
 EditorExtensionImpl:
   serializedVersion: 6
+--- !u!1 &103580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 485724}
+  m_Layer: 0
+  m_Name: BattlePoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &153154
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 494704}
+  m_Layer: 0
+  m_Name: LauncherPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &155668
 GameObject:
   m_ObjectHideFlags: 1
@@ -881,6 +911,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &173168
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 423756}
+  m_Layer: 0
+  m_Name: ProjectileHitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &186750
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +935,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 427436}
   m_Layer: 0
-  m_Name: UIComponent
+  m_Name: UIComponents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1033,6 +1078,7 @@ Transform:
   - {fileID: 400090}
   - {fileID: 400092}
   - {fileID: 427436}
+  - {fileID: 485724}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!1002 &400017
@@ -1648,6 +1694,18 @@ Transform:
 --- !u!1002 &400093
 EditorExtensionImpl:
   serializedVersion: 6
+--- !u!4 &423756
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .684000015, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 485724}
+  m_RootOrder: 0
 --- !u!4 &427436
 Transform:
   m_ObjectHideFlags: 1
@@ -1673,6 +1731,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 427436}
   m_RootOrder: 0
+--- !u!4 &485724
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 423756}
+  - {fileID: 494704}
+  m_Father: {fileID: 400016}
+  m_RootOrder: 3
+--- !u!4 &494704
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153154}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 485724}
+  m_RootOrder: 1
 --- !u!12 &1200000
 ParticleAnimator:
   m_ObjectHideFlags: 1

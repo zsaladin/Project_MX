@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class UserRecordSave : ScriptableObject 
+namespace MX
 {
-    public List<UserRecord> UserRecords = new List<UserRecord>();
-
-    public UserRecord Get(int id)
+    public class UserRecordSave : ScriptableObject
     {
-        return UserRecords.Find(item => item.ID == id);
+        public List<UserRecord> UserRecords = new List<UserRecord>();
+
+        public UserRecord Get(int id)
+        {
+            return UserRecords.Find(item => item.ID == id);
+        }
     }
 }

@@ -2,102 +2,110 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class BattleAction_Offense : BattleAction, IProjectileReached
+namespace MX
 {
-    protected BattleActor _target;
-
-    protected float _currentDuratiion;
-    protected bool _isDealed;
-    
-    public override ActionType Type
+    public class BattleAction_Offense : BattleAction, IProjectileReached
     {
-        get
+        protected BattleActor _target;
+
+        protected float _currentDuratiion;
+        protected bool _isDealed;
+
+        public override ActionType Type
         {
-            return ActionType.Offense;
-        }
-    }
-
-    public override void OnBegin()
-    {
-        base.OnBegin();
-
-        _currentDuratiion = 0;
-        _isDealed = false;
-
-        Actor.AnimationController.Play(AnimationType.Attack);
-
-        _target = Actor.Target;
-        if (_target != null)
-            Actor.transform.LookAt(_target.transform);
-    }
-    
-    public override void OnTick()
-    {
-        _currentDuratiion += Manager.Constant.GAME_TICK;
-
-        if (_currentDuratiion > Actor.OffenseTime)
-        {
-            IsEnd = true;
-            return;
-        }
-
-        if (_currentDuratiion >= Actor.OffenseDealTime)
-        {
-            if (_isDealed == false)
+            get
             {
-                _isDealed = true;
-                Offense();
+                return ActionType.Offense;
             }
         }
-    }
 
-    public override void OnEnd()
-    {
-        
-    }
+        public BattleAction_Offense(BattleActor actor)
+            : base(actor)
+        {
 
-    public override void Update()
-    {
-        
-    }
+        }
 
-    void Offense()
-    {
-        if (_target == null) return;
+        public override void OnBegin()
+        {
+            base.OnBegin();
 
-        if (Actor.OffenseType == OffenseType.Melee)
+            _currentDuratiion = 0;
+            _isDealed = false;
+
+            Actor.AnimationController.Play(AnimationType.Attack);
+
+            _target = Actor.Target;
+        }
+
+        public override void OnTick()
+        {
+            _currentDuratiion += Manager.Constant.GAME_TICK;
+
+            if (_target != null)
+            {
+                Actor.BaseAction.LookAt(_target.Position);
+            }
+
+            if (_currentDuratiion > Actor.OffenseTime)
+            {
+                IsEnd = true;
+                return;
+            }
+
+            if (_currentDuratiion >= Actor.OffenseDealTime)
+            {
+                if (_isDealed == false)
+                {
+                    _isDealed = true;
+                    Offense();
+                }
+            }
+        }
+
+        public override void Update()
+        {
+            if (_target != null)
+                Actor.transform.LookAt(_target.transform);
+        }
+
+        void Offense()
+        {
+            if (_target == null) return;
+
+            if (Actor.OffenseType == OffenseType.Melee)
+            {
+                DealDamage();
+            }
+            else if (Actor.OffenseType == OffenseType.Range || Actor.OffenseType == OffenseType.Magic)
+            {
+                ProjectileProfile projectileProfile = Manager.Data.ProjectileProfileSave.Get(Actor.OffenseProjectileType);
+                BattleProjectile projectile = Manager.Entity.CreateProjectile(projectileProfile, Actor.LauncherPoint);
+                projectile.SetTarget(_target);
+                projectile.ReachedHandler = this;
+            }
+        }
+
+        void DealDamage()
+        {
+            var defenseAction = _target.CurrentState.FindAction<BattleAction_Defense>();
+            if (defenseAction != null)
+            {
+                defenseAction.Defense(Actor.OffensePower);
+            }
+        }
+
+        public void OnProjectileReached(Vector3 targetPosition)
         {
             DealDamage();
         }
-        else if (Actor.OffenseType == OffenseType.Range || Actor.OffenseType == OffenseType.Magic)
-        {
-            ProjectileProfile projectileProfile = Manager.Data.ProjectileProfileSave.Get(Actor.OffenseProjectileType);
-            BattleProjectile projectile = Manager.Entity.CreateProjectile(projectileProfile, Actor.Position);
-            projectile.SetTarget(_target);
-            projectile.ReachedHandler = this;
-        }
     }
 
-    void DealDamage()
+
+    public enum OffenseType
     {
-        var defenseAction = _target.CurrentState.FindAction<BattleAction_Defense>();
-        if (defenseAction != null)
-        {
-            defenseAction.Defense(this);
-        }
+        Invalid = 0x00,
+        Melee = 0x01,
+        Range = 0x02,
+        Magic = 0x04,
     }
-
-    public void OnProjectileReached()
-    {
-        DealDamage();
-    }
-}
-
-
-public enum OffenseType
-{
-    Invalid     = 0x00,
-    Melee       = 0x01,
-    Range       = 0x02,
-    Magic       = 0x04,
 }

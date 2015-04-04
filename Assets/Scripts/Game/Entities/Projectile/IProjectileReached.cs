@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public interface IProjectileReached 
+namespace MX
 {
-    void OnProjectileReached();
+    public interface IProjectileReached
+    {
+        void OnProjectileReached(Vector3 targetPosition);
+    }
 }

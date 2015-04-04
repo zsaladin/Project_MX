@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
-public static class CollectionExtension
+namespace MX
 {
-    public static bool ContainsProperly<T>(this List<T> collection, T item, IComparer<T> comparer)
+    public static class CollectionExtension
     {
-        if (collection.Count > 10000)
+        public static bool ContainsProperly<T>(this List<T> collection, T item, IComparer<T> comparer)
         {
-            //Debug.Log(collection.Count);
-            return collection.BinarySearch(item, comparer) > 0;
-        }
+            if (collection.Count > 10000)
+            {
+                //Debug.Log(collection.Count);
+                return collection.BinarySearch(item, comparer) > 0;
+            }
 
-        return collection.Contains(item);
+            return collection.Contains(item);
+        }
     }
 }

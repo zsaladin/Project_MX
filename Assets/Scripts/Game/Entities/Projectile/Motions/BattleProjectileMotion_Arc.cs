@@ -2,52 +2,79 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class BattleProjectileMotion_Arc : BattleProjectileMotion 
+namespace MX
 {
-    const float _gravityAcc = -20f;
-    bool _isEnded = false;
-    public override void OnTick()
+    public class BattleProjectileMotion_Arc : BattleProjectileMotion
     {
-        Vector3 targetPosition = _projectitle.TargetPosition;
-        targetPosition.y = 0;
+        const float _gravityAcc = -20f;
+        bool _isEnded = false;
 
-        Vector3 position = _projectitle.Position;
-        position.y = 0;
+        float _nextSecond;
+        float _totalSecond;
+        float _beginVelocity;
 
-        Vector3 direction = (targetPosition - position).normalized;
-
-        float nextDeltaDistance = _speed * Manager.Constant.GAME_TICK;
-        Vector3 nextPosition = _projectitle.Position + direction * nextDeltaDistance;
-
-
-        Vector3 totalVector = _projectitle.TargetPosition - _projectitle.BeginPosition;
-        totalVector.y = 0;
-        float totalDistance = totalVector.magnitude;
-
-        Vector3 currentVector = _projectitle.Position - _projectitle.BeginPosition;
-        currentVector.y = 0;
-        float currentDistance = currentVector.magnitude;
-
-        float nextRatio = (currentDistance + nextDeltaDistance) / totalDistance;
-        if (nextRatio >= 1f)
+        public override void OnTick()
         {
-            _isEnded = true;
+            Vector3 targetPosition = _projectitle.TargetPosition;
+            targetPosition.y = 0;
+
+            Vector3 position = _projectitle.Position;
+            position.y = 0;
+
+            Vector3 direction = (targetPosition - position).normalized;
+
+            float nextDeltaDistance = _speed * Manager.Constant.GAME_TICK;
+            Vector3 nextPosition = _projectitle.Position + direction * nextDeltaDistance;
+
+
+            Vector3 totalVector = _projectitle.TargetPosition - _projectitle.BeginPosition;
+            totalVector.y = 0;
+            float totalDistance = totalVector.magnitude;
+
+            Vector3 currentVector = _projectitle.Position - _projectitle.BeginPosition;
+            currentVector.y = 0;
+            float currentDistance = currentVector.magnitude;
+
+            float nextRatio = (currentDistance + nextDeltaDistance) / totalDistance;
+            if (nextRatio >= 1f)
+            {
+                _isEnded = true;
+            }
+
+            _totalSecond = totalDistance / _speed;
+            _nextSecond = _isEnded ? _totalSecond : (currentDistance + nextDeltaDistance) / _speed;
+
+            float diffHeight = _projectitle.TargetPosition.y - _projectitle.BeginPosition.y;
+            _beginVelocity = (diffHeight - (0.5f * _gravityAcc * _totalSecond * _totalSecond)) / _totalSecond;
+
+            float nextHeight = _nextSecond * _beginVelocity + (0.5f * _gravityAcc * _nextSecond * _nextSecond);
+
+            nextPosition.y = _projectitle.BeginPosition.y + nextHeight;
+            _projectitle.Position = nextPosition;
         }
 
-        float totalSecond = totalDistance / _speed;
-        float nextSecond = _isEnded ? totalSecond : (currentDistance + nextDeltaDistance) / _speed;
+        public override void Update()
+        {
+            Vector3 projTransXZPosition = _projectitle.transform.position;
+            Vector3 projXZPosition = _projectitle.Position;
+            projTransXZPosition.y = 0;
+            projXZPosition.y = 0;
+            Vector3 nextPos = Vector3.MoveTowards(projTransXZPosition, projXZPosition, _speed * Time.deltaTime);
 
-        float diffHeight = _projectitle.TargetPosition.y - _projectitle.BeginPosition.y;
-        float beginVelocity = (diffHeight - (0.5f * _gravityAcc * totalSecond * totalSecond)) / totalSecond;
+            float currentAcc = _beginVelocity + _gravityAcc * (_nextSecond - Manager.Constant.GAME_TICK);
 
-        float nextHeight = nextSecond * beginVelocity + (0.5f * _gravityAcc * nextSecond * nextSecond);
+            float transY = _projectitle.transform.position.y;
+            float y = _projectitle.Position.y;
+            nextPos.y = transY + currentAcc * Time.deltaTime;
 
-        nextPosition.y = _projectitle.BeginPosition.y + nextHeight;
-        _projectitle.Position = nextPosition;
-    }
 
-    public override bool IsEnded()
-    {
-        return _isEnded;
+            //Vector3.MoveTowards(_projectitle.transform.position, _projectitle.Position, _speed * Time.deltaTime);
+            _projectitle.transform.position = nextPos;
+        }
+
+        public override bool IsEnded()
+        {
+            return _isEnded;
+        }
     }
 }

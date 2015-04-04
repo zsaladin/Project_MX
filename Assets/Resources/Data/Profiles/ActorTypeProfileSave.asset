@@ -18,49 +18,435 @@ MonoBehaviour:
     - ID: 1
       Name: Movement
       ConditionStateSet:
-      - ConditionType: 2
-        ConditionProfileID: 1
-        StateProfileID: 2
-      - ConditionType: 1
-        ConditionProfileID: 1
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: StandardHitPoint
+              Value: 0
+            BoolParams:
+            - Key: IsTrue
+              Value: 0
+            StringParams: []
+            ComparisonParams:
+            - Key: ComparisonType
+              Value: 5
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 1
+            ActionTypeParams:
+            - Key: ActionType
+              Value: 0
         StateProfileID: 3
-      - ConditionType: 4
-        ConditionProfileID: 2
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 2
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: StandardHitPoint
+              Value: 0
+            BoolParams:
+            - Key: IsTrue
+              Value: 1
+            StringParams: []
+            ComparisonParams:
+            - Key: ComparisonType
+              Value: 1
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 0
+            ActionTypeParams: []
+        StateProfileID: 2
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 4
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 0
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
         StateProfileID: 4
       Actions: 030000000200000004000000
+      IsDefault: 0
     - ID: 2
       Name: Attack
       ConditionStateSet:
-      - ConditionType: 2
-        ConditionProfileID: 2
-        StateProfileID: 1
-      - ConditionType: 3
-        ConditionProfileID: 1
-        StateProfileID: 2
-      - ConditionType: 1
-        ConditionProfileID: 1
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: StandardHitPoint
+              Value: 0
+            BoolParams: []
+            StringParams: []
+            ComparisonParams:
+            - Key: ComparisonType
+              Value: 5
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 1
+            ActionTypeParams: []
         StateProfileID: 3
-      - ConditionType: 4
-        ConditionProfileID: 2
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 3
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams:
+            - Key: ActionType
+              Value: 1
         StateProfileID: 4
       Actions: 020000000400000001000000
+      IsDefault: 0
     - ID: 3
       Name: Death
       ConditionStateSet: []
       Actions: 05000000
+      IsDefault: 0
     - ID: 4
       Name: Wait
       ConditionStateSet:
-      - ConditionType: 4
-        ConditionProfileID: 1
-        StateProfileID: 1
-      - ConditionType: 1
-        ConditionProfileID: 1
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: StandardHitPoint
+              Value: 0
+            BoolParams: []
+            StringParams: []
+            ComparisonParams:
+            - Key: ComparisonType
+              Value: 5
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 1
+            ActionTypeParams: []
         StateProfileID: 3
-      - ConditionType: 2
-        ConditionProfileID: 1
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 2
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 1
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
         StateProfileID: 2
-      Actions: 0400000006000000
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 4
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 1
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 1
+      Actions: 040000000600000002000000
+      IsDefault: 1
   - ID: 2
     Name: Hero
-    States: []
+    States:
+    - ID: 1
+      Name: Wait
+      ConditionStateSet:
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: StandardHitPoint
+              Value: 0
+            BoolParams: []
+            StringParams: []
+            ComparisonParams:
+            - Key: ComparisonType
+              Value: 5
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 1
+            ActionTypeParams: []
+        StateProfileID: 5
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 5
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 4
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 2
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 1
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 3
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 4
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 1
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 2
+      Actions: 060000000400000002000000
+      IsDefault: 1
+    - ID: 2
+      Name: Movement
+      ConditionStateSet:
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: StandardHitPoint
+              Value: 0
+            BoolParams: []
+            StringParams: []
+            ComparisonParams:
+            - Key: ComparisonType
+              Value: 5
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 0
+            ActionTypeParams: []
+        StateProfileID: 5
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 5
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 4
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 2
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 1
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 3
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 4
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 0
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 1
+      Actions: 040000000200000003000000
+      IsDefault: 0
+    - ID: 3
+      Name: Attack
+      ConditionStateSet:
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: StandardHitPoint
+              Value: 0
+            BoolParams: []
+            StringParams: []
+            ComparisonParams:
+            - Key: ComparisonType
+              Value: 5
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 0
+            ActionTypeParams: []
+        StateProfileID: 5
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 4
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 0
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 1
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 2
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams:
+            - Key: IsTrue
+              Value: 0
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+        StateProfileID: 2
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 3
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams:
+            - Key: ActionType
+              Value: 1
+        StateProfileID: 1
+      Actions: 010000000400000002000000
+      IsDefault: 0
+    - ID: 4
+      Name: Skill
+      ConditionStateSet:
+      - ConditionProfile:
+          ID: 0
+          Name: 
+          Type: 3
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams:
+            - Key: ActionType
+              Value: 7
+        StateProfileID: 1
+      Actions: 0700000004000000
+      IsDefault: 0
+    - ID: 5
+      Name: Death
+      ConditionStateSet: []
+      Actions: 05000000
+      IsDefault: 0

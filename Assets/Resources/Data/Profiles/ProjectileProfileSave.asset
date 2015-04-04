@@ -19,8 +19,14 @@ MonoBehaviour:
     Speed: 8
     MaxHeight: 0
   - ID: 2
-    Name: Arc Arrow
-    Prefab: {fileID: 102270, guid: bafda99fe9582b24d8a38215f6b94ce8, type: 2}
+    Name: Ice Ball Normal
+    Prefab: {fileID: 179576, guid: 948d19622c7a6a14084dff68d19c9fd2, type: 2}
     ProjectileMotionType: 2
     Speed: 12
     MaxHeight: 6
+  - ID: 3
+    Name: Ice Ball Skill
+    Prefab: {fileID: 183490, guid: 6c601799131a0f247b115dcd82752acd, type: 2}
+    ProjectileMotionType: 2
+    Speed: 5
+    MaxHeight: 0

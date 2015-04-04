@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class BattleEvent_MouseUp : BattleEvent 
+namespace MX
 {
-    public override EventType Type
+    public class BattleEvent_MouseUp : BattleEvent
     {
-        get { return EventType.MouseUp; }
+        public override EventType Type
+        {
+            get { return EventType.MouseUp; }
+        }
+        public Vector3 _mousePosition;
     }
-    public Vector3 _mousePosition;
 }

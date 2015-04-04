@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 
-[System.Serializable]
-public class BattleStateProfile : Profile
+namespace MX
 {
-    public List<ConditionStateSet> ConditionStateSet = new List<ConditionStateSet>();
-    public List<ActionType> Actions = new List<ActionType>();
-}
+    [System.Serializable]
+    public class BattleStateProfile : Profile
+    {
+        public List<ConditionStateSet> ConditionStateSet = new List<ConditionStateSet>();
+        public List<ActionType> Actions = new List<ActionType>();
+        public bool IsDefault = false;
+    }
 
-[System.Serializable]
-public class ConditionStateSet
-{
-    public ConditionType ConditionType;
-    public int ConditionProfileID;
-    public int StateProfileID;
+    [System.Serializable]
+    public class ConditionStateSet
+    {
+        public BattleStateConditionProfile ConditionProfile = new BattleStateConditionProfile();
+        public int StateProfileID;
+    }
 }

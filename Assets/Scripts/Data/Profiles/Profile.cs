@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-[System.Serializable]
-public abstract class Profile : Data
+namespace MX
 {
+    [System.Serializable]
+    public abstract class Profile : Data
+    {
+
+    }
 }

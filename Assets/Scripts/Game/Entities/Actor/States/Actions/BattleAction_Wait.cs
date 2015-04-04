@@ -2,12 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class BattleAction_Wait : BattleAction 
+namespace MX
 {
-    public override void OnBegin()
+    public class BattleAction_Wait : BattleAction
     {
-        base.OnBegin();
+        public BattleAction_Wait(BattleActor actor)
+            : base(actor)
+        {
 
-        Actor.AnimationController.Play(AnimationType.Idle);
+        }
+
+        public override ActionType Type
+        {
+            get
+            {
+                return ActionType.Wait;
+            }
+        }
+
+        public override void OnBegin()
+        {
+            base.OnBegin();
+
+            Actor.AnimationController.Play(AnimationType.Idle);
+        }
     }
 }

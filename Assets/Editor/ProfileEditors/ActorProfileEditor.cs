@@ -3,39 +3,61 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ActorProfileEditor : EditorWindow 
+namespace MX
 {
-    ActorProfileSave _save;
-    ActorProfile _currentProfile;
-
-    [MenuItem("Custom/Profile/Actor")]
-    static public void CreateActorProfileWindow()
+    public class ActorProfileEditor : EditorWindow
     {
-        EditorWindow.GetWindow<ActorProfileEditor>();
-    }
+        ActorProfileSave _save;
+        ActorProfile _currentProfile;
 
-    void Init()
-    {
-        if (_save == null)
-            _save = ScriptableObjectUtility.GetAsset<ActorProfileSave>(DataType.Profile);
-    }
+        BattleSkillProfile _currentSkillProfile;
 
-    void OnGUI()
-    {
-        Init();
+        [MenuItem("Custom/Profile/Actor")]
+        static public void CreateActorProfileWindow()
+        {
+            EditorWindow.GetWindow<ActorProfileEditor>();
+        }
 
-        GUILayout.BeginHorizontal();
+        void Init()
+        {
+            if (_save == null)
+                _save = ScriptableObjectUtility.GetAsset<ActorProfileSave>(DataType.Profile);
+        }
+
+        void OnGUI()
+        {
+            Init();
+
+            GUILayout.BeginHorizontal();
+            {
+                DrawActorProfiles();
+                if (_currentProfile == null) return;
+
+                DrawActorBaseProperties();
+                DrawSkills();
+
+                if (_currentSkillProfile == null) return;
+                DrawSkillParams();
+                DrawSkillCondition();
+
+            } GUILayout.EndHorizontal();
+        }
+
+        void DrawActorProfiles()
         {
             GUILayout.BeginVertical(GUILayout.Width(200));
             {
-                CommonEditorUnitity.DrawData(_save.ActorProfiles, ref _currentProfile);
-                CommonEditorUnitity.DrawAddData(_save.ActorProfiles, ref _currentProfile);
-                CommonEditorUnitity.DrawRemoveData(_save.ActorProfiles, ref _currentProfile);
-                CommonEditorUnitity.DrawSaveData(_save);
+                bool isChanged = CommonEditorUtility.DrawData(_save.ActorProfiles, ref _currentProfile);
+                CommonEditorUtility.DrawAddData(_save.ActorProfiles, ref _currentProfile);
+                CommonEditorUtility.DrawRemoveData(_save.ActorProfiles, ref _currentProfile);
+                CommonEditorUtility.DrawSaveData(_save);
+                if (isChanged)
+                    _currentSkillProfile = null;
             } GUILayout.EndVertical();
+        }
 
-            if (_currentProfile == null) return;
-
+        void DrawActorBaseProperties()
+        {
             GUILayout.BeginVertical(GUILayout.Width(150));
             {
                 GUILayout.Label("Name");
@@ -54,7 +76,7 @@ public class ActorProfileEditor : EditorWindow
                 GUILayout.Label("OffenseRange");
                 GUILayout.Label("DefenseType");
                 GUILayout.Label("MovingSpeed");
-                
+
             } GUILayout.EndVertical();
 
             GUILayout.BeginVertical(GUILayout.Width(150));
@@ -68,7 +90,7 @@ public class ActorProfileEditor : EditorWindow
 
                 _currentProfile.Size = EditorGUILayout.FloatField(_currentProfile.Size);
                 _currentProfile.HitPointMax = EditorGUILayout.FloatField(_currentProfile.HitPointMax);
-                _currentProfile.OffenseType = (OffenseType) EditorGUILayout.EnumPopup(_currentProfile.OffenseType);
+                _currentProfile.OffenseType = (OffenseType)EditorGUILayout.EnumPopup(_currentProfile.OffenseType);
                 if (_currentProfile.OffenseType == OffenseType.Range || _currentProfile.OffenseType == OffenseType.Magic)
                 {
                     var list = Manager.Data.ProjectileProfileSave.ProjectileProfiles.ToList();
@@ -83,10 +105,73 @@ public class ActorProfileEditor : EditorWindow
                 _currentProfile.OffenseRange = EditorGUILayout.FloatField(_currentProfile.OffenseRange);
                 _currentProfile.DefenseType = (DefenseType)EditorGUILayout.EnumPopup(_currentProfile.DefenseType);
                 _currentProfile.MovingSpeed = EditorGUILayout.FloatField(_currentProfile.MovingSpeed);
-                
+
             } GUILayout.EndVertical();
+        }
 
+        void DrawSkills()
+        {
+            if (!IncludeSkillAction()) return;
 
-        } GUILayout.EndHorizontal();
+            GUILayout.BeginVertical(GUILayout.Width(100));
+            {
+                EditorGUILayout.LabelField("Skills");
+                foreach(var skill in _currentProfile.Skills)
+                {
+                    GUILayout.BeginHorizontal(GUILayout.Width(80));
+                    {
+                        string label = string.Format("{0}. ", skill.ID.ToString());
+                        if (GUILayout.Toggle(skill == _currentSkillProfile, label, GUILayout.Width(30)))
+                            _currentSkillProfile = skill;
+                        skill.Type = (SkillType)EditorGUILayout.EnumPopup(skill.Type, GUILayout.Width(100));
+                    } GUILayout.EndHorizontal();
+                }
+                CommonEditorUtility.DrawAddData(_currentProfile.Skills, ref _currentSkillProfile);
+                CommonEditorUtility.DrawRemoveData(_currentProfile.Skills, ref _currentSkillProfile);
+            } GUILayout.EndVertical();
+        }
+
+        void DrawSkillParams()
+        {
+            BattleSkillEditorUtility.DrawParams(_currentSkillProfile);
+        }
+
+        void DrawSkillCondition()
+        {
+            EditorGUILayout.BeginVertical(GUILayout.Width(150));
+            {
+                EditorGUILayout.LabelField("Skill Conditions");
+                foreach (var skillCondition in _currentSkillProfile.Conditions)
+                {
+                    BattleSkillEditorUtility.DrawConditions(_currentSkillProfile, skillCondition);
+                    EditorGUILayout.LabelField("");
+                }
+
+                if (GUILayout.Button("Add"))
+                {
+                    _currentSkillProfile.Conditions.Add(new BattleSkillConditionProfile());
+                }
+            } EditorGUILayout.EndVertical();
+        }
+
+        bool IncludeSkillAction()
+        {
+            ActorTypeProfile actorTypeProfile = Manager.Data.ActorTypeProfileSave.Get(_currentProfile.ActorType);
+            if (actorTypeProfile == null) return false;
+
+            bool doesItIncludeSkillAction = false;
+            foreach (var state in actorTypeProfile.States)
+            {
+                foreach (var action in state.Actions)
+                {
+                    if (action == ActionType.Skill)
+                    {
+                        doesItIncludeSkillAction = true;
+                        break;
+                    }
+                }
+            }
+            return doesItIncludeSkillAction;
+        }
     }
 }

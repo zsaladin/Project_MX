@@ -2,46 +2,58 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
-// Tatget Matching Algorithm will be interchangeable.
-public class BattleAction_SearchForTarget : BattleAction 
+namespace MX
 {
-    public BattleActor Target { get; protected set; }
-
-    public override void OnBegin()
+    // Tatget Matching Algorithm will be interchangeable.
+    public class BattleAction_SearchForTarget : BattleAction
     {
-        base.OnBegin();
+        public BattleActor Target { get; protected set; }
 
-        SearchForTarget();
-    }
-
-    public override void OnTick()
-    {
-        SearchForTarget();
-    }
-
-    void SearchForTarget()
-    {
-        List<BattleActor> opponents = Manager.Entity.GetActors(Actor.OpponentOwnerShip, false);
-
-        BattleActor nearestOpponent = null;
-        float minDiff = float.MaxValue;
-
-        Vector3 actorPosition = Actor.Position;
-        int count = opponents.Count;
-        for (int i = 0; i < count; ++i)
+        public override ActionType Type
         {
-            Vector3 diff = actorPosition - opponents[i].Position;
-            float sqrMag = diff.sqrMagnitude;
-            if (minDiff > sqrMag)
+            get
             {
-                minDiff = sqrMag;
-                nearestOpponent = opponents[i];
+                return ActionType.SearchForTarget;
             }
         }
+        public BattleAction_SearchForTarget(BattleActor actor)
+            : base(actor)
+        {
 
-        Target = nearestOpponent;
+        }
+        public override void OnBegin()
+        {
+            base.OnBegin();
+
+            SearchForTarget();
+        }
+
+        public override void OnTick()
+        {
+            SearchForTarget();
+        }
+
+        void SearchForTarget()
+        {
+            List<BattleActor> opponents = Manager.Entity.GetActors(Actor.OpponentOwnerShip, false);
+
+            BattleActor nearestOpponent = null;
+            float minDiff = float.MaxValue;
+
+            Vector3 actorPosition = Actor.Position;
+            int count = opponents.Count;
+            for (int i = 0; i < count; ++i)
+            {
+                Vector3 diff = actorPosition - opponents[i].Position;
+                float sqrMag = diff.sqrMagnitude;
+                if (minDiff > sqrMag)
+                {
+                    minDiff = sqrMag;
+                    nearestOpponent = opponents[i];
+                }
+            }
+
+            Target = nearestOpponent;
+        }
     }
-
-
 }

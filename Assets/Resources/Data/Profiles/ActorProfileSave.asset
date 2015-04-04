@@ -15,7 +15,7 @@ MonoBehaviour:
   - ID: 1
     Name: Warrior
     Prefab: {fileID: 100070, guid: a0179be775d865349b2c4bbbd6f83177, type: 2}
-    ActorType: 1
+    ActorType: 2
     Size: 1.5
     HitPointMax: 1000
     OffenseType: 1
@@ -26,6 +26,57 @@ MonoBehaviour:
     OffenseRange: .5
     DefenseType: 2
     MovingSpeed: 3
+    Skills:
+    - ID: 1
+      Name: Name
+      Type: 2
+      Params:
+        ID: 0
+        Name: 
+        IntParams:
+        - Key: ProjectileID
+          Value: 3
+        FloatParams:
+        - Key: Radius
+          Value: 3
+        - Key: Damage
+          Value: 100
+        BoolParams: []
+        StringParams: []
+        ComparisonParams: []
+        RatioValueParams: []
+        ActionTypeParams: []
+      Conditions:
+      - ID: 1
+        Name: 
+        Type: 1
+        Params:
+          ID: 1
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: CoolTime
+            Value: 2
+          BoolParams: []
+          StringParams: []
+          ComparisonParams: []
+          RatioValueParams: []
+          ActionTypeParams: []
+      - ID: 2
+        Name: 
+        Type: 2
+        Params:
+          ID: 0
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: Range
+            Value: 2
+          BoolParams: []
+          StringParams: []
+          ComparisonParams: []
+          RatioValueParams: []
+          ActionTypeParams: []
   - ID: 2
     Name: Troll
     Prefab: {fileID: 100000, guid: ba76689f220e59a48845d4df03dcbffa, type: 2}
@@ -40,6 +91,7 @@ MonoBehaviour:
     OffenseRange: .699999988
     DefenseType: 1
     MovingSpeed: 3
+    Skills: []
   - ID: 3
     Name: SkeletonDark
     Prefab: {fileID: 100016, guid: a2cb09cf998faef4fb7887e15c3608c1, type: 2}
@@ -54,6 +106,7 @@ MonoBehaviour:
     OffenseRange: .300000012
     DefenseType: 1
     MovingSpeed: 2
+    Skills: []
   - ID: 4
     Name: SkeletonFresh
     Prefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
@@ -68,20 +121,72 @@ MonoBehaviour:
     OffenseRange: .300000012
     DefenseType: 1
     MovingSpeed: 2
+    Skills: []
   - ID: 5
     Name: SkeletonMage
     Prefab: {fileID: 100024, guid: 1bc803c4bf46dcc48b0d9035951ec07a, type: 2}
-    ActorType: 1
+    ActorType: 2
     Size: 1.5
     HitPointMax: 300
     OffenseType: 4
     OffenseProjectileType: 2
     OffensePower: 30
     OffenseTime: 1.12
-    OffenseDealTime: .600000024
+    OffenseDealTime: .400000006
     OffenseRange: 8
     DefenseType: 1
     MovingSpeed: 2
+    Skills:
+    - ID: 1
+      Name: 
+      Type: 1
+      Params:
+        ID: 0
+        Name: 
+        IntParams:
+        - Key: ProjectileID
+          Value: 3
+        FloatParams:
+        - Key: Radius
+          Value: 3
+        - Key: Damage
+          Value: 500
+        BoolParams: []
+        StringParams: []
+        ComparisonParams: []
+        RatioValueParams: []
+        ActionTypeParams: []
+      Conditions:
+      - ID: 0
+        Name: 
+        Type: 1
+        Params:
+          ID: 0
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: CoolTime
+            Value: 3
+          BoolParams: []
+          StringParams: []
+          ComparisonParams: []
+          RatioValueParams: []
+          ActionTypeParams: []
+      - ID: 0
+        Name: Range
+        Type: 2
+        Params:
+          ID: 0
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: Range
+            Value: 10
+          BoolParams: []
+          StringParams: []
+          ComparisonParams: []
+          RatioValueParams: []
+          ActionTypeParams: []
   - ID: 6
     Name: SkeletonNormal
     Prefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
@@ -96,3 +201,4 @@ MonoBehaviour:
     OffenseRange: .300000012
     DefenseType: 1
     MovingSpeed: 2
+    Skills: []

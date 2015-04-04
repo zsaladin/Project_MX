@@ -82,6 +82,9 @@
     <Reference Include="UnityEditor.OSXStandalone.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="JMOAssets">
+      <HintPath>Assets\JMO Assets\Editor\JMOAssets.dll</HintPath>
+    </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
@@ -104,12 +107,22 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\ProfileEditors\ActorProfileEditor.cs" />
     <Compile Include="Assets\Editor\ProfileEditors\ActorTypeProfileEditor.cs" />
-    <Compile Include="Assets\Editor\ProfileEditors\ConditionProfileEditor.cs" />
     <Compile Include="Assets\Editor\ProfileEditors\ProjectileProfileEditor.cs" />
     <Compile Include="Assets\Editor\RecordEditors\UserRecordEditor.cs" />
-    <Compile Include="Assets\Editor\Utitlities\CommonEditorUnitity.cs" />
+    <Compile Include="Assets\Editor\Utitlities\BattleSkillEditorUtility.cs" />
+    <Compile Include="Assets\Editor\Utitlities\BattleStateConditionUtility.cs" />
+    <Compile Include="Assets\Editor\Utitlities\CommonEditorUtility.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Editor\CFX_InspectorHelpEditor.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Editor\CFX_SpawnSystemEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\JMO Assets\!JMO Assets Readme.txt" />
+    <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+    <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX3 Readme.txt" />
+    <None Include="Assets\JMO Assets\Cartoon FX\Shaders (Mobile)\CFXM_MobileParticleAdd_Alpha8.shader" />
+    <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Invert.shader" />
+    <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
     <None Include="Assets\Raw\Models\Earthborn Troll\Shader\Alpha_Texture.shader" />
     <None Include="Assets\Raw\Models\Earthborn Troll\Shader\DoubleSided-Light-Spec.shader" />
     <None Include="Assets\Raw\Models\SkeletonData\animations.txt" />

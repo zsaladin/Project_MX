@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public interface ITickable 
+namespace MX
 {
-    void OnTick();
+    public interface ITickable
+    {
+        void OnTick();
+    }
 }

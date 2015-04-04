@@ -2,43 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class MecanimAnimationController : AnimationController 
+namespace MX
 {
-    private Animator _animator;
-
-    public override void Init()
+    public class MecanimAnimationController : AnimationController
     {
-        _animator = GetComponent<Animator>();
-    }
+        private Animator _animator;
 
-    public override void Play()
-    {
-        _animator.enabled = true;
-    }
+        public override void Init()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
-    public override void Play(AnimationType type)
-    {
-        _animator.enabled = true;
-        _animator.Play(type.ToString());
-    }
+        public override void Play(float speed = 1f)
+        {
+            _animator.enabled = true;
+            _animator.speed = speed;
+        }
 
-    public override void Stop()
-    {
-        _animator.enabled = false;
-    }
+        public override void Play(AnimationType type, float speed = 1f)
+        {
+            _animator.enabled = true;
+            _animator.Play(type.ToString());
+            _animator.speed = speed;
+        }
 
-    public override void Stop(AnimationType type)
-    {
-        _animator.enabled = false;
-    }
+        public override void Stop()
+        {
+            _animator.enabled = false;
+        }
 
-    public override bool IsPlaying()
-    {
-        return _animator.enabled;
-    }
+        public override void Stop(AnimationType type)
+        {
+            _animator.enabled = false;
+        }
 
-    public override bool IsPlaying(AnimationType type)
-    {
-        return _animator.GetCurrentAnimatorStateInfo(0).IsName(type.ToString());
+        public override bool IsPlaying()
+        {
+            return _animator.enabled;
+        }
+
+        public override bool IsPlaying(AnimationType type)
+        {
+            return _animator.GetCurrentAnimatorStateInfo(0).IsName(type.ToString());
+        }
     }
 }

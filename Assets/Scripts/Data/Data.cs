@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public abstract class Data
+namespace MX
 {
-    public int ID;
-    public string Name;
+    [System.Serializable]
+    public abstract class Data
+    {
+        public int ID;
+        public string Name;
+    }
 }

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
-[System.Serializable]
-public class ActorTypeProfileSave : ScriptableObject 
+namespace MX
 {
-    public List<ActorTypeProfile> ActorTypeProfiles = new List<ActorTypeProfile>();
-
-    public ActorTypeProfile Get(int id)
+    [System.Serializable]
+    public class ActorTypeProfileSave : ScriptableObject
     {
-        return ActorTypeProfiles.Find(item => item.ID == id);
+        public List<ActorTypeProfile> ActorTypeProfiles = new List<ActorTypeProfile>();
+
+        public ActorTypeProfile Get(int id)
+        {
+            return ActorTypeProfiles.Find(item => item.ID == id);
+        }
     }
 }

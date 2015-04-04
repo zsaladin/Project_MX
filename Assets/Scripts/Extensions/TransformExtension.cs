@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public static class TransformExtension 
+namespace MX
 {
-    public static Transform FindChildRecursively(this Transform transfrom, string name)
+    public static class TransformExtension
     {
-        Transform[] trans = transfrom.GetComponentsInChildren<Transform>();
-        for(int i = 0; i < trans.Length; ++i)
+        public static Transform FindChildRecursively(this Transform transfrom, string name)
         {
-            if (trans[i].name == name)
-                return trans[i];
-        }
+            Transform[] trans = transfrom.GetComponentsInChildren<Transform>();
+            for (int i = 0; i < trans.Length; ++i)
+            {
+                if (trans[i].name == name)
+                    return trans[i];
+            }
 
-        return null;
+            return null;
+        }
     }
 }

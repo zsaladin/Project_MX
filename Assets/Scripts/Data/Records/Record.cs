@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-[System.Serializable]
-public abstract class Record : Data
+namespace MX
 {
+    [System.Serializable]
+    public abstract class Record : Data
+    {
 
+    }
 }

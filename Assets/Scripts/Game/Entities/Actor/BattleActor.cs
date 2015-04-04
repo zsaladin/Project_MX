@@ -29,11 +29,9 @@ namespace MX
         public float MovingSpeed { get; private set; }
         #endregion
 
-        public BattleState[] States { get; private set; }
-        public BattleState CurrentState { get; private set; }
-        public BattleState DefaultState { get; private set; }
-
-        public BattleSkill[] Skills { get; private set; }
+        public BattleStateMachine StateMachine { get; private set; }
+        public BattleSkillMachine SkillMachine { get; private set; }
+        public BattleBuffMachine BuffMachine { get; private set; }
 
         public Ownership OwnerShip { get; private set; }
         public Ownership OpponentOwnerShip { get { return (Ownership)((int)OwnerShip ^ 0x1); } }
@@ -44,8 +42,8 @@ namespace MX
         public Vector3 LauncherPoint { get; set; }
         public Vector3 ProjectileHitPoint { get; set; }
 
-        public BattleActor Target { get { return CurrentState.Target; } }
-        public Vector3 Destination { get { return CurrentState.Destination; } }
+        public BattleActor Target { get { return StateMachine.CurrentState.Target; } }
+        public Vector3 Destination { get { return StateMachine.CurrentState.Destination; } }
 
         public BattleActorBaseAction BaseAction { get; private set; }
         public AnimationController AnimationController { get; private set; }
@@ -64,16 +62,19 @@ namespace MX
                 Position = _record.Position;
 
             transform.position = Position;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0));
+
+            InitStats();
 
             AnimationController = GetComponent<AnimationController>();
             AnimationController.Init();
 
             BaseAction = new BattleActorBaseAction(this);
 
-            InitStats();
-            InitStates();
-            InitSkills();
+            StateMachine = new BattleStateMachine(this, _actorTypeProfile);
+            SkillMachine = new BattleSkillMachine(this, _profile);
+            BuffMachine = new BattleBuffMachine(this);
+
+            
         }
 
         void InitStats()
@@ -92,36 +93,17 @@ namespace MX
             MovingSpeed = _profile.MovingSpeed;
         }
 
-        void InitStates()
+        public void OnTick()
         {
-            States = new BattleState[_actorTypeProfile.States.Count];
-            for (int i = 0; i < _actorTypeProfile.States.Count; ++i)
-            {
-                BattleStateProfile stateProfile = _actorTypeProfile.States[i];
-                BattleState state = new BattleState();
-                state.Init(stateProfile, this);
-                States[i] = state;
-
-                if (stateProfile.IsDefault) 
-                    DefaultState = state;
-            }
-
-            for (int i = 0; i < States.Length; ++i)
-            {
-                States[i].PostInit();
-            }
-            CurrentState = DefaultState;
-            CurrentState.OnBegin();
+            BuffMachine.OnTick();
+            StateMachine.OnTick();
+            SkillMachine.OnTick();
         }
 
-        void InitSkills()
+        void Update()
         {
-            Skills = new BattleSkill[_profile.Skills.Count];
-            for (int i = 0; i < _profile.Skills.Count; ++i)
-            {
-                BattleSkill skill = BattleSkill.Create(_profile.Skills[i], this);
-                Skills[i] = skill;
-            }
+            StateMachine.CurrentState.Update();
+            BaseAction.Update();
         }
 
         public void AddUIController(UIMonoBehaviour ui)
@@ -145,32 +127,15 @@ namespace MX
             }
         }
 
-        public void OnTick()
+#if UNITY_EDITOR
+        void OnDrawGizmos()
         {
-            CurrentState.OnTick();
-            BattleState nextState = CurrentState.OnConditionConfirm();
-            if (nextState != null)
+            UnityEditor.Handles.Label(transform.position, StateMachine.CurrentState.Profile.Name);
+            for(int i = 0; i < BuffMachine.Buffs.Count; ++i)
             {
-                CurrentState.OnEnd();
-                CurrentState = nextState;
-                CurrentState.OnBegin();
-            }
-
-            for (int i = 0; i < Skills.Length; ++i)
-            {
-                Skills[i].OnTick();
+                UnityEditor.Handles.Label(transform.position + Vector3.up * 1, BuffMachine.Buffs[i].Profile.Name);
             }
         }
-
-        void Update()
-        {
-            CurrentState.Update();
-            BaseAction.Update();
-        }
-
-        public void OnChangeState()
-        {
-
-        }
+#endif
     }
 }

@@ -10,6 +10,9 @@ namespace MX
         protected BattleActor Actor { get; private set; }
 
         protected List<BattleSkillCondition> _conditions = new List<BattleSkillCondition>();
+        protected List<BattleActor> _targetActors = new List<BattleActor>();
+
+        protected float _damage;
 
         public BattleSkill(BattleSkillProfile profile, BattleActor actor)
         {
@@ -34,6 +37,20 @@ namespace MX
             {
                 _conditions[i].OnTick();
             }
+        }
+
+        public virtual void Deal()
+        {
+            for(int i = 0; i < _targetActors.Count; ++i)
+            {
+                var defenseAction = _targetActors[i].StateMachine.CurrentState.FindAction<BattleAction_Defense>();
+                if (defenseAction != null)
+                    defenseAction.Defense(_damage);
+
+                for (int j = 0; j < Profile.Buffs.Count; ++j)
+                    _targetActors[i].BuffMachine.AddBuff(Profile.Buffs[j]);
+            }
+            _targetActors.Clear();
         }
 
         public bool IsInCondition()

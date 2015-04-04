@@ -36,7 +36,7 @@ namespace MX
         {
             foreach (var pair in _actorPathFinders)
             {
-                if (pair.Key.CurrentState.FindAction<BattleAction_Movement>() != null)
+                if (pair.Key.StateMachine.CurrentState.FindAction<BattleAction_Movement>() != null)
                     pair.Value.OnTick();
             }
         }

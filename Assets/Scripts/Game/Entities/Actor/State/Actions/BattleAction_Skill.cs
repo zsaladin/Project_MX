@@ -40,10 +40,10 @@ namespace MX
             }
 
             _availabeSkills.Clear();
-            for (int i = 0; i < Actor.Skills.Length; ++i)
+            for (int i = 0; i < Actor.SkillMachine.Skills.Length; ++i)
             {
-                if (Actor.Skills[i].IsInCondition())
-                    _availabeSkills.Add(Actor.Skills[i]);
+                if (Actor.SkillMachine.Skills[i].IsInCondition())
+                    _availabeSkills.Add(Actor.SkillMachine.Skills[i]);
             }
 
             if (_availabeSkills.Count == 0)

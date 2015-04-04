@@ -14,6 +14,7 @@ namespace MX
         public List<KeyComparisonTypeValue> ComparisonParams = new List<KeyComparisonTypeValue>();
         public List<KeyRatioValueTypeValue> RatioValueParams = new List<KeyRatioValueTypeValue>();
         public List<KeyActionTypeValue> ActionTypeParams = new List<KeyActionTypeValue>();
+        public List<KeyBuffActionTypeValue> BuffActionTypeParams = new List<KeyBuffActionTypeValue>();
 
         public int? GetInt(string key)
         {
@@ -66,6 +67,14 @@ namespace MX
         public ActionType? GetActionTypeValue(string key)
         {
             var result = ActionTypeParams.Find(item => item.Key == key);
+            if (result == null) return null;
+
+            return result.Value;
+        }
+
+        public BuffActionType? GetBuffActionTypeValue(string key)
+        {
+            var result = BuffActionTypeParams.Find(item => item.Key == key);
             if (result == null) return null;
 
             return result.Value;
@@ -155,6 +164,18 @@ namespace MX
             result.Value = value;
         }
 
+        public void Set(string key, BuffActionType value)
+        {
+            var result = BuffActionTypeParams.Find(item => item.Key == key);
+            if (result == null)
+            {
+                result = new KeyBuffActionTypeValue { Key = key };
+                BuffActionTypeParams.Add(result);
+            }
+
+            result.Value = value;
+        }
+
 
         public int GetIntOrDefault(string key)
         {
@@ -212,15 +233,12 @@ namespace MX
             return GetActionTypeValue(key).Value;
         }
 
-        public static List<System.Type> ParamTypes = new List<System.Type>();
-        static ParamData()
+        public BuffActionType GetBuffActionTypeOrDefault(string key)
         {
-            ParamTypes.Add(typeof(int));
-            ParamTypes.Add(typeof(float));
-            ParamTypes.Add(typeof(bool));
-            ParamTypes.Add(typeof(string));
-            ParamTypes.Add(typeof(ComparisonType));
-            ParamTypes.Add(typeof(RatioValueType));
+            var result = BuffActionTypeParams.Find(item => item.Key == key);
+            if (result == null) Set(key, BuffActionType.Invalid);
+
+            return GetBuffActionTypeValue(key).Value;
         }
     }
 
@@ -271,5 +289,12 @@ namespace MX
     {
         public string Key;
         public ActionType Value;
+    }
+
+    [System.Serializable]
+    public class KeyBuffActionTypeValue
+    {
+        public string Key;
+        public BuffActionType Value;
     }
 }

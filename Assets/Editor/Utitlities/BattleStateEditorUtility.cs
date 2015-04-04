@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MX
 {
-    public static class BattleStateConditionUtility
+    public static class BattleStateEditorUtility
     {
         public static void DrawParams(BattleStateConditionProfile profile)
         {
@@ -25,15 +25,11 @@ namespace MX
                     break;
 
                 case StateConditionType.IsActionEnded:
-                    string key;
-                    EditorGUILayout.BeginHorizontal();
-                    {
-                        key = "ActionType";
-                        EditorGUILayout.LabelField(key, option);
-                        profile.Params.Set(key, (ActionType)EditorGUILayout.EnumPopup(profile.Params.GetActionTypeOrDefault(key), option));
-                    } EditorGUILayout.EndHorizontal();
+                    DrawParamActionType(profile, option);
                     break;
-
+                case StateConditionType.BuffAction:
+                    DrawParamBuff(profile, option);
+                    break;
             }
         }
 
@@ -64,6 +60,35 @@ namespace MX
         public static void DrawParamExistsTarget(BattleStateConditionProfile profile, GUILayoutOption option)
         {
             string key;
+            EditorGUILayout.BeginHorizontal();
+            {
+                key = "IsTrue";
+                EditorGUILayout.LabelField(key, option);
+                profile.Params.Set(key, EditorGUILayout.Toggle(profile.Params.GetBoolOrDefault(key), option));
+            } EditorGUILayout.EndHorizontal();
+        }
+
+        public static void DrawParamActionType(BattleStateConditionProfile profile, GUILayoutOption option)
+        {
+            string key;
+            EditorGUILayout.BeginHorizontal();
+            {
+                key = "ActionType";
+                EditorGUILayout.LabelField(key, option);
+                profile.Params.Set(key, (ActionType)EditorGUILayout.EnumPopup(profile.Params.GetActionTypeOrDefault(key), option));
+            } EditorGUILayout.EndHorizontal();
+        }
+
+        public static void DrawParamBuff(BattleStateConditionProfile profile, GUILayoutOption option)
+        {
+            string key;
+            EditorGUILayout.BeginHorizontal();
+            {
+                key = "BuffActionType";
+                EditorGUILayout.LabelField(key, option);
+                profile.Params.Set(key, (BuffActionType)EditorGUILayout.EnumPopup(profile.Params.GetBuffActionTypeOrDefault(key), option));
+            } EditorGUILayout.EndHorizontal();
+
             EditorGUILayout.BeginHorizontal();
             {
                 key = "IsTrue";

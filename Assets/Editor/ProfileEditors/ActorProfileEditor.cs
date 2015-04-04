@@ -11,6 +11,9 @@ namespace MX
         ActorProfile _currentProfile;
 
         BattleSkillProfile _currentSkillProfile;
+        BattleBuffProfile _currentBuffProfile;
+        BattleBuffActionProfile _currentBuffActionProfile;
+        BattleBuffConditionProfile _currentBuffCondProfile;
 
         [MenuItem("Custom/Profile/Actor")]
         static public void CreateActorProfileWindow()
@@ -34,13 +37,47 @@ namespace MX
                 if (_currentProfile == null) return;
 
                 DrawActorBaseProperties();
-                DrawSkills();
 
-                if (_currentSkillProfile == null) return;
-                DrawSkillParams();
-                DrawSkillCondition();
+                GUILayout.BeginVertical();
+                {
+                    GUILayout.BeginHorizontal();
+                    {
+                        DrawSkills();
+
+                        if (_currentSkillProfile == null) return;
+                        DrawSkillParams();
+                        DrawSkillCondition();
+                    } GUILayout.EndHorizontal();
+
+                    GUILayout.BeginVertical();
+                    {
+                        DrawBuffs();
+                        GUILayout.BeginHorizontal();
+                        {
+                            BattleSkillEditorUtility.DrawBuffActions(_currentBuffProfile, ref _currentBuffActionProfile);
+                            BattleSkillEditorUtility.DrawBuffActionParams(_currentBuffProfile, _currentBuffActionProfile);
+                        } GUILayout.EndHorizontal();
+
+                        GUILayout.BeginHorizontal();
+                        {
+                            BattleSkillEditorUtility.DrawBuffCondition(_currentBuffProfile, ref _currentBuffCondProfile);
+                            BattleSkillEditorUtility.DrawBuffConditionParams(_currentBuffProfile, _currentBuffCondProfile);
+                        } GUILayout.EndHorizontal();
+                    } GUILayout.EndVertical();
+                } GUILayout.EndVertical();
 
             } GUILayout.EndHorizontal();
+        }
+
+        private void DrawBuffs()
+        {
+            GUILayout.BeginVertical(GUILayout.Width(100));
+            {
+                EditorGUILayout.LabelField("Buffs");
+                CommonEditorUtility.DrawData(_currentSkillProfile.Buffs, ref _currentBuffProfile, true);
+                CommonEditorUtility.DrawAddData(_currentSkillProfile.Buffs, ref _currentBuffProfile);
+                CommonEditorUtility.DrawRemoveData(_currentSkillProfile.Buffs, ref _currentBuffProfile);
+            } GUILayout.EndVertical();
         }
 
         void DrawActorProfiles()
@@ -52,7 +89,12 @@ namespace MX
                 CommonEditorUtility.DrawRemoveData(_save.ActorProfiles, ref _currentProfile);
                 CommonEditorUtility.DrawSaveData(_save);
                 if (isChanged)
+                {
                     _currentSkillProfile = null;
+                    _currentBuffProfile = null;
+                    _currentBuffActionProfile = null;
+                    _currentBuffCondProfile = null;
+                }
             } GUILayout.EndVertical();
         }
 
@@ -120,10 +162,18 @@ namespace MX
                 {
                     GUILayout.BeginHorizontal(GUILayout.Width(80));
                     {
+                        var prevSkillProfile = _currentBuffCondProfile;
                         string label = string.Format("{0}. ", skill.ID.ToString());
                         if (GUILayout.Toggle(skill == _currentSkillProfile, label, GUILayout.Width(30)))
                             _currentSkillProfile = skill;
                         skill.Type = (SkillType)EditorGUILayout.EnumPopup(skill.Type, GUILayout.Width(100));
+
+                        if (prevSkillProfile != _currentBuffCondProfile)
+                        {
+                            _currentBuffProfile = null;
+                            _currentBuffActionProfile = null;
+                            _currentBuffCondProfile = null;
+                        }
                     } GUILayout.EndHorizontal();
                 }
                 CommonEditorUtility.DrawAddData(_currentProfile.Skills, ref _currentSkillProfile);

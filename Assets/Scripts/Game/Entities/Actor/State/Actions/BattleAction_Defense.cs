@@ -21,9 +21,9 @@ namespace MX
         }
 
 
-        public void Defense(float damamge)
+        public void Defense(float damage)
         {
-            Actor.HitPoint -= damamge;
+            Actor.HitPoint -= damage;
             Actor.RedrawUIs();
         }
     }

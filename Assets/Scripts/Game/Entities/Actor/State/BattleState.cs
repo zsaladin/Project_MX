@@ -6,8 +6,9 @@ namespace MX
 {
     public class BattleState : ITickable
     {
-        private BattleStateProfile _profile;
+        public BattleStateProfile Profile { get; private set; }
         private BattleActor _actor;
+        private BattleStateMachine _machine;
         private Dictionary<BattleStateCondition, BattleState> _conditions = new Dictionary<BattleStateCondition, BattleState>();
         private BattleAction_SearchForTarget _searchingTargetAction;
 
@@ -32,10 +33,11 @@ namespace MX
             }
         }
 
-        public void Init(BattleStateProfile profile, BattleActor actor)
+        public void Init(BattleStateProfile profile, BattleActor actor, BattleStateMachine machine)
         {
             _actor = actor;
-            _profile = profile;
+            Profile = profile;
+            _machine = machine;
 
             _actions = new List<BattleAction>();
 
@@ -50,12 +52,12 @@ namespace MX
 
         public void PostInit()
         {
-            for (int i = 0; i < _profile.ConditionStateSet.Count; ++i)
+            for (int i = 0; i < Profile.ConditionStateSet.Count; ++i)
             {
-                ConditionStateSet set = _profile.ConditionStateSet[i];
+                ConditionStateSet set = Profile.ConditionStateSet[i];
                 BattleStateConditionProfile conditionProfile = set.ConditionProfile;
                 BattleStateCondition condition = BattleStateCondition.Create(conditionProfile, _actor, this);
-                _conditions.Add(condition, _actor.States.FirstOrDefault(item => item._profile.ID == set.StateProfileID));
+                _conditions.Add(condition, _machine.States.FirstOrDefault(item => item.Profile.ID == set.StateProfileID));
             }
         }
 

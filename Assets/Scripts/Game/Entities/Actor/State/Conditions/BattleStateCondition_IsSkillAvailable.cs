@@ -14,9 +14,9 @@ namespace MX
 
         public override bool IsInCondition()
         {
-            for (int i = 0; i < _actor.Skills.Length; ++i)
+            for (int i = 0; i < _actor.SkillMachine.Skills.Length; ++i)
             {
-                if (_actor.Skills[i].IsInCondition())
+                if (_actor.SkillMachine.Skills[i].IsInCondition())
                     return true;
             }
 

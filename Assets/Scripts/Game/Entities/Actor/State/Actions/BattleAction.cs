@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MX
 {
-    public abstract class BattleAction : ITickable
+    public abstract class BattleAction
     {
         public BattleActor Actor { get; private set; }
 

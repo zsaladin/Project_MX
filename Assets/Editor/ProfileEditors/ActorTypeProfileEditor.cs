@@ -214,7 +214,7 @@ namespace MX
         {
             if (_currentConditionSet != null)
             {
-                BattleStateConditionUtility.DrawParams(_currentConditionSet.ConditionProfile);
+                BattleStateEditorUtility.DrawParams(_currentConditionSet.ConditionProfile);
             }
         }
     }

@@ -46,6 +46,7 @@ MonoBehaviour:
         ComparisonParams: []
         RatioValueParams: []
         ActionTypeParams: []
+        BuffActionTypeParams: []
       Conditions:
       - ID: 1
         Name: 
@@ -62,6 +63,7 @@ MonoBehaviour:
           ComparisonParams: []
           RatioValueParams: []
           ActionTypeParams: []
+          BuffActionTypeParams: []
       - ID: 2
         Name: 
         Type: 2
@@ -77,6 +79,42 @@ MonoBehaviour:
           ComparisonParams: []
           RatioValueParams: []
           ActionTypeParams: []
+          BuffActionTypeParams: []
+      Buffs:
+      - ID: 1
+        Name: Stun
+        Conditions:
+        - ID: 1
+          Name: New
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Duration
+              Value: 1
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Actions:
+        - ID: 1
+          Name: New
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
   - ID: 2
     Name: Troll
     Prefab: {fileID: 100000, guid: ba76689f220e59a48845d4df03dcbffa, type: 2}
@@ -150,12 +188,13 @@ MonoBehaviour:
         - Key: Radius
           Value: 3
         - Key: Damage
-          Value: 500
+          Value: 200
         BoolParams: []
         StringParams: []
         ComparisonParams: []
         RatioValueParams: []
         ActionTypeParams: []
+        BuffActionTypeParams: []
       Conditions:
       - ID: 0
         Name: 
@@ -172,6 +211,7 @@ MonoBehaviour:
           ComparisonParams: []
           RatioValueParams: []
           ActionTypeParams: []
+          BuffActionTypeParams: []
       - ID: 0
         Name: Range
         Type: 2
@@ -187,6 +227,8 @@ MonoBehaviour:
           ComparisonParams: []
           RatioValueParams: []
           ActionTypeParams: []
+          BuffActionTypeParams: []
+      Buffs: []
   - ID: 6
     Name: SkeletonNormal
     Prefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}

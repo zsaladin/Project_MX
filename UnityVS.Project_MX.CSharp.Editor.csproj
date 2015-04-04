@@ -110,7 +110,7 @@
     <Compile Include="Assets\Editor\ProfileEditors\ProjectileProfileEditor.cs" />
     <Compile Include="Assets\Editor\RecordEditors\UserRecordEditor.cs" />
     <Compile Include="Assets\Editor\Utitlities\BattleSkillEditorUtility.cs" />
-    <Compile Include="Assets\Editor\Utitlities\BattleStateConditionUtility.cs" />
+    <Compile Include="Assets\Editor\Utitlities\BattleStateEditorUtility.cs" />
     <Compile Include="Assets\Editor\Utitlities\CommonEditorUtility.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
     <Compile Include="Assets\JMO Assets\Cartoon FX\Editor\CFX_InspectorHelpEditor.cs" />

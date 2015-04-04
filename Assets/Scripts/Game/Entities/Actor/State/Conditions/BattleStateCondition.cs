@@ -35,6 +35,8 @@ namespace MX
                     return new BattleStateCondition_ExistsTarget(profile, actor, state);
                 case StateConditionType.IsSkillAvailable:
                     return new BattleStateCondition_IsSkillAvailable(profile, actor, state);
+                case StateConditionType.BuffAction:
+                    return new BattleStateCondition_Buff(profile, actor, state);
             }
 
             return null;
@@ -73,5 +75,6 @@ namespace MX
         IsActionEnded,
         ExistsTarget,
         IsSkillAvailable,
+        BuffAction,
     }
 }

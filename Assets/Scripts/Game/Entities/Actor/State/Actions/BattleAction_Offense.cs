@@ -87,7 +87,7 @@ namespace MX
 
         void DealDamage()
         {
-            var defenseAction = _target.CurrentState.FindAction<BattleAction_Defense>();
+            var defenseAction = _target.StateMachine.CurrentState.FindAction<BattleAction_Defense>();
             if (defenseAction != null)
             {
                 defenseAction.Defense(Actor.OffensePower);

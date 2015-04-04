@@ -119,6 +119,7 @@
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Skill\BattleSkill_Splash.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Skill\Conditions\BattleSkillCondition.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Skill\Conditions\BattleSkillCondition_CoolTime.cs" />
+    <Compile Include="Assets\Scripts\Game\Entities\Actor\Skill\Conditions\BattleSkillCondition_Random.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Skill\Conditions\BattleSkillCondition_Range.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\State\Actions\BattleAction.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\State\Actions\BattleAction_Death.cs" />

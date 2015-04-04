@@ -53,22 +53,16 @@ namespace MX
             switch (conditionProfile.Type)
             {
                 case SkillConditionType.CoolTime:
-                    DrawCoolTime(conditionProfile);
+                    CommonEditorUtility.DrawParam(conditionProfile.Params, "CoolTime", typeof(float));
                     break;
                 case SkillConditionType.Range:
-                    DrawRange(conditionProfile);
+                    CommonEditorUtility.DrawParam(conditionProfile.Params, "Range", typeof(float));
                     break;
+                case SkillConditionType.Random:
+                    CommonEditorUtility.DrawParam(conditionProfile.Params, "Ratio", typeof(float));
+                    break;
+
             }
-        }
-
-        static void DrawCoolTime(BattleSkillConditionProfile profile)
-        {
-            CommonEditorUtility.DrawParam(profile.Params, "CoolTime", typeof(float));
-        }
-
-        static void DrawRange(BattleSkillConditionProfile profile)
-        {
-            CommonEditorUtility.DrawParam(profile.Params, "Range", typeof(float));
         }
 
         public static void DrawBuffActions(BattleBuffProfile buffProfile, ref BattleBuffActionProfile actionProfile)

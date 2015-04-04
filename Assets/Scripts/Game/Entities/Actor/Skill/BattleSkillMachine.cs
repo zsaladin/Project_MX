@@ -10,6 +10,7 @@ namespace MX
         private ActorProfile _profile;
 
         public BattleSkill[] Skills { get; private set; }
+        public BattleSkill NextSkill { get; set; }
 
         public BattleSkillMachine(BattleActor actor, ActorProfile profile)
         {
@@ -23,6 +24,7 @@ namespace MX
                 Skills[i] = skill;
             }
         }
+
         public void OnTick()
         {
             for (int i = 0; i < Skills.Length; ++i)

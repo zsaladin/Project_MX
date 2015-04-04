@@ -39,22 +39,12 @@ namespace MX
                 return;
             }
 
-            _availabeSkills.Clear();
-            for (int i = 0; i < Actor.SkillMachine.Skills.Length; ++i)
-            {
-                if (Actor.SkillMachine.Skills[i].IsInCondition())
-                    _availabeSkills.Add(Actor.SkillMachine.Skills[i]);
-            }
-
-            if (_availabeSkills.Count == 0)
+            _selectedSkill = Actor.SkillMachine.NextSkill;
+            if (_selectedSkill == null)
             {
                 IsEnd = true;
                 return;
             }
-
-
-
-            _selectedSkill = _availabeSkills[Random.Range(0, _availabeSkills.Count)];
 
             _currentDuratiion = 0;
             _isDealed = false;

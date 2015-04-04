@@ -19,6 +19,8 @@ namespace MX
 
         public void Init()
         {
+            Random.seed = 20;
+
             _tickCount = 0;
             _currentTickCounter = 0;
 

@@ -30,6 +30,8 @@ namespace MX
                     return new BattleSkillCondition_CoolTime(profile, actor, skill);
                 case SkillConditionType.Range:
                     return new BattleSkillCondition_Range(profile, actor, skill);
+                case SkillConditionType.Random:
+                    return new BattleSkillCondition_Random(profile, actor, skill);
             }
 
             return null;
@@ -41,5 +43,6 @@ namespace MX
         Invalid,
         CoolTime,
         Range,
+        Random,
     }
 }

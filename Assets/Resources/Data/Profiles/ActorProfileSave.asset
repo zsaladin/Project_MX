@@ -41,6 +41,12 @@ MonoBehaviour:
           Value: 3
         - Key: Damage
           Value: 100
+        - Key: CoolTime
+          Value: 0
+        - Key: Range
+          Value: 0
+        - Key: Ratio
+          Value: .200000003
         BoolParams: []
         StringParams: []
         ComparisonParams: []
@@ -74,6 +80,22 @@ MonoBehaviour:
           FloatParams:
           - Key: Range
             Value: 2
+          BoolParams: []
+          StringParams: []
+          ComparisonParams: []
+          RatioValueParams: []
+          ActionTypeParams: []
+          BuffActionTypeParams: []
+      - ID: 0
+        Name: 
+        Type: 3
+        Params:
+          ID: 0
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: Ratio
+            Value: .200000003
           BoolParams: []
           StringParams: []
           ComparisonParams: []
@@ -163,7 +185,7 @@ MonoBehaviour:
     OffenseDealTime: .5
     OffenseRange: .300000012
     DefenseType: 1
-    MovingSpeed: 2
+    MovingSpeed: 3
     Skills: []
   - ID: 4
     Name: SkeletonFresh
@@ -178,7 +200,7 @@ MonoBehaviour:
     OffenseDealTime: .5
     OffenseRange: .300000012
     DefenseType: 1
-    MovingSpeed: 2
+    MovingSpeed: 3
     Skills: []
   - ID: 5
     Name: SkeletonMage
@@ -193,7 +215,7 @@ MonoBehaviour:
     OffenseDealTime: .400000006
     OffenseRange: 8
     DefenseType: 1
-    MovingSpeed: 2
+    MovingSpeed: 3
     Skills:
     - ID: 1
       Name: 
@@ -262,5 +284,5 @@ MonoBehaviour:
     OffenseDealTime: .5
     OffenseRange: .300000012
     DefenseType: 1
-    MovingSpeed: 2
+    MovingSpeed: 3
     Skills: []

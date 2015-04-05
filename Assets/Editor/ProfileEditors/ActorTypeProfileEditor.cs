@@ -8,7 +8,7 @@ namespace MX
     public class ActorTypeProfileEditor : EditorWindow
     {
         ActorTypeProfileSave _save;
-        ActorTypeProfile _currentProfile;
+        BattleActorTypeProfile _currentProfile;
 
         ActionType _selectedActionType;
         Vector2 _actionScroll;

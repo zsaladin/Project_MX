@@ -7,9 +7,9 @@ namespace MX
     [System.Serializable]
     public class ActorTypeProfileSave : ScriptableObject
     {
-        public List<ActorTypeProfile> ActorTypeProfiles = new List<ActorTypeProfile>();
+        public List<BattleActorTypeProfile> ActorTypeProfiles = new List<BattleActorTypeProfile>();
 
-        public ActorTypeProfile Get(int id)
+        public BattleActorTypeProfile Get(int id)
         {
             return ActorTypeProfiles.Find(item => item.ID == id);
         }

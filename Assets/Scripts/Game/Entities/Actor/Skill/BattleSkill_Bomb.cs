@@ -40,10 +40,10 @@ namespace MX
 
         public void OnProjectileReached(Vector3 targetPosition)
         {
+            _targetPosition = targetPosition;
+
             Vector3 targetPos = targetPosition;
             targetPos.y = 0;
-
-            GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(Manager.Constant.Effect.ICE_HIT_SKILL)).transform.position = targetPos;
 
             var opponentActors = Manager.Entity.GetActors(Actor.OpponentOwnerShip, false);
             for (int i = 0; i < opponentActors.Count; ++i)

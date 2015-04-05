@@ -6,9 +6,9 @@ namespace MX
 {
     public class ActorProfileSave : ScriptableObject
     {
-        public List<ActorProfile> ActorProfiles = new List<ActorProfile>();
+        public List<BattleActorProfile> ActorProfiles = new List<BattleActorProfile>();
 
-        public ActorProfile Get(int id)
+        public BattleActorProfile Get(int id)
         {
             return ActorProfiles.Find(item => item.ID == id);
         }

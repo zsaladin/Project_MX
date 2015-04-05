@@ -81,7 +81,7 @@ namespace MX
 
                             GUILayout.BeginVertical(GUILayout.Width(150));
                             {
-                                ActorProfile profile = Manager.Data.ActorProfileSave.Get(_currentActorRecord.ProfileID);
+                                BattleActorProfile profile = Manager.Data.ActorProfileSave.Get(_currentActorRecord.ProfileID);
                                 int actorIndex = Manager.Data.ActorProfileSave.ActorProfiles.IndexOf(profile);
                                 string[] actorProfileNames = Manager.Data.ActorProfileSave.ActorProfiles.Select(item => item.Name).ToArray();
 

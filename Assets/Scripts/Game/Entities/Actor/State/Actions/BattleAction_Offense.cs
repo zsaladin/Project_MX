@@ -83,6 +83,8 @@ namespace MX
                 projectile.SetTarget(_target);
                 projectile.ReachedHandler = this;
             }
+
+            OnDealEffects();
         }
 
         void DealDamage()
@@ -92,11 +94,44 @@ namespace MX
             {
                 defenseAction.Defense(Actor.OffensePower);
             }
+            OnHitEffects();
+            OnSpotEffects();
         }
 
         public void OnProjectileReached(Vector3 targetPosition)
         {
             DealDamage();
+        }
+
+        protected void OnDealEffects()
+        {
+            for (int i = 0; i < Actor.Profile.OnDealEffects.Count; ++i)
+            {
+                var effectProfile = Actor.Profile.OnDealEffects[i];
+                GameObject effectObject = GameObject.Instantiate<GameObject>(effectProfile.Prefab);
+                effectObject.AddComponent<EffectController>().Init(effectProfile, Actor);
+            }
+        }
+
+        protected void OnHitEffects()
+        {
+            for (int i = 0; i < Actor.Profile.OnHitEffects.Count; ++i)
+            {
+                var effectProfile = Actor.Profile.OnHitEffects[i];
+                GameObject effectObject = GameObject.Instantiate<GameObject>(effectProfile.Prefab);
+                if (_target != null)
+                    effectObject.AddComponent<EffectController>().Init(effectProfile, _target);
+            }
+        }
+
+        protected void OnSpotEffects()
+        {
+            for (int i = 0; i < Actor.Profile.OnSpotEffects.Count; ++i)
+            {
+                var effectProfile = Actor.Profile.OnSpotEffects[i];
+                GameObject effectObject = GameObject.Instantiate<GameObject>(effectProfile.Prefab);
+                effectObject.AddComponent<EffectController>().Init(effectProfile, _target.Position);
+            }
         }
     }
 

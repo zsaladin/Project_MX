@@ -71,8 +71,9 @@
     <Compile Include="Assets\Scripts\Data\Data.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager.cs" />
     <Compile Include="Assets\Scripts\Data\ParamData.cs" />
-    <Compile Include="Assets\Scripts\Data\Profiles\Actor\ActorProfile.cs" />
-    <Compile Include="Assets\Scripts\Data\Profiles\Actor\ActorTypeProfile.cs" />
+    <Compile Include="Assets\Scripts\Data\Profiles\Actor\BattleActorProfile.cs" />
+    <Compile Include="Assets\Scripts\Data\Profiles\Actor\BattleActorTypeProfile.cs" />
+    <Compile Include="Assets\Scripts\Data\Profiles\Actor\BattleEffectProfile.cs" />
     <Compile Include="Assets\Scripts\Data\Profiles\Actor\Buff\BattleBuffActionProfile.cs" />
     <Compile Include="Assets\Scripts\Data\Profiles\Actor\Buff\BattleBuffConditionProfile.cs" />
     <Compile Include="Assets\Scripts\Data\Profiles\Actor\Buff\BattleBuffProfile.cs" />

@@ -9,5 +9,7 @@ namespace MX
     {
         public List<BattleBuffConditionProfile> Conditions = new List<BattleBuffConditionProfile>();
         public List<BattleBuffActionProfile> Actions = new List<BattleBuffActionProfile>();
+
+        public List<BattleEffectProfile> Effects = new List<BattleEffectProfile>();
     }
 }

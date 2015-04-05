@@ -11,6 +11,7 @@ namespace MX
 
         protected List<BattleSkillCondition> _conditions = new List<BattleSkillCondition>();
         protected List<BattleActor> _targetActors = new List<BattleActor>();
+        protected Vector3 _targetPosition;
 
         protected float _damage;
 
@@ -29,6 +30,8 @@ namespace MX
         {
             for (int i = 0; i < _conditions.Count; ++i)
                 _conditions[i].OnSkill();
+
+            OnSkillEffects();
         }
 
         public virtual void OnTick()
@@ -50,6 +53,9 @@ namespace MX
                 for (int j = 0; j < Profile.Buffs.Count; ++j)
                     _targetActors[i].BuffMachine.AddBuff(Profile.Buffs[j], Actor);
             }
+
+            OnHitEffects();
+            OnSpotEffects();
             _targetActors.Clear();
         }
 
@@ -63,6 +69,41 @@ namespace MX
 
             return true;
         }
+
+        protected void OnSkillEffects()
+        {
+            for(int i = 0; i < Profile.OnSkillEffects.Count; ++i)
+            {
+                var effectProfile = Profile.OnSkillEffects[i];
+                GameObject effectObject = GameObject.Instantiate<GameObject>(effectProfile.Prefab);
+                effectObject.AddComponent<EffectController>().Init(effectProfile, Actor);
+            }
+        }
+
+        protected void OnHitEffects()
+        {
+            for (int i = 0; i < Profile.OnHitEffects.Count; ++i)
+            {
+                var effectProfile = Profile.OnHitEffects[i];
+                for (int j = 0; j < _targetActors.Count; ++j)
+                {
+                    GameObject effectObject = GameObject.Instantiate<GameObject>(effectProfile.Prefab);
+                    if (_targetActors[j] != null)
+                        effectObject.AddComponent<EffectController>().Init(effectProfile, _targetActors[j]);
+                }
+            }
+        }
+
+        protected void OnSpotEffects()
+        {
+            for (int i = 0; i < Profile.OnSpotEffects.Count; ++i)
+            {
+                var effectProfile = Profile.OnSpotEffects[i];
+                GameObject effectObject = GameObject.Instantiate<GameObject>(effectProfile.Prefab);
+                effectObject.AddComponent<EffectController>().Init(effectProfile, _targetPosition);
+            }
+        }
+
 
         public static BattleSkill Create(BattleSkillProfile profile, BattleActor actor)
         {

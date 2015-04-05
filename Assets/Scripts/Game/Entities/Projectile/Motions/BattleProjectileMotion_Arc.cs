@@ -64,11 +64,7 @@ namespace MX
             float currentAcc = _beginVelocity + _gravityAcc * (_nextSecond - Manager.Constant.GAME_TICK);
 
             float transY = _projectitle.transform.position.y;
-            float y = _projectitle.Position.y;
             nextPos.y = transY + currentAcc * Time.deltaTime;
-
-
-            //Vector3.MoveTowards(_projectitle.transform.position, _projectitle.Position, _speed * Time.deltaTime);
             _projectitle.transform.position = nextPos;
         }
 

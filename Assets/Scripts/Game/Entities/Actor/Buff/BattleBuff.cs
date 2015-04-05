@@ -12,6 +12,7 @@ namespace MX
 
         private List<BattleBuffAction> _buffActions = new List<BattleBuffAction>();
         private List<BattleBuffCondition> _buffConditions = new List<BattleBuffCondition>();
+        private List<EffectController> _effects = new List<EffectController>();
 
         public BattleBuff(BattleBuffProfile profile, BattleActor actor, BattleActor attacker)
         {
@@ -45,6 +46,15 @@ namespace MX
             {
                 _buffConditions[i].OnBegin();
             }
+
+            for(int i = 0; i < Profile.Effects.Count; ++i)
+            {
+                var effectProfile = Profile.Effects[i];
+                GameObject effectObject = GameObject.Instantiate<GameObject>(effectProfile.Prefab);
+                EffectController effect = effectObject.AddComponent<EffectController>();
+                effect.Init(effectProfile, _actor);
+                _effects.Add(effect);
+            }
         }
 
         public void OnTick()
@@ -70,6 +80,11 @@ namespace MX
             for (int i = 0; i < _buffConditions.Count; ++i)
             {
                 _buffConditions[i].OnEnd();
+            }
+
+            for(int i = 0; i < _effects.Count; ++i)
+            {
+                _effects[i].Destroy();
             }
         }
 

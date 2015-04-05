@@ -63,7 +63,7 @@ MonoBehaviour:
           IntParams: []
           FloatParams:
           - Key: CoolTime
-            Value: 6
+            Value: 3
           BoolParams: []
           StringParams: []
           ComparisonParams: []
@@ -95,7 +95,7 @@ MonoBehaviour:
           IntParams: []
           FloatParams:
           - Key: Ratio
-            Value: .200000003
+            Value: 1
           BoolParams: []
           StringParams: []
           ComparisonParams: []
@@ -115,7 +115,7 @@ MonoBehaviour:
             IntParams: []
             FloatParams:
             - Key: Duration
-              Value: .25
+              Value: 1.5
             BoolParams: []
             StringParams: []
             ComparisonParams: []
@@ -123,27 +123,7 @@ MonoBehaviour:
             ActionTypeParams: []
             BuffActionTypeParams: []
         Actions:
-        - ID: 1
-          Name: New
-          Type: 3
-          Params:
-            ID: 0
-            Name: 
-            IntParams: []
-            FloatParams:
-            - Key: Duration
-              Value: .25
-            - Key: Distance
-              Value: 4.19999981
-            - Key: FarFrom
-              Value: 0
-            BoolParams: []
-            StringParams: []
-            ComparisonParams: []
-            RatioValueParams: []
-            ActionTypeParams: []
-            BuffActionTypeParams: []
-        - ID: 2
+        - ID: 3
           Name: New
           Type: 1
           Params:
@@ -157,6 +137,49 @@ MonoBehaviour:
             RatioValueParams: []
             ActionTypeParams: []
             BuffActionTypeParams: []
+        - ID: 4
+          Name: New
+          Type: 3
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Duration
+              Value: .25
+            - Key: Distance
+              Value: 5
+            - Key: FarFrom
+              Value: 0
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Effects:
+        - ID: 1
+          Name: Stun_Skill
+          Prefab: {fileID: 186322, guid: 601592feceb5c4644861e274f2ff0723, type: 2}
+          Delay: 0
+          Duration: 121
+          IsLooping: 0
+          IsGlobal: 0
+          NodeType: 2
+      OnSkillEffects: []
+      OnHitEffects:
+      - ID: 1
+        Name: KnockbackHit_Skill
+        Prefab: {fileID: 180272, guid: 28bd4224ebac46b49acfe2cf0c8fcaf5, type: 2}
+        Delay: 0
+        Duration: 2
+        IsLooping: 0
+        IsGlobal: 0
+        NodeType: 3
+      OnSpotEffects: []
+    OnDealEffects: []
+    OnHitEffects: []
+    OnSpotEffects: []
   - ID: 2
     Name: Troll
     Prefab: {fileID: 100000, guid: ba76689f220e59a48845d4df03dcbffa, type: 2}
@@ -172,6 +195,9 @@ MonoBehaviour:
     DefenseType: 1
     MovingSpeed: 3
     Skills: []
+    OnDealEffects: []
+    OnHitEffects: []
+    OnSpotEffects: []
   - ID: 3
     Name: SkeletonDark
     Prefab: {fileID: 100016, guid: a2cb09cf998faef4fb7887e15c3608c1, type: 2}
@@ -187,6 +213,9 @@ MonoBehaviour:
     DefenseType: 1
     MovingSpeed: 3
     Skills: []
+    OnDealEffects: []
+    OnHitEffects: []
+    OnSpotEffects: []
   - ID: 4
     Name: SkeletonFresh
     Prefab: {fileID: 100010, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 2}
@@ -202,6 +231,9 @@ MonoBehaviour:
     DefenseType: 1
     MovingSpeed: 3
     Skills: []
+    OnDealEffects: []
+    OnHitEffects: []
+    OnSpotEffects: []
   - ID: 5
     Name: SkeletonMage
     Prefab: {fileID: 100024, guid: 1bc803c4bf46dcc48b0d9035951ec07a, type: 2}
@@ -271,6 +303,20 @@ MonoBehaviour:
           ActionTypeParams: []
           BuffActionTypeParams: []
       Buffs: []
+      OnSkillEffects: []
+      OnHitEffects: []
+      OnSpotEffects:
+      - ID: 0
+        Name: IceHit_Skill
+        Prefab: {fileID: 102824, guid: e5ce468cf2e9d074f96ce1bd44532a96, type: 2}
+        Delay: 0
+        Duration: 4
+        IsLooping: 0
+        IsGlobal: 1
+        NodeType: 0
+    OnDealEffects: []
+    OnHitEffects: []
+    OnSpotEffects: []
   - ID: 6
     Name: SkeletonNormal
     Prefab: {fileID: 100008, guid: d139727d46a14204285626a8b7ef9525, type: 2}
@@ -286,3 +332,6 @@ MonoBehaviour:
     DefenseType: 1
     MovingSpeed: 3
     Skills: []
+    OnDealEffects: []
+    OnHitEffects: []
+    OnSpotEffects: []

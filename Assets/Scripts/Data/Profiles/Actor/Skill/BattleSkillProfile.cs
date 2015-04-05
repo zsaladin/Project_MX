@@ -11,5 +11,9 @@ namespace MX
         public ParamData Params = new ParamData();
         public List<BattleSkillConditionProfile> Conditions = new List<BattleSkillConditionProfile>();
         public List<BattleBuffProfile> Buffs = new List<BattleBuffProfile>();
+
+        public List<BattleEffectProfile> OnSkillEffects = new List<BattleEffectProfile>();
+        public List<BattleEffectProfile> OnHitEffects = new List<BattleEffectProfile>();
+        public List<BattleEffectProfile> OnSpotEffects = new List<BattleEffectProfile>();
     }
 }

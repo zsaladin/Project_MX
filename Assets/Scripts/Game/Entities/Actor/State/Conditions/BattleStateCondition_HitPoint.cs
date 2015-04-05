@@ -20,7 +20,6 @@ namespace MX
 
         public override bool IsInCondition()
         {
-            var profile = _profile;
             float compare;
 
             if (_ratioValueType == RatioValueType.Ratio)

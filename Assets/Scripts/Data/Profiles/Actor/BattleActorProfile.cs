@@ -5,7 +5,7 @@ using System.Linq;
 namespace MX
 {
     [System.Serializable]
-    public class ActorProfile : Profile
+    public class BattleActorProfile : Profile
     {
         public GameObject Prefab;
         public int ActorType;
@@ -26,5 +26,9 @@ namespace MX
         public float MovingSpeed;
 
         public List<BattleSkillProfile> Skills = new List<BattleSkillProfile>();
+
+        public List<BattleEffectProfile> OnDealEffects = new List<BattleEffectProfile>();
+        public List<BattleEffectProfile> OnHitEffects = new List<BattleEffectProfile>();
+        public List<BattleEffectProfile> OnSpotEffects = new List<BattleEffectProfile>();
     }
 }

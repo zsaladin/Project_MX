@@ -41,6 +41,8 @@ namespace MX
 
         void DealDamage()
         {
+            _targetPosition = Actor.Target.Position;
+
             Vector3 targetPos = Actor.Target.Position;
             targetPos.y = 0;
 

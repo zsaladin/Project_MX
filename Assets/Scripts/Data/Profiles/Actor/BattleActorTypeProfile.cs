@@ -4,11 +4,8 @@ using System.Collections.Generic;
 namespace MX
 {
     [System.Serializable]
-    public class ActorTypeProfile : Profile
+    public class BattleActorTypeProfile : Profile
     {
-        /// <summary>
-        /// State Profile ID
-        /// </summary>
         public List<BattleStateProfile> States = new List<BattleStateProfile>();
 
         public BattleStateProfile GetStateProfile(int id)

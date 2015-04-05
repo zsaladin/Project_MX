@@ -7,12 +7,12 @@ namespace MX
     public class BattleSkillMachine : ITickable
     {
         private BattleActor _actor;
-        private ActorProfile _profile;
+        private BattleActorProfile _profile;
 
         public BattleSkill[] Skills { get; private set; }
         public BattleSkill NextSkill { get; set; }
 
-        public BattleSkillMachine(BattleActor actor, ActorProfile profile)
+        public BattleSkillMachine(BattleActor actor, BattleActorProfile profile)
         {
             _actor = actor;
             _profile = profile;

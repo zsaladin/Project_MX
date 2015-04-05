@@ -7,10 +7,10 @@ namespace MX
     public class BattleActor : MonoBehaviour, ITickable
     {
         private ActorRecord _record;
-        private ActorProfile _profile;
-        private ActorTypeProfile _actorTypeProfile;
-
+        private BattleActorTypeProfile _actorTypeProfile;
         private List<UIMonoBehaviour> _uiControllers = new List<UIMonoBehaviour>();
+
+        public BattleActorProfile Profile { get; private set; }
 
         #region Battle Stat Property
         public float Size { get; private set; }
@@ -55,8 +55,8 @@ namespace MX
             OwnerShip = ownerShip;
 
             _record = record;
-            _profile = Manager.Data.ActorProfileSave.Get(record.ProfileID);
-            _actorTypeProfile = Manager.Data.ActorTypeProfileSave.Get(_profile.ActorType);
+            Profile = Manager.Data.ActorProfileSave.Get(record.ProfileID);
+            _actorTypeProfile = Manager.Data.ActorTypeProfileSave.Get(Profile.ActorType);
 
             if (position != null)
                 Position = position.Value;
@@ -73,7 +73,7 @@ namespace MX
             BaseAction = new BattleActorBaseAction(this);
 
             StateMachine = new BattleStateMachine(this, _actorTypeProfile);
-            SkillMachine = new BattleSkillMachine(this, _profile);
+            SkillMachine = new BattleSkillMachine(this, Profile);
             BuffMachine = new BattleBuffMachine(this);
 
             
@@ -81,18 +81,18 @@ namespace MX
 
         void InitStats()
         {
-            Size = _profile.Size;
-            HitPoint = HitPointMax = _profile.HitPointMax;
-            OffenseType = _profile.OffenseType;
-            OffenseProjectileType = _profile.OffenseProjectileType;
-            OffensePower = _profile.OffensePower;
-            OffenseTime = _profile.OffenseTime;
-            OffenseDealTime = _profile.OffenseDealTime;
-            OffenseRange = _profile.OffenseRange;
+            Size = Profile.Size;
+            HitPoint = HitPointMax = Profile.HitPointMax;
+            OffenseType = Profile.OffenseType;
+            OffenseProjectileType = Profile.OffenseProjectileType;
+            OffensePower = Profile.OffensePower;
+            OffenseTime = Profile.OffenseTime;
+            OffenseDealTime = Profile.OffenseDealTime;
+            OffenseRange = Profile.OffenseRange;
 
-            DefenseType = _profile.DefenseType;
+            DefenseType = Profile.DefenseType;
 
-            MovingSpeed = _profile.MovingSpeed;
+            MovingSpeed = Profile.MovingSpeed;
         }
 
         public void OnTick()

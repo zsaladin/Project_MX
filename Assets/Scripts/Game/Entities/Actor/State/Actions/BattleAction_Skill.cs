@@ -7,12 +7,10 @@ namespace MX
     public class BattleAction_Skill : BattleAction
     {
         private BattleSkill _selectedSkill;
-        private List<BattleSkill> _availabeSkills = new List<BattleSkill>();
+        private BattleActor _target;
 
-        protected BattleActor _target;
-
-        protected float _currentDuratiion;
-        protected bool _isDealed;
+        private float _currentDuratiion;
+        private bool _isDealed;
 
         public override ActionType Type
         {

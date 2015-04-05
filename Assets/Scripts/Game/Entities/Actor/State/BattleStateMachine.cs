@@ -8,13 +8,13 @@ namespace MX
     public class BattleStateMachine : ITickable
     {
         private BattleActor _actor;
-        private ActorTypeProfile _typeProfile;
+        private BattleActorTypeProfile _typeProfile;
 
         public BattleState[] States { get; private set; }
         public BattleState CurrentState { get; private set; }
         public BattleState DefaultState { get; private set; }
 
-        public BattleStateMachine(BattleActor actor, ActorTypeProfile typeProfile)
+        public BattleStateMachine(BattleActor actor, BattleActorTypeProfile typeProfile)
         {
             _actor = actor;
             _typeProfile = typeProfile;

@@ -41,7 +41,7 @@ namespace MX
 
         public BattleActor CreateActors(Ownership ownership, ActorRecord actorRecord, Vector3? position = null)
         {
-            ActorProfile profile = Manager.Data.ActorProfileSave.Get(actorRecord.ProfileID);
+            BattleActorProfile profile = Manager.Data.ActorProfileSave.Get(actorRecord.ProfileID);
             GameObject obj = Instantiate<GameObject>(profile.Prefab);
             BattleActor battleActor = obj.AddComponent<BattleActor>();
             battleActor.Init(actorRecord, ownership, position);

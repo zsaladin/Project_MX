@@ -90,6 +90,13 @@ namespace MX
             }
         }
 
+        public static void DrawHorizontalLine(Color color)
+        {
+            Color originalColor = GUI.color;
+            GUI.color = color;
+            GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(1));
+            GUI.color = originalColor;
+        }
         public static void DrawParam(ParamData param, string key, System.Type type)
         {
             EditorGUILayout.BeginHorizontal();
@@ -104,6 +111,48 @@ namespace MX
                 else if (type == typeof(string))
                     param.Set(key, EditorGUILayout.TextField(param.GetStringOrDefault(key), GUILayout.Width(100)));
             } EditorGUILayout.EndHorizontal();
+        }
+
+        public static void DrawEffect(BattleEffectProfile profile)
+        {
+            if (profile == null) return;
+            EditorGUILayout.BeginVertical();
+            {
+                EditorGUILayout.LabelField("Effect Params");
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField("Prefab", GUILayout.Width(100));
+                    GameObject prevObj = profile.Prefab;
+                    profile.Prefab = EditorGUILayout.ObjectField(profile.Prefab, typeof(GameObject), GUILayout.Width(100)) as GameObject;
+                    if (prevObj != profile.Prefab)
+                        profile.Name = profile.Prefab.name;
+
+                } EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField("Delay", GUILayout.Width(100));
+                    profile.Delay = EditorGUILayout.FloatField(profile.Delay, GUILayout.Width(100));
+                } EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField("Duration", GUILayout.Width(100));
+                    profile.Duration = EditorGUILayout.FloatField(profile.Duration, GUILayout.Width(100));
+                } EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField("IsGlobal", GUILayout.Width(100));
+                    profile.IsGlobal = EditorGUILayout.Toggle(profile.IsGlobal, GUILayout.Width(100));
+                } EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField("Node Type", GUILayout.Width(100));
+                    profile.NodeType = (EffectNodeType)EditorGUILayout.EnumPopup(profile.NodeType, GUILayout.Width(100));
+                } EditorGUILayout.EndHorizontal();
+            } EditorGUILayout.EndVertical();
         }
     }
 }

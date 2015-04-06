@@ -95,77 +95,14 @@ MonoBehaviour:
           IntParams: []
           FloatParams:
           - Key: Ratio
-            Value: 1
+            Value: .5
           BoolParams: []
           StringParams: []
           ComparisonParams: []
           RatioValueParams: []
           ActionTypeParams: []
           BuffActionTypeParams: []
-      Buffs:
-      - ID: 1
-        Name: Knockback
-        Conditions:
-        - ID: 1
-          Name: New
-          Type: 1
-          Params:
-            ID: 0
-            Name: 
-            IntParams: []
-            FloatParams:
-            - Key: Duration
-              Value: 1.5
-            BoolParams: []
-            StringParams: []
-            ComparisonParams: []
-            RatioValueParams: []
-            ActionTypeParams: []
-            BuffActionTypeParams: []
-        Actions:
-        - ID: 3
-          Name: New
-          Type: 1
-          Params:
-            ID: 0
-            Name: 
-            IntParams: []
-            FloatParams: []
-            BoolParams: []
-            StringParams: []
-            ComparisonParams: []
-            RatioValueParams: []
-            ActionTypeParams: []
-            BuffActionTypeParams: []
-        - ID: 4
-          Name: New
-          Type: 3
-          Params:
-            ID: 0
-            Name: 
-            IntParams: []
-            FloatParams:
-            - Key: Duration
-              Value: .25
-            - Key: Distance
-              Value: 5
-            - Key: FarFrom
-              Value: 0
-            BoolParams: []
-            StringParams: []
-            ComparisonParams: []
-            RatioValueParams: []
-            ActionTypeParams: []
-            BuffActionTypeParams: []
-        Effects:
-        - ID: 1
-          Name: Stun_Skill
-          Prefab: {fileID: 186322, guid: 601592feceb5c4644861e274f2ff0723, type: 2}
-          Delay: 0
-          Duration: 121
-          IsLooping: 0
-          IsGlobal: 0
-          NodeType: 2
+      Buffs: []
       OnSkillEffects: []
       OnHitEffects:
       - ID: 1
@@ -302,7 +239,86 @@ MonoBehaviour:
           RatioValueParams: []
           ActionTypeParams: []
           BuffActionTypeParams: []
-      Buffs: []
+      - ID: 0
+        Name: 
+        Type: 3
+        Params:
+          ID: 0
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: Ratio
+            Value: .5
+          BoolParams: []
+          StringParams: []
+          ComparisonParams: []
+          RatioValueParams: []
+          ActionTypeParams: []
+          BuffActionTypeParams: []
+      Buffs:
+      - ID: 1
+        Name: New
+        Conditions:
+        - ID: 1
+          Name: New
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Duration
+              Value: 1
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Actions:
+        - ID: 1
+          Name: New
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams: []
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        - ID: 2
+          Name: New
+          Type: 3
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Duration
+              Value: .25
+            - Key: Distance
+              Value: 3.5
+            - Key: FarFrom
+              Value: 0
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Effects:
+        - ID: 1
+          Name: Stun_Skill
+          Prefab: {fileID: 186322, guid: 601592feceb5c4644861e274f2ff0723, type: 2}
+          Delay: 0
+          Duration: 1
+          IsLooping: 0
+          IsGlobal: 0
+          NodeType: 2
       OnSkillEffects: []
       OnHitEffects: []
       OnSpotEffects:

@@ -29,7 +29,7 @@ namespace MX
         {
             base.OnBegin();
 
-            Actor.AnimationController.Play(AnimationType.Walk, Actor.MovingSpeed);
+            Actor.AnimationController.Play(AnimationType.Walk, Actor.Property.MovingSpeed);
         }
 
         public override void OnTick()
@@ -41,7 +41,7 @@ namespace MX
             if (_totalPathPositions == null) return;
             if (_totalPathPositions.Count == 0) return;
 
-            float totalMoveDistance = Actor.MovingSpeed * Manager.Constant.GAME_TICK;
+            float totalMoveDistance = Actor.Property.MovingSpeed * Manager.Constant.GAME_TICK;
 
             for (int i = 1; i <= _totalPathPositions.Count; ++i)
             {
@@ -79,7 +79,7 @@ namespace MX
                 Vector3 destination = _effectivePathPositions[_finalPathIndex];
                 if (destination == Actor.transform.position) continue;
 
-                Actor.transform.position = Vector3.MoveTowards(Actor.transform.position, destination, Actor.MovingSpeed * Time.deltaTime);
+                Actor.transform.position = Vector3.MoveTowards(Actor.transform.position, destination, Actor.Property.MovingSpeed * Time.deltaTime);
                 Actor.transform.LookAt(destination);
                 break;
             }

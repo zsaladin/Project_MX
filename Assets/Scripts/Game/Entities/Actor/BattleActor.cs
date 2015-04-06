@@ -11,23 +11,8 @@ namespace MX
         private List<UIMonoBehaviour> _uiControllers = new List<UIMonoBehaviour>();
 
         public BattleActorProfile Profile { get; private set; }
-
-        #region Battle Stat Property
-        public float Size { get; private set; }
-        public float HitPointMax { get; private set; }
-        public float HitPoint { get; set; }
-
-        public OffenseType OffenseType { get; private set; }
-        public int OffenseProjectileType { get; private set; }
-        public float OffensePower { get; private set; }
-        public float OffenseTime { get; private set; }
-        public float OffenseDealTime { get; private set; }
-        public float OffenseRange { get; private set; }
-
-        public DefenseType DefenseType { get; private set; }
-
-        public float MovingSpeed { get; private set; }
-        #endregion
+        public BattleActorPropery Property { get; private set; }
+        public BattleActorBaseAction BaseAction { get; private set; }
 
         public BattleStateMachine StateMachine { get; private set; }
         public BattleSkillMachine SkillMachine { get; private set; }
@@ -45,7 +30,6 @@ namespace MX
         public BattleActor Target { get { return StateMachine.CurrentState.Target; } }
         public Vector3 Destination { get { return StateMachine.CurrentState.Destination; } }
 
-        public BattleActorBaseAction BaseAction { get; private set; }
         public AnimationController AnimationController { get; private set; }
 
         public bool debug = false;
@@ -65,12 +49,11 @@ namespace MX
 
             transform.position = Position;
 
-            InitStats();
-
             AnimationController = GetComponent<AnimationController>();
             AnimationController.Init();
 
             BaseAction = new BattleActorBaseAction(this);
+            Property = new BattleActorPropery(this);
 
             StateMachine = new BattleStateMachine(this, _actorTypeProfile);
             SkillMachine = new BattleSkillMachine(this, Profile);
@@ -79,21 +62,6 @@ namespace MX
             
         }
 
-        void InitStats()
-        {
-            Size = Profile.Size;
-            HitPoint = HitPointMax = Profile.HitPointMax;
-            OffenseType = Profile.OffenseType;
-            OffenseProjectileType = Profile.OffenseProjectileType;
-            OffensePower = Profile.OffensePower;
-            OffenseTime = Profile.OffenseTime;
-            OffenseDealTime = Profile.OffenseDealTime;
-            OffenseRange = Profile.OffenseRange;
-
-            DefenseType = Profile.DefenseType;
-
-            MovingSpeed = Profile.MovingSpeed;
-        }
 
         public void OnTick()
         {

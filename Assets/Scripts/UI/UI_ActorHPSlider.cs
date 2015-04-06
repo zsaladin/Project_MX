@@ -55,7 +55,7 @@ namespace MX
 
         public override void UpdateUI()
         {
-            _slider.value = _actor.HitPoint / _actor.HitPointMax;
+            _slider.value = _actor.Property.HitPoint / _actor.Property.HitPointMax;
         }
 
         void Update()

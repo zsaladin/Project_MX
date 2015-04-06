@@ -26,13 +26,13 @@ namespace MX
         {
             if (Actor.Target == null) return;
 
-            if (Actor.OffenseType == OffenseType.Melee)
+            if (Actor.Property.OffenseType == OffenseType.Melee)
             {
                 DealDamage();
             }
-            else if (Actor.OffenseType == OffenseType.Range || Actor.OffenseType == OffenseType.Magic)
+            else if (Actor.Property.OffenseType == OffenseType.Range || Actor.Property.OffenseType == OffenseType.Magic)
             {
-                ProjectileProfile projectileProfile = Manager.Data.ProjectileProfileSave.Get(Actor.OffenseProjectileType);
+                ProjectileProfile projectileProfile = Manager.Data.ProjectileProfileSave.Get(Actor.Property.OffenseProjectileType);
                 BattleProjectile projectile = Manager.Entity.CreateProjectile(projectileProfile, Actor.LauncherPoint);
                 projectile.SetTarget(Actor.Target);
                 projectile.ReachedHandler = this;

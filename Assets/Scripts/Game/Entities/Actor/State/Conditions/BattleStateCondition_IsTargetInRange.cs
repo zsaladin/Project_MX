@@ -20,7 +20,7 @@ namespace MX
 
             // It must be chagned from 'maginitude' to  'sqrMaginitude'
             Vector3 diff = _actor.Target.Position - _actor.Position;
-            bool isInRange = diff.magnitude <= _actor.OffenseRange + (_actor.Size * 0.5f) + (_actor.Target.Size * 0.5f);
+            bool isInRange = diff.magnitude <= _actor.Property.OffenseRange + (_actor.Property.Size * 0.5f) + (_actor.Target.Property.Size * 0.5f);
             if (_isTrue)
                 return isInRange;
             else

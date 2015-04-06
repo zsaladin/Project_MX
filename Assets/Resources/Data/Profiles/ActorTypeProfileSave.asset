@@ -594,7 +594,7 @@ MonoBehaviour:
               Value: 1
             BuffActionTypeParams: []
         StateProfileID: 1
-      Actions: 010000000400000002000000
+      Actions: 040000000200000001000000
       IsDefault: 0
     - ID: 4
       Name: Skill

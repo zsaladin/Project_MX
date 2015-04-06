@@ -46,13 +46,13 @@ namespace MX
                 Actor.BaseAction.LookAt(_target.Position);
             }
 
-            if (_currentDuratiion > Actor.OffenseTime)
+            if (_currentDuratiion > Actor.Property.OffenseTime)
             {
                 IsEnd = true;
                 return;
             }
 
-            if (_currentDuratiion >= Actor.OffenseDealTime)
+            if (_currentDuratiion >= Actor.Property.OffenseDealTime)
             {
                 if (_isDealed == false)
                 {
@@ -72,13 +72,13 @@ namespace MX
         {
             if (_target == null) return;
 
-            if (Actor.OffenseType == OffenseType.Melee)
+            if (Actor.Property.OffenseType == OffenseType.Melee)
             {
                 DealDamage();
             }
-            else if (Actor.OffenseType == OffenseType.Range || Actor.OffenseType == OffenseType.Magic)
+            else if (Actor.Property.OffenseType == OffenseType.Range || Actor.Property.OffenseType == OffenseType.Magic)
             {
-                ProjectileProfile projectileProfile = Manager.Data.ProjectileProfileSave.Get(Actor.OffenseProjectileType);
+                ProjectileProfile projectileProfile = Manager.Data.ProjectileProfileSave.Get(Actor.Property.OffenseProjectileType);
                 BattleProjectile projectile = Manager.Entity.CreateProjectile(projectileProfile, Actor.LauncherPoint);
                 projectile.SetTarget(_target);
                 projectile.ReachedHandler = this;
@@ -92,7 +92,7 @@ namespace MX
             var defenseAction = _target.StateMachine.CurrentState.FindAction<BattleAction_Defense>();
             if (defenseAction != null)
             {
-                defenseAction.Defense(Actor.OffensePower);
+                defenseAction.Defense(Actor.Property.OffensePower);
             }
             OnHitEffects();
             OnSpotEffects();

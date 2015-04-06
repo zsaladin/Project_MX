@@ -60,13 +60,13 @@ namespace MX
                 Actor.BaseAction.LookAt(_target.Position);
             }
 
-            if (_currentDuratiion > Actor.OffenseTime)
+            if (_currentDuratiion > Actor.Property.OffenseTime)
             {
                 IsEnd = true;
                 return;
             }
 
-            if (_currentDuratiion >= Actor.OffenseDealTime)
+            if (_currentDuratiion >= Actor.Property.OffenseDealTime)
             {
                 if (_isDealed == false)
                 {

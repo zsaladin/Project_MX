@@ -24,11 +24,11 @@ namespace MX
 
             if (_ratioValueType == RatioValueType.Ratio)
             {
-                compare = _actor.HitPoint / _actor.HitPointMax;
+                compare = _actor.Property.HitPoint / _actor.Property.HitPointMax;
             }
             else
             {
-                compare = _actor.HitPoint;
+                compare = _actor.Property.HitPoint;
             }
 
             if (_comparisonType.Has(ComparisonType.Equal))

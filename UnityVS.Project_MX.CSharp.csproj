@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\Game\Coordinate\PathNode.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\BattleActor.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\BattleActorBaseAction.cs" />
+    <Compile Include="Assets\Scripts\Game\Entities\Actor\BattleActorPropery.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BattleBuff.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BattleBuffMachine.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction.cs" />

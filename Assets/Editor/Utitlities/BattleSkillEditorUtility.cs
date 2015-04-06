@@ -56,6 +56,7 @@ namespace MX
                     CommonEditorUtility.DrawParam(conditionProfile.Params, "CoolTime", typeof(float));
                     break;
                 case SkillConditionType.Range:
+                    CommonEditorUtility.DrawParam(conditionProfile.Params, "ComparisonType", typeof(ComparisonType));
                     CommonEditorUtility.DrawParam(conditionProfile.Params, "Range", typeof(float));
                     break;
                 case SkillConditionType.Random:
@@ -107,6 +108,10 @@ namespace MX
                         CommonEditorUtility.DrawParam(actionProfile.Params, "Duration", typeof(float));
                         CommonEditorUtility.DrawParam(actionProfile.Params, "Distance", typeof(float));
                         CommonEditorUtility.DrawParam(actionProfile.Params, "FarFrom", typeof(float));
+                        break;
+                    case BuffActionType.MovementSpeed:
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "RatioValueType", typeof(RatioValueType));
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "Value", typeof(float));
                         break;
 
                 }

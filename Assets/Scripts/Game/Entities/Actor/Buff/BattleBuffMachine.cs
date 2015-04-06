@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MX
 {
-    public class BattleBuffMachine : ITickable
+    public class BattleBuffMachine
     {
         private BattleActor _actor;
         private List<BattleBuff> _addedBuffs = new List<BattleBuff>();
@@ -65,9 +65,32 @@ namespace MX
             AddBuff(new BattleBuff(buffProfile, _actor, attacker));
         }
 
-        public bool ContainsBuff(BuffActionType type)
+        public bool ContainsBuffAction(BuffActionType type)
         {
             return Buffs.Find(item => item.ContainsAction(type)) != null;
+        }
+
+
+        public float GetBuffedMovementSpeed()
+        {
+            float value = 0;
+            float ratio = 0;
+
+            for(int i = 0; i < Buffs.Count; ++i)
+            {
+                BattleBuff buff = Buffs[i];
+                var buffActionIterator = buff.FindActions<BattleBuffAction_MovementSpeed>();
+                while(buffActionIterator.MoveNext())
+                {
+                    BattleBuffAction_MovementSpeed action = buffActionIterator.Current;
+                    if (action.RatioValueType == RatioValueType.Value)
+                        value += action.Value;
+                    else
+                        ratio += action.Value;
+                }
+            }
+
+            return _actor.Property.RawMovingSpeed * (1 + ratio) + value;
         }
     }
 }

@@ -23,6 +23,10 @@ namespace MX
 
         public void Defense(float damage)
         {
+            if (Actor.debug)
+            {
+                Debug.Log("A");
+            }
             Actor.Property.HitPoint -= damage;
             Actor.RedrawUIs();
         }

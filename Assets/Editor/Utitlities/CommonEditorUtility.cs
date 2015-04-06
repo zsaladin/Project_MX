@@ -110,6 +110,11 @@ namespace MX
                     param.Set(key, EditorGUILayout.Toggle(param.GetBoolOrDefault(key), GUILayout.Width(100)));
                 else if (type == typeof(string))
                     param.Set(key, EditorGUILayout.TextField(param.GetStringOrDefault(key), GUILayout.Width(100)));
+                else if (type == typeof(RatioValueType))
+                    param.Set(key, (RatioValueType)EditorGUILayout.EnumPopup(param.GetRatioValueOrDefault(key), GUILayout.Width(100)));
+                else if (type == typeof(ComparisonType))
+                    param.Set(key, (ComparisonType)EditorGUILayout.EnumMaskField(param.GetComparisonOrDefault(key), GUILayout.Width(100)));
+                
             } EditorGUILayout.EndHorizontal();
         }
 

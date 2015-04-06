@@ -113,6 +113,8 @@ namespace MX
                     return new BattleSkill_Bomb(profile, actor);
                 case SkillType.Splash:
                     return new BattleSkill_Splash(profile, actor);
+                case SkillType.BuffSelf:
+                    return new BattleSkill_BuffSelf(profile, actor);
             }
 
             return null;
@@ -125,5 +127,6 @@ namespace MX
         Invalid,
         Bomb,
         Splash,
+        BuffSelf,
     }
 }

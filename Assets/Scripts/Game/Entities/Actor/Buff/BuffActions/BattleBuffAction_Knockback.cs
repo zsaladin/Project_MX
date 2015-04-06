@@ -19,8 +19,8 @@ namespace MX
             get { return BuffActionType.Knockback; }
         }
 
-        public BattleBuffAction_Knockback(BattleBuffActionProfile profile, BattleActor actor, BattleActor attacker)
-            : base(profile, actor, attacker)
+        public BattleBuffAction_Knockback(BattleBuffActionProfile profile, BattleActor actor, BattleActor caster)
+            : base(profile, actor, caster)
         {
             _duration = profile.Params.GetFloat("Duration").Value;
             _distance = profile.Params.GetFloat("Distance").Value;
@@ -35,7 +35,7 @@ namespace MX
             _velocity = _distance / _duration;
             //_direction = (_actor.Position - _attacker.Position).normalized;
 
-            Vector3 startPosition = _attacker.Position + _attacker.BaseAction.Direction * _farFrom;
+            Vector3 startPosition = _caster.Position + _caster.BaseAction.Direction * _farFrom;
             _direction = (_actor.Position - startPosition).normalized;
         }
 

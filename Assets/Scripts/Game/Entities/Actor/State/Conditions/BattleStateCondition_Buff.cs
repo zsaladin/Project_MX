@@ -18,7 +18,7 @@ namespace MX
 
         public override bool IsInCondition()
         {
-            bool contains = _actor.BuffMachine.ContainsBuff(_buffActionType);
+            bool contains = _actor.BuffMachine.ContainsBuffAction(_buffActionType);
             return _isTrue ? contains : !contains;
         }
     }

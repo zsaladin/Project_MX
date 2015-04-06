@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MX
 {
-    public class BattleActor : MonoBehaviour, ITickable
+    public class BattleActor : MonoBehaviour
     {
         private ActorRecord _record;
         private BattleActorTypeProfile _actorTypeProfile;
@@ -58,8 +58,6 @@ namespace MX
             StateMachine = new BattleStateMachine(this, _actorTypeProfile);
             SkillMachine = new BattleSkillMachine(this, Profile);
             BuffMachine = new BattleBuffMachine(this);
-
-            
         }
 
 

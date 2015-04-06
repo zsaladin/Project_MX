@@ -7,15 +7,15 @@ namespace MX
     public abstract class BattleBuffAction
     {
         protected BattleActor _actor;
-        protected BattleActor _attacker;
+        protected BattleActor _caster;
         protected BattleBuffActionProfile _profile;
 
         public abstract BuffActionType Type { get; }
 
-        public BattleBuffAction(BattleBuffActionProfile profile, BattleActor actor, BattleActor attacker)
+        public BattleBuffAction(BattleBuffActionProfile profile, BattleActor actor, BattleActor caster)
         {
             _actor = actor;
-            _attacker = attacker;
+            _caster = caster;
             _profile = profile;
         }
 
@@ -24,16 +24,18 @@ namespace MX
         public virtual void OnEnd() { }
         public virtual void Update() { }
 
-        public static BattleBuffAction Create(BattleBuffActionProfile profile, BattleActor actor, BattleActor attacker)
+        public static BattleBuffAction Create(BattleBuffActionProfile profile, BattleActor actor, BattleActor caster)
         {
             switch(profile.Type)
             {
                 case BuffActionType.Interruption:
-                    return new BattleBuffAction_Interruption(profile, actor, attacker);
+                    return new BattleBuffAction_Interruption(profile, actor, caster);
                 case BuffActionType.Airborn:
-                    return new BattleBuffAction_Airborn(profile, actor, attacker);
+                    return new BattleBuffAction_Airborn(profile, actor, caster);
                 case BuffActionType.Knockback:
-                    return new BattleBuffAction_Knockback(profile, actor, attacker);
+                    return new BattleBuffAction_Knockback(profile, actor, caster);
+                case BuffActionType.MovementSpeed:
+                    return new BattleBuffAction_MovementSpeed(profile, actor, caster);
             }
 
             return null;
@@ -46,5 +48,6 @@ namespace MX
         Interruption,
         Airborn,
         Knockback,
+        MovementSpeed,
     }
 }

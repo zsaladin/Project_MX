@@ -22,7 +22,7 @@ namespace MX
 
             for(int i = 0; i < Profile.Actions.Count; ++i)
             {
-                if (_actor.BuffMachine.ContainsBuff(Profile.Actions[i].Type))
+                if (_actor.BuffMachine.ContainsBuffAction(Profile.Actions[i].Type))
                     continue;
                 var buffAction = BattleBuffAction.Create(Profile.Actions[i], _actor, attacker);
                 _buffActions.Add(buffAction);
@@ -112,6 +112,17 @@ namespace MX
         public bool ContainsAction(BuffActionType type)
         {
             return _buffActions.Find(item => item.Type == type) != null;
+        }
+
+        // List를 만들어서 가비지를 발생 시키기 싫어서 했지만...
+        public IEnumerator<TAction> FindActions<TAction>() where TAction : BattleBuffAction
+        {
+            for(int i = 0; i < _buffActions.Count; ++i)
+            {
+                TAction action = _buffActions[i] as TAction;
+                if (action != null)
+                    yield return action;
+            }
         }
     }
 }

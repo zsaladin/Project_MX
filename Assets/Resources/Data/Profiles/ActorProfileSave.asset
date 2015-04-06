@@ -82,8 +82,12 @@ MonoBehaviour:
             Value: 2
           BoolParams: []
           StringParams: []
-          ComparisonParams: []
-          RatioValueParams: []
+          ComparisonParams:
+          - Key: ComparisonType
+            Value: 5
+          RatioValueParams:
+          - Key: ComparisonType
+            Value: 0
           ActionTypeParams: []
           BuffActionTypeParams: []
       - ID: 0
@@ -113,6 +117,108 @@ MonoBehaviour:
         IsLooping: 0
         IsGlobal: 0
         NodeType: 3
+      OnSpotEffects: []
+    - ID: 2
+      Name: New
+      Type: 3
+      Params:
+        ID: 0
+        Name: 
+        IntParams: []
+        FloatParams: []
+        BoolParams: []
+        StringParams: []
+        ComparisonParams: []
+        RatioValueParams: []
+        ActionTypeParams: []
+        BuffActionTypeParams: []
+      Conditions:
+      - ID: 0
+        Name: 
+        Type: 2
+        Params:
+          ID: 0
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: Range
+            Value: 8
+          BoolParams: []
+          StringParams: []
+          ComparisonParams:
+          - Key: ComparisonType
+            Value: 3
+          RatioValueParams: []
+          ActionTypeParams: []
+          BuffActionTypeParams: []
+      - ID: 0
+        Name: 
+        Type: 1
+        Params:
+          ID: 0
+          Name: 
+          IntParams: []
+          FloatParams:
+          - Key: Range
+            Value: 0
+          - Key: CoolTime
+            Value: 8
+          BoolParams: []
+          StringParams: []
+          ComparisonParams: []
+          RatioValueParams: []
+          ActionTypeParams: []
+          BuffActionTypeParams: []
+      Buffs:
+      - ID: 1
+        Name: New
+        Conditions:
+        - ID: 1
+          Name: New
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Duration
+              Value: 3
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Actions:
+        - ID: 1
+          Name: New
+          Type: 4
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Value
+              Value: 2
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams:
+            - Key: RatioValueType
+              Value: 0
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Effects:
+        - ID: 1
+          Name: Movement_Buff
+          Prefab: {fileID: 130316, guid: c76c922226104474b89349a61025a0bf, type: 2}
+          Delay: 0
+          Duration: 2
+          IsLooping: 0
+          IsGlobal: 0
+          NodeType: 2
+      OnSkillEffects: []
+      OnHitEffects: []
       OnSpotEffects: []
     OnDealEffects: []
     OnHitEffects: []
@@ -235,7 +341,9 @@ MonoBehaviour:
             Value: 10
           BoolParams: []
           StringParams: []
-          ComparisonParams: []
+          ComparisonParams:
+          - Key: ComparisonType
+            Value: 5
           RatioValueParams: []
           ActionTypeParams: []
           BuffActionTypeParams: []

@@ -617,7 +617,7 @@ MonoBehaviour:
               Value: 7
             BuffActionTypeParams: []
         StateProfileID: 1
-      Actions: 070000000400000002000000
+      Actions: 040000000700000002000000
       IsDefault: 0
     - ID: 5
       Name: Death

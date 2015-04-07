@@ -34,6 +34,12 @@ namespace MX
             if (_target == null)
             {
                 IsEnd = true;
+
+                if (Actor.debug)
+                {
+                    Debug.Log("A");
+                }
+
                 return;
             }
 
@@ -71,6 +77,8 @@ namespace MX
                 if (_isDealed == false)
                 {
                     _isDealed = true;
+                    if (_selectedSkill == null)
+                        Debug.Log("A");
                     _selectedSkill.OnSkill();
                 }
             }

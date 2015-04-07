@@ -41,10 +41,10 @@ namespace MX
 
         public void OnTick()
         {
-            CurrentState.OnTick();
-
             BattleState nextState = CurrentState.OnConditionConfirm();
-            if (nextState != null)
+            if (nextState == null)
+                CurrentState.OnTick();
+            else
             {
                 CurrentState.OnEnd();
                 CurrentState = nextState;

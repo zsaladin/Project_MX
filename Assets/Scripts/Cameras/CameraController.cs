@@ -7,16 +7,33 @@ namespace MX
     public class CameraController : MonoBehaviour
     {
         public float _sensitivity = 1f;
+        public float _height = 13.7f;
+
         protected Vector3? _mouseDownPosition;
+
+        public BattleActor PossessedActor { get; set; }
 
         protected virtual void Update()
         {
-            CatchMouseDown();
-            CatchMouseUp();
+            if (PossessedActor == null)
+            {
+                CatchMouseDown();
+                CatchMouseUp();
 
-            if (_mouseDownPosition == null) return;
+                if (_mouseDownPosition == null) return;
 
-            MoveCamera();
+                MoveCamera();
+            }
+            else
+            {
+                Vector3 targetPos = PossessedActor.transform.position - PossessedActor.transform.forward * 3 + Vector3.up * 3;
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, 20 * Time.deltaTime);
+
+                Quaternion original = transform.rotation;
+                transform.LookAt(PossessedActor.transform);
+                transform.rotation = Quaternion.RotateTowards(original, transform.rotation, 20 * Time.deltaTime);
+                Debug.Log(GetComponent<Camera>().projectionMatrix);
+            }
         }
 
         void CatchMouseDown()

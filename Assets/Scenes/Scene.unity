@@ -17702,6 +17702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sensitivity: 1
+  _height: 13.6999998
 --- !u!1001 &746219029
 Prefab:
   m_ObjectHideFlags: 0

@@ -97,10 +97,17 @@ namespace MX
 
             Ray ray = Camera.main.ScreenPointToRay(mouseEvent._mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("Ground", "Actor")))
             {
-                UserRecord record = Manager.Data.UserRecordSave.Get(Manager.Game._ourForceID);
-                Manager.Entity.CreateActors(Ownership.OurForce, record.ActorRecords[Random.Range(0, record.ActorRecords.Count)], hit.point);
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Actor"))
+                {
+                    //Camera.main.GetComponent<CameraController>().PossessedActor = (hit.collider.GetComponent<BattleActor>());
+                }
+                else
+                {
+                    UserRecord record = Manager.Data.UserRecordSave.Get(Manager.Game._ourForceID);
+                    Manager.Entity.CreateActors(Ownership.OurForce, record.ActorRecords[Random.Range(0, record.ActorRecords.Count)], hit.point);
+                }
             }
         }
 

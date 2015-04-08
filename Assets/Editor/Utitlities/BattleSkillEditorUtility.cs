@@ -113,6 +113,11 @@ namespace MX
                         CommonEditorUtility.DrawParam(actionProfile.Params, "RatioValueType", typeof(RatioValueType));
                         CommonEditorUtility.DrawParam(actionProfile.Params, "Value", typeof(float));
                         break;
+                    case BuffActionType.DamageOverTime:
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "Damage", typeof(float));
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "TickDuration", typeof(float));
+                        CommonEditorUtility.DrawParam(actionProfile.Params, "Radius", typeof(float));
+                        break;
 
                 }
             } EditorGUILayout.EndVertical();

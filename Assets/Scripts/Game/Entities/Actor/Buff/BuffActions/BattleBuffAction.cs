@@ -36,6 +36,8 @@ namespace MX
                     return new BattleBuffAction_Knockback(profile, actor, caster);
                 case BuffActionType.MovementSpeed:
                     return new BattleBuffAction_MovementSpeed(profile, actor, caster);
+                case BuffActionType.DamageOverTime:
+                    return new BattleBuffAction_DamageOverTime(profile, actor, caster);
             }
 
             return null;
@@ -49,5 +51,6 @@ namespace MX
         Airborn,
         Knockback,
         MovementSpeed,
+        DamageOverTime,
     }
 }

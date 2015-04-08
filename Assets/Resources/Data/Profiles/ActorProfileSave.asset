@@ -29,7 +29,7 @@ MonoBehaviour:
     Skills:
     - ID: 1
       Name: Name
-      Type: 2
+      Type: 3
       Params:
         ID: 0
         Name: 
@@ -63,7 +63,7 @@ MonoBehaviour:
           IntParams: []
           FloatParams:
           - Key: CoolTime
-            Value: 3
+            Value: 10
           BoolParams: []
           StringParams: []
           ComparisonParams: []
@@ -79,7 +79,7 @@ MonoBehaviour:
           IntParams: []
           FloatParams:
           - Key: Range
-            Value: 2
+            Value: 3
           BoolParams: []
           StringParams: []
           ComparisonParams:
@@ -106,17 +106,58 @@ MonoBehaviour:
           RatioValueParams: []
           ActionTypeParams: []
           BuffActionTypeParams: []
-      Buffs: []
-      OnSkillEffects: []
-      OnHitEffects:
+      Buffs:
       - ID: 1
-        Name: KnockbackHit_Skill
-        Prefab: {fileID: 180272, guid: 28bd4224ebac46b49acfe2cf0c8fcaf5, type: 2}
-        Delay: 0
-        Duration: 2
-        IsLooping: 0
-        IsGlobal: 0
-        NodeType: 3
+        Name: Tonado
+        Conditions:
+        - ID: 1
+          Name: New
+          Type: 1
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Duration
+              Value: 5
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Actions:
+        - ID: 1
+          Name: New
+          Type: 5
+          Params:
+            ID: 0
+            Name: 
+            IntParams: []
+            FloatParams:
+            - Key: Damage
+              Value: 50
+            - Key: TickDuration
+              Value: .5
+            - Key: Radius
+              Value: 4
+            BoolParams: []
+            StringParams: []
+            ComparisonParams: []
+            RatioValueParams: []
+            ActionTypeParams: []
+            BuffActionTypeParams: []
+        Effects:
+        - ID: 1
+          Name: Frame
+          Prefab: {fileID: 185116, guid: 1c3017adcc443ec45ba5f3e9bac36e03, type: 2}
+          Delay: 0
+          Duration: 10
+          IsLooping: 0
+          IsGlobal: 0
+          NodeType: 4
+      OnSkillEffects: []
+      OnHitEffects: []
       OnSpotEffects: []
     - ID: 2
       Name: New
@@ -171,7 +212,7 @@ MonoBehaviour:
           BuffActionTypeParams: []
       Buffs:
       - ID: 1
-        Name: New
+        Name: Movement
         Conditions:
         - ID: 1
           Name: New
@@ -210,13 +251,13 @@ MonoBehaviour:
             BuffActionTypeParams: []
         Effects:
         - ID: 1
-          Name: Movement_Buff
-          Prefab: {fileID: 130316, guid: c76c922226104474b89349a61025a0bf, type: 2}
+          Name: KnockbackHit_Skill
+          Prefab: {fileID: 180272, guid: 28bd4224ebac46b49acfe2cf0c8fcaf5, type: 2}
           Delay: 0
-          Duration: 2
+          Duration: 10
           IsLooping: 0
           IsGlobal: 0
-          NodeType: 2
+          NodeType: 4
       OnSkillEffects: []
       OnHitEffects: []
       OnSpotEffects: []

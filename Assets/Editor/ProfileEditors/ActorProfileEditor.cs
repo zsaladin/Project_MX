@@ -108,9 +108,13 @@ namespace MX
             GUILayout.BeginVertical(GUILayout.Width(100));
             {
                 EditorGUILayout.LabelField("Buffs");
-                CommonEditorUtility.DrawData(_currentSkillProfile.Buffs, ref _currentBuffProfile, true);
+                bool isChanged = CommonEditorUtility.DrawData(_currentSkillProfile.Buffs, ref _currentBuffProfile, true);
                 CommonEditorUtility.DrawAddData(_currentSkillProfile.Buffs, ref _currentBuffProfile);
                 CommonEditorUtility.DrawRemoveData(_currentSkillProfile.Buffs, ref _currentBuffProfile);
+                if (isChanged)
+                {
+                    OnBuffProfileChanged();
+                }
             } GUILayout.EndVertical();
         }
 
@@ -139,17 +143,7 @@ namespace MX
                 CommonEditorUtility.DrawSaveData(_save);
                 if (isChanged)
                 {
-                    _currentSkillProfile = null;
-                    _currentBuffProfile = null;
-                    _currentBuffActionProfile = null;
-                    _currentBuffCondProfile = null;
-                    _currentOnHitEffectProfile = null;
-                    _currentOnSkillEffectProfile = null;
-                    _currentOnSpotEffectProfile = null;
-                    _currentBuffEffectProfile = null;
-                    _currentBaseOnDealProfile = null;
-                    _currentBaseOnHitProfile = null;
-                    _currentBaseOnSpotProfile = null;
+                    OnActorProfileChanged();
                 }
             } GUILayout.EndVertical();
         }
@@ -266,17 +260,15 @@ namespace MX
                 {
                     GUILayout.BeginHorizontal(GUILayout.Width(80));
                     {
-                        var prevSkillProfile = _currentBuffCondProfile;
+                        var prevSkillProfile = _currentSkillProfile;
                         string label = string.Format("{0}. ", skill.ID.ToString());
                         if (GUILayout.Toggle(skill == _currentSkillProfile, label, GUILayout.Width(30)))
                             _currentSkillProfile = skill;
                         skill.Type = (SkillType)EditorGUILayout.EnumPopup(skill.Type, GUILayout.Width(100));
 
-                        if (prevSkillProfile != _currentBuffCondProfile)
+                        if (prevSkillProfile != _currentSkillProfile)
                         {
-                            _currentBuffProfile = null;
-                            _currentBuffActionProfile = null;
-                            _currentBuffCondProfile = null;
+                            OnSkillProfieChanged();
                         }
                     } GUILayout.EndHorizontal();
                 }
@@ -400,6 +392,33 @@ namespace MX
             result.Apply();
 
             return result;
+        }
+
+        void OnActorProfileChanged()
+        {
+            _currentBaseOnDealProfile = null;
+            _currentBaseOnHitProfile = null;
+            _currentBaseOnSpotProfile = null;
+
+            _currentSkillProfile = null;  
+            OnSkillProfieChanged();
+        }
+
+        void OnSkillProfieChanged()
+        {
+            _currentOnHitEffectProfile = null;
+            _currentOnSkillEffectProfile = null;
+            _currentOnSpotEffectProfile = null;
+
+            _currentBuffProfile = null;
+            OnBuffProfileChanged();
+        }
+
+        void OnBuffProfileChanged()
+        {
+            _currentBuffActionProfile = null;
+            _currentBuffCondProfile = null;
+            _currentBuffEffectProfile = null;
         }
  
     }

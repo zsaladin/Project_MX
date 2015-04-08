@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BattleBuffMachine.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_Airborn.cs" />
+    <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_DamageOverTime.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_Interruption.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_Knockback.cs" />
     <Compile Include="Assets\Scripts\Game\Entities\Actor\Buff\BuffActions\BattleBuffAction_MovementSpeed.cs" />

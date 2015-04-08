@@ -65,7 +65,11 @@ namespace MX
         public override void Update()
         {
             if (_target != null)
-                Actor.transform.LookAt(_target.transform);
+            {
+                Vector3 targetPos = _target.transform.position;
+                targetPos.y = Actor.transform.position.y;
+                Actor.transform.LookAt(targetPos);
+            }
         }
 
         void Offense()

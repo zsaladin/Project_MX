@@ -34,12 +34,6 @@ namespace MX
             if (_target == null)
             {
                 IsEnd = true;
-
-                if (Actor.debug)
-                {
-                    Debug.Log("A");
-                }
-
                 return;
             }
 
@@ -77,8 +71,6 @@ namespace MX
                 if (_isDealed == false)
                 {
                     _isDealed = true;
-                    if (_selectedSkill == null)
-                        Debug.Log("A");
                     _selectedSkill.OnSkill();
                 }
             }
@@ -87,7 +79,11 @@ namespace MX
         public override void Update()
         {
             if (_target != null)
-                Actor.transform.LookAt(_target.transform);
+            {
+                Vector3 targetPos = _target.transform.position;
+                targetPos.y = Actor.transform.position.y;
+                Actor.transform.LookAt(targetPos);
+            }
         }
     }
 }

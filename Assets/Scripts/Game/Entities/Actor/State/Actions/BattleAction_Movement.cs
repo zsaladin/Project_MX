@@ -80,19 +80,10 @@ namespace MX
                 if (destination == Actor.transform.position) continue;
 
                 Actor.transform.position = Vector3.MoveTowards(Actor.transform.position, destination, Actor.Property.MovingSpeed * Time.deltaTime);
+                destination.y = Actor.transform.position.y;
                 Actor.transform.LookAt(destination);
                 break;
             }
-
-            //if (Actor.OwnerShip == Ownership.OurForce)
-            //{
-            //    for (int i = 0; i < _totalPathPositions.Count - 1; ++i)
-            //    {
-            //        Debug.DrawLine(_totalPathPositions[i] + new Vector3(0f, 0.2f, 0f), _totalPathPositions[i + 1] + new Vector3(0f, 0.2f, 0f), Color.red);
-            //    }
-
-            //    Debug.DrawRay(Actor.Position, Vector3.up, Color.white);
-            //}
         }
 
     }

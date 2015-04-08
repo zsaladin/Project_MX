@@ -28,11 +28,6 @@ namespace MX
         public virtual void OnEnd() { }
         public virtual void Update() { }
 
-        public void LookAt(Vector3 targetPosition)
-        {
-
-        }
-
         public static BattleAction Create(ActionType type, BattleActor actor)
         {
             switch (type)

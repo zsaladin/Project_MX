@@ -27,6 +27,7 @@ namespace MX
         public override void OnTick()
         {
             base.OnTick();
+            _actor.AnimationController.Stop();
         }
 
         public override void OnEnd()
